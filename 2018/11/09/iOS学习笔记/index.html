@@ -81,16 +81,16 @@
 
 <meta name="description" content="autoLayout  Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个v">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WYQ">
+<meta property="og:title" content="iOS学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/11/09/iOS学习笔记/index.html">
 <meta property="og:site_name" content="WYQ">
 <meta property="og:description" content="autoLayout  Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个v">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-3288012c6594faf8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-09T04:05:06.000Z">
+<meta property="og:updated_time" content="2018-11-09T06:32:43.665Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WYQ">
+<meta name="twitter:title" content="iOS学习笔记">
 <meta name="twitter:description" content="autoLayout  Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个v">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/69809-3288012c6594faf8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
@@ -128,7 +128,7 @@
 
 
 
-  <title> | WYQ</title>
+  <title>iOS学习笔记 | WYQ</title>
   
 
 
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">iOS学习笔记</h1>
         
 
         <div class="post-meta">
@@ -264,7 +264,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:18:16+08:00">
                 2018-11-09
               </time>
             
@@ -407,7 +407,8 @@ self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewCon
 <li>手撸NSLayoutConstraint需要注意firstItem和secondItem的顺序</li>
 <li>注意了，注意了，keyWindow不知道什么时候会被系统干掉，所以把hud加在keyWindow上的时候一定要注意哦。最近遇到的在把mov转换成mp4的时候系统起了个异步线程，然后kenWindow就被干掉了。</li>
 <li>用CGContextClearRect就可以实现画一张中间透明的图片了。</li>
-<li><p>想知道某个变量在程序调试时的状态，可以用借助dispatch_source_t 监控调试开始，打印变量  <a href="http://ios.jobbole.com/81566/" target="_blank" rel="noopener">from</a></p>
+<li>想知道某个变量在程序调试时的状态，可以用借助dispatch_source_t 监控调试开始，打印变量  <a href="http://ios.jobbole.com/81566/" target="_blank" rel="noopener">from</a><blockquote>
+</blockquote>
 <pre><code>dispatch_queue_t queue = dispatch_get_main_queue();
 static dispatch_source_t source = nil;
 __typeof(self) __weak weakSelf = self;
@@ -423,16 +424,18 @@ dispatch_once(&amp;onceToken, ^{
     }
 });
 </code></pre></li>
-<li><p>当UINavigationController push或者pop操作时NavigationBar右侧底部会变灰，解决这种问题需要把最接近当前vc的view的view的背景色修改一下就可以了。</p>
-</li>
-<li><p><img src="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-</li>
+<li>当UINavigationController push或者pop操作时NavigationBar右侧底部会变灰，解决这种问题需要把最接近当前vc的view的view的背景色修改一下就可以了。</li>
 <li>企业账户 往App Store上发布应用必须是Agent账户</li>
 <li>用Xcode写C，即使仅仅有C也要把Compile Sources As改为Objective C++</li>
 <li>我一直以为下边的代码是默认的，然而并不是，需要明确写出来。😂<pre><code>self.tableView.rowHeight = UITableViewAutomaticDimension;
 </code></pre></li>
 <li>CALayer对path的动画执行完后path为初始值,如果想要最后停留住状态就可以把初始值设为toValue的值</li>
 <li>iOS11的本地通知要想在前台显示必须实现代理willPresent的方法,文档有说明的,记住</li>
+<li>像素就是绘画的基本单元，就是一个方格，但是并不一定是一个物理点，在高清屏上是有多个包含多个物理点的。DPI就是每英寸有多少个像素。分辨率在用ps的设计那里就是DPI，但是一般在移动开发那里就是图片的长宽。</li>
+<li><p>关于在Swift中<code>self.property</code>和<code>property</code>，提倡不用<code>self</code>，这样如果在闭包中使用的属性是属于当前的实例对象时编译器就会报错，你就必须加上<code>self</code>，当你加上<code>self</code>的时候你就意识到<code>self</code>要被循环引用了，你就知道要处理这个问题了。</p>
+</li>
+<li><p><img src="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+</li>
 </ol>
 
       
@@ -458,8 +461,8 @@ dispatch_once(&amp;onceToken, ^{
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/09/回头看之UITableView-(基本代理方法及复用原理)/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2018/11/09/ReactiveCocoa解读-订阅信号/" rel="next" title="ReactiveCocoa解读-订阅信号">
+                <i class="fa fa-chevron-left"></i> ReactiveCocoa解读-订阅信号
               </a>
             
           </div>
@@ -468,8 +471,8 @@ dispatch_once(&amp;onceToken, ^{
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/09/打破Swift里带有引用计数的结构体/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/09/回头看之UITableView-基本代理方法及复用原理/" rel="prev" title="回头看之UITableView-(基本代理方法及复用原理)">
+                回头看之UITableView-(基本代理方法及复用原理) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -538,7 +541,7 @@ dispatch_once(&amp;onceToken, ^{
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

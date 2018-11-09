@@ -81,7 +81,7 @@
 
 <meta name="description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WYQ">
+<meta property="og:title" content="ReactiveCocoa解读-订阅信号">
 <meta property="og:url" content="http://yoursite.com/2018/11/09/ReactiveCocoa解读-订阅信号/index.html">
 <meta property="og:site_name" content="WYQ">
 <meta property="og:description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
@@ -89,9 +89,9 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-2a25a6514c7a7229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-058f5b522000e7ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-09T04:05:06.000Z">
+<meta property="og:updated_time" content="2018-11-09T06:17:15.075Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WYQ">
+<meta name="twitter:title" content="ReactiveCocoa解读-订阅信号">
 <meta name="twitter:description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
@@ -129,7 +129,7 @@
 
 
 
-  <title> | WYQ</title>
+  <title>ReactiveCocoa解读-订阅信号 | WYQ</title>
   
 
 
@@ -253,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">ReactiveCocoa解读-订阅信号</h1>
         
 
         <div class="post-meta">
@@ -265,7 +265,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:17:15+08:00">
                 2018-11-09
               </time>
             
@@ -410,18 +410,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/09/UIImagePickerController不走回调的问题/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/09/GMTC1600块的总结/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/09/iOS学习笔记/" rel="prev" title="iOS学习笔记">
+                iOS学习笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -490,7 +486,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

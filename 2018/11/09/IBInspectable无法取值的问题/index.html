@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下12345678Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above erro">
+<meta name="description" content="我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行 dispatch_async(dispatch_get_main_queue(), ^{ //some code} 竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以如图：  奇怪的问题，特此记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VS保存时自动格式化导致ejs编译错误">
-<meta property="og:url" content="http://yoursite.com/2018/11/09/VS保存时自动格式化导致ejs编译错误/index.html">
+<meta property="og:title" content="IBInspectable无法取值的问题">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/IBInspectable无法取值的问题/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:description" content="ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下12345678Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above erro">
+<meta property="og:description" content="我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行 dispatch_async(dispatch_get_main_queue(), ^{ //some code} 竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以如图：  奇怪的问题，特此记录">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-09T06:35:13.632Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-192d31537be63fe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-11-09T06:40:54.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VS保存时自动格式化导致ejs编译错误">
-<meta name="twitter:description" content="ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下12345678Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above erro">
+<meta name="twitter:title" content="IBInspectable无法取值的问题">
+<meta name="twitter:description" content="我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行 dispatch_async(dispatch_get_main_queue(), ^{ //some code} 竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以如图：  奇怪的问题，特此记录">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/69809-192d31537be63fe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/09/VS保存时自动格式化导致ejs编译错误/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/IBInspectable无法取值的问题/">
 
 
 
 
 
-  <title>VS保存时自动格式化导致ejs编译错误 | WYQ</title>
+  <title>IBInspectable无法取值的问题 | WYQ</title>
   
 
 
@@ -232,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/VS保存时自动格式化导致ejs编译错误/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/IBInspectable无法取值的问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -249,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">VS保存时自动格式化导致ejs编译错误</h1>
+          <h1 class="post-title" itemprop="name headline">IBInspectable无法取值的问题</h1>
         
 
         <div class="post-meta">
@@ -261,7 +263,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:35:13+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:40:54+08:00">
                 2018-11-09
               </time>
             
@@ -299,15 +301,11 @@
       
 
       
-        <p>ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个<br>最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above error is not helpful, you may want to try EJS-Lint: https://github.com/RyanZim/EJS-Lint</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs</span><br><span class="line"></span><br><span class="line">If the above error is not helpful, you may want to try EJS-Lint:</span><br><span class="line">https://github.com/RyanZim/EJS-Lint</span><br><span class="line">    at new Function (&lt;anonymous&gt;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>完全看不到有用的信息,shit</p>
-<p>于是我就按提示用 <a href="https://github.com/RyanZim/EJS-Lint" target="_blank" rel="noopener">https://github.com/RyanZim/EJS-Lint</a> 来试试能不能看到更多信息…<br>心累啊,用命令号执行直接返回了没有任何信息.加在工程里返回undefined, MMP.姿势不对?有掌握动作要领的请指教.</p>
-<p>在折磨了接近两天的时间后我不得对我接近千行的ejs文件一行行ejs代码进行查看,还是没错啊…要你你能不崩溃?</p>
-<p>最最后,我就重新把带有ejs代码的片段一段段摘出来,然后一遍遍部署运行,终于…苍天啊.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \ &apos;&apos; %&gt;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
-<p>如上这就是问题代码,估计再细心你可能也没法很多发现问题吧…<br>其实我的原始代码是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \&apos;&apos; %&gt;</span><br></pre></td></tr></table></figure></p>
-<p>发现了,他妈的最后一个转义斜杠<code>\</code>后边接了个空格…wtf.<br>而这都是我在保存时vs给我自动格式化造成的.</p>
-<p>说了太多脏话.反思</p>
+        <p>我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行</p>
+<pre><code>dispatch_async(dispatch_get_main_queue(), ^{ //some code}
+</code></pre><p>竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以<br>如图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-192d31537be63fe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>奇怪的问题，特此记录</p>
 
       
     </div>
@@ -332,8 +330,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/09/UIImagePickerController不走回调的问题/" rel="next" title="UIImagePickerController不走回调的问题">
-                <i class="fa fa-chevron-left"></i> UIImagePickerController不走回调的问题
+              <a href="/2018/11/09/WCSession-sendMessage-失败处理/" rel="next" title="WCSession-sendMessage-失败处理">
+                <i class="fa fa-chevron-left"></i> WCSession-sendMessage-失败处理
               </a>
             
           </div>
@@ -341,10 +339,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/09/WCSession-sendMessage-失败处理/" rel="prev" title="WCSession-sendMessage-失败处理">
-                WCSession-sendMessage-失败处理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

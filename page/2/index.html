@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/为什么dispatch_sync在主线程会死锁/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看UITableView-二-父视图UIScrollView/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/为什么dispatch_sync在主线程会死锁/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/回头看UITableView-二-父视图UIScrollView/" itemprop="url">回头看UITableView(二)-父视图UIScrollView</a></h1>
         
 
         <div class="post-meta">
@@ -260,475 +260,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先看下面一段代码</p>
-<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;abc&quot;, DISPATCH_QUEUE_SERIAL);
-dispatch_sync(queue, ^{//taskA
-    //do something
-    dispatch_sync(queue, ^{//taskB
-        //啥也干不了
-    });
-});
-</code></pre><p>dispatch_sync函数用于将一个block(任务)提交到队列中同步执行，直到block执行完后，这个函数才会返回。queue是一个串行队列，如果先后加入两个任务，taskA和taskB, 那么只有taskA执行完之后taskB才能执行。如果taskB是在taskA中加进队列的，那么它们依然遵守先进先出原则，即taskA执行完之后taskB才执行，也就是taskB在等待taskA完成。但是因为dispatch_sync的同步特性,taskB执行不完taskA就不算完成，即taskA在等待taskB的完成，这样就发生了死锁。</p>
-<p>根据上面那份代码，我们就可以理解下面的代码为什么会阻塞主线程了。</p>
-<pre><code>dispatch_queue_t mainQueue = dispatch_get_main_queue();
-dispatch_sync(mainQueue, ^{
-    NSLog(@&quot;hello&quot;);
-});
-</code></pre><p>mainQueue是系统创建的，在执行上面的代码之前就已经加进去了很多任务</p>
-<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;Main&quot;, DISPATCH_QUEUE_SERIAL);
-dispatch_sync(queue, ^{
-    //Task A
-});
-...
-dispatch_sync(queue, ^{
-    //Task N
-});
-</code></pre><p>在这N个任务里有一个任务是这样的：</p>
-<pre><code>dispatch_sync(queue, ^{
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    dispatch_sync(mainQueue, ^{
-        NSLog(@&quot;hello&quot;);
-    });
-});
-</code></pre><p>所以，发生死锁就是必然的了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/关于连续触发的函数中动画异常的描述/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/关于连续触发的函数中动画异常的描述/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我想要的过程是这样的，我有两个label像球场上的广告牌一样交替滚动，当前的往上移动逐渐消失下边的从下边同时往上移动逐渐出现。我为了在autolayout下也能实现所以一开始准备用transform实现，但是发现往上移动的动画异常，不知道什么原因，让人郁闷。。。便秘的感觉很久之后，我决定退而求其次，用改变center来实现，问题解决了，但是是建立在我这两个label没有autolayout的基础之上。今天特此记下，留待以后研究。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看UITableView(三)-下拉刷新的实现/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/回头看UITableView(三)-下拉刷新的实现/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近陷入了项目中一个日历月视图与周视图切换效果的实现，长时间没有实现想要的效果，沮丧至极。烦请有好想法的同学指点一二，在线等<a href="http://weibo.com/u/2242240253/home?wvr=5&amp;lf=reg" target="_blank" rel="noopener">@留什么白</a>。</p>
-<hr>
-<p>结束例行的啰嗦，进入正题。</p>
-<p>大家可能都用过MJRefresh,十分之方便，李明杰老师借助runtime的特性，极尽之能，让千千万万小白开发者和遵循不重复制造轮子原则的开发者用最少的代码就实现了界面下拉刷新的功能。我们今天不谈runtime的黑魔法，而是UITableView最常见的刷新数据方式下拉刷新的实现过程。</p>
-<p>首先，我们定义三个枚举值</p>
-<pre><code>typedef NS_ENUM(NSUInteger, RefreshState) {
-    RefreshStateNormal,//正常
-    RefreshStatePulling,//释放即可刷新
-    RefreshStateLoading,//加载中
-};
-</code></pre><p>分别表示正常状态、释放即可刷新状态、加载中状态</p>
-<p>为了简单说明，我们只用一个UILabel来表现就可以，把它放在内容上方，也就是正常情况下看不到的地方，只有下拉的时候才能看到。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/69809-218b9752173c81ce.gif?imageMogr2/auto-orient/strip" alt="UILabel的位置"></p>
-<p>然后我们估算一个大体的距离，从而确定触发加载状态的临界点。</p>
-<p>简单描述一下将要实现的情形：</p>
-<p>我们往下滑动视图，如果视图下滑到触发点，状态变为<code>RefreshStatePulling</code>,即标签文字变为“松手即可刷新”。<br>接下来有两种状况会发生：一，松开手；二，不松手，又向初始位置滑。第一种情况，当你松开手时，因为UIScrollView有回弹效果，视图会往上滑动，当到达触发点时，状态改为<code>RefreshStateLoading</code>,即视图停在当前位置，不受回弹作用影响，标签文字变为“加载中…”,等加载动作完成之后，手动触发复原动作，视图滑到原始状态 <code>RefreshStateNormal</code>,同时标签文字变为‘下拉刷新’；第二种情况，你没有松手，然后又往回滑动，当到达触发点以上时，状态变为初始状态<code>RefreshStateNormal</code>。</p>
-<p>如果你对上述过程不是很了解的话，那你随便找个带下拉刷新的应用试试就行了，不用温柔，越暴力越好。弄清上述过程是实现整个流程的基础。</p>
-<p>接下来要做的就是决定什么时候改变状态了，参照上述过程，我们在UIScrollView的代理函数<code>scrollViewDidScroll:</code>监控<code>contentOffset</code>的变化，再结合<code>isDragging</code>属性就可以改变状态了。</p>
-<pre><code>- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if(scrollView.contentOffset.y &lt; -SwitchPoint-self.originalInsetTop){
-        if(self.refreshState == RefreshStateNormal){//小于临界值（在触发点以下），如果状态是正常就转为下拉刷新，如果正在刷新或者已经是下拉刷新则不变
-            self.refreshState = RefreshStatePulling;
-        }
-    }else{//大于临界值（在触发点以上，包括触发点）
-        if(scrollView.isDragging){//手指没有离开屏幕
-            if(self.refreshState == RefreshStatePulling){//原来是下拉的话变成正常，原来是刷新或者正常的话不变
-                self.refreshState = RefreshStateNormal;
-            }
-        }else{//手指离开屏幕
-            if(self.refreshState == RefreshStatePulling){//原来是下拉的话变成加载中，原来是加载中或者正常的话不变
-                self.tableView.contentInset = UIEdgeInsetsMake(self.originalInsetTop+SwitchPoint, 0, 0, 0);//改变contentInset的值就可以取消回弹效果停留在当前位置了 关于contentIinset的介绍，可以查看我的上一篇文章
-                self.refreshState = RefreshStateLoading;
-            }
-        }
-    }    
-}
-</code></pre><p>这段代码决定了UIScrollView每个时刻的状态，那么接下来的就简单多了，只要重写一下<code>setRefreshState:</code>方法就可以了。</p>
-<pre><code>- (void)setRefreshState:(RefreshState)refreshState{
-    _refreshState = refreshState;
-    switch (refreshState) {
-        case RefreshStateNormal:
-            self.pulldownLabel.text = @&quot;下拉刷新&quot;;
-            [self.pulldownLabel sizeToFit];
-            break;
-        case RefreshStateLoading:
-            self.pulldownLabel.text = @&quot;正在刷新...&quot;;
-            [self.pulldownLabel sizeToFit];
-            if(self.refreshBlock){
-                self.refreshBlock();//这里就是你要执行的耗时的操作
-            }            
-            break;
-        case RefreshStatePulling:
-            self.pulldownLabel.text = @&quot;松开即可刷新&quot;;
-            [self.pulldownLabel sizeToFit];
-            break;
-        default:
-            break;
-    }
-}
-</code></pre><p>看一下我们的效果：<br><img src="http://upload-images.jianshu.io/upload_images/69809-72950bd579e695a9.gif?imageMogr2/auto-orient/strip" alt="平凡而简单的效果"><br>当然你会说这不够diao,不够炫酷，人家的效果都是这样：</p>
-<p><img src="https://camo.githubusercontent.com/15577b87be4403d9e2ede4d5cd5b9fccbd1d03ae/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343334333438363135312e676966" alt=""> <img src="https://camo.githubusercontent.com/911191d46157ea3961728b16696aea4440ffeb92/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343430323233383338392e676966" alt=""></p>
-<p>又被你发现了，😂，我满(hao)是(wu)虔(jie)诚(cao)地盗了大神的图，@M了个J，大神，膝盖已发货，请验收。</p>
-<p>那么我们怎么实现这样的效果呢，很简单，在上边设置状态的代码里添加动画就行了。来一段伪的代码：</p>
-<pre><code>case RefreshStateNormal:
-     self.pulldownLabel.text = @&quot;下拉刷新&quot;;
-     [UIView animateWithDuration:0.3 animations:^{
-         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI/2);//箭头旋转180º
-     }];
-     break;
-</code></pre><p>还有一点需要强调，在<code>scrollViewDidScroll:</code>里保持加载状态时修改了<code>contentInset</code>,所以取消加载状态恢复原状时只需…如此如此：</p>
-<pre><code>- (void)endRefresh{
-    if(self.refreshState == RefreshStateLoading){
-        self.refreshState = RefreshStateNormal;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.tableView.contentInset = UIEdgeInsetsMake(self.originalInsetTop, 0, 0, 0);
-        } completion:nil];
-    }
-}
-</code></pre><p>OK，希望看到这里你能理解下拉刷新的整个过程及原理了，欢迎指正和打击。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看UITableView(二)-父视图UIScrollView/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/回头看UITableView(二)-父视图UIScrollView/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:20:40+08:00">
                 2018-11-09
               </time>
             
@@ -855,7 +387,7 @@ view.backgroundColor = [UIColor greenColor];
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/打破Swift里带有引用计数的结构体/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看之UITableView-基本代理方法及复用原理/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -874,7 +406,7 @@ view.backgroundColor = [UIColor greenColor];
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/打破Swift里带有引用计数的结构体/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/回头看之UITableView-基本代理方法及复用原理/" itemprop="url">回头看之UITableView-(基本代理方法及复用原理)</a></h1>
         
 
         <div class="post-meta">
@@ -886,382 +418,7 @@ view.backgroundColor = [UIColor greenColor];
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Swift里，一个类<code>class</code>是分配在堆<code>heap</code>上的，它通过引用计数<code>reference counting</code>的方式来追踪自己的生命周期并能在生命走到尽头的时候执行一些清理工作<code>clean behaviors</code>，比如留点什么遗言。结构体<code>struct</code>却是相反的，它不是单独分配在堆上，没有引用计数，也不能在生命结束时留什么遗言。</p>
-<p>事实上，堆、引用计数和清理工作这些特性也可以适用于结构体。不过要特别小心的是：出格的行为很容易导致问题。笔者接下来就讲告诉你结构体是怎么带着那些你把它们跟一个类联系起来的特性销毁的以及这可能是导致内存泄露、错误行为和编译崩溃的根源。</p>
-<blockquote>
-<p><strong>OUT OF DATE AS OF SWIFT 3</strong>: While it is still possible to have a heap allocated, reference counted struct with cleanup behaviors in Swift 3, it is no longer possible to capture a reference to self<br> in a struct method as described in this article. The problems detailed in section 2 in this article have been fixed in Swift 3 and the remainder of this article is merely a historical artefact. Don’t worry: you’re better off as a result.</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/iOS学习笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/iOS学习笔记/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>autoLayout</p>
-<blockquote>
-<p>Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个view的大小，或者位置或者位置中的某一个项（比如x）的时候，就会出现约束不足的情况，在xib或者storyboard中，会以黄色的警告出现在左侧提示框内；如果你给出的约束推导出了两个甚至多个互相矛盾的位置尺寸结果的时候，就产生了布局错误，在编译的时候直接就build不过。</p>
-</blockquote>
-</li>
-<li><p>在画布中角度是顺时针转的<br><img src="http://upload-images.jianshu.io/upload_images/69809-3288012c6594faf8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="angle"></p>
-</li>
-<li><p>引用</p>
-<blockquote>
-<p>在绘制的方法中，使用 UIGraphicsBeginImageContextWithOptions 来取代 UIGraphicsGetCurrentContext <a href="http://objccn.io/issue-2-2/" target="_blank" rel="noopener">出处</a></p>
-</blockquote>
-</li>
-<li><p>应用间相互调用只要知道双方设置好的URL就行了，打开另一个应用时可以把当前应用的URL传过去，要打开的应用就可以根据响应的代码就可以让用户触发返回原始应用了</p>
-</li>
-<li><p><em>事件的响应链是从子视图到父视图层层传递的，模式是子视图调用父视图相同的方法（[super XXX]），所以触发该事件的先后顺序应该是从父视图到子视图，当然这是默认情况，如果你重写了事件方法，就可以控制是否把事件传递给父视图，或者哪个视图先触发事件</em><br>上面的理解貌似不够准确，重新整理如下：<br>. <strong>事件链的建立</strong>  简单讲是发生在addSubView时，被添加的视图的nextResponder(下一个响应者)就是它的父视图。如果一个veiw(下面简称A)不是普通的view，它是某个viewcontroller的根veiw,那么A的nextResponder在A从初始化完后就赋值为viewController。然后当A被addsubview到rootview的时候(addChildViewController时会发生)，Controller A的nextresponder被复制为rootview。<br>.  <strong>事件的传递</strong> 当用户触摸时，UIKit先创建一个事件对象，加到事件队列中去，然后UIAPPlication从中取出来，从window开始查找，发现点击位置在window的范围内，那就继续查找window的subViews,直到找到视图树最顶部的叶子视图，然后把事件交给这个顶部视图，视图处理事件，如果不处理就交给它的nextResponser,层层往下，直到window再到UIApplacation。</p>
-</li>
-<li><p>像素就是一个小点，px就表示一个真正的点，pt就是标准中定好的有大小的点,1/72英寸,分辨率是指指每单位面积（平方英寸）像素的个个数，即dpi,之所以谈到具体的设备时经常用W*H表示分辨率，是用了当前设备的长宽方向上的像素除以当前设备相应的尺寸</p>
-</li>
-<li><p>devices只有选择了universal(通用)才可以让iPhone和iPad共用界面或者说不同尺寸的设备共用界面</p>
-</li>
-<li><p>IQKeyboardManager 必须是在push或者present的VC的视图上才可以自动调整位置 事后问过作者，说怎么都可以，但是我用的版本却实不行，作者给意见，可以考虑addChildViewCOntroller</p>
-</li>
-<li><p>从UINavigationController里出来的UIViewController无法不会执行shouldAutorotate,这种情况必须自定义一个继承UINavigationController的类</p>
-</li>
-<li><p>要实现UITableViewCell的编辑必须实现下面两个方法</p>
-<pre><code>(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath; 
-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
-</code></pre></li>
-<li><p>关于堆栈的理解 ：栈 — 战死 栈是死的，一般是提前分配好的，除非你malloc出来，堆的可控性就比较强，也就是自己控制它的创建，当然它的消亡也应该你来控制<br>举个小栗：在一个函数中定义了 NSArray  *a = [[NSArray alloc] init]  a是个指针，他就是放在栈中的，但是它指向的那个数组就是存在堆中的。</p>
-</li>
-<li><p>objective-c因为字符串比较特殊，所以在写正则的时候，碰到转义字符必须多加一个”\\”，比如：全数字字符：@”^\\\\d\\+$”</p>
-</li>
-<li><p>UITableView竟然被我发现了一个新用法（当然这个用法是旧的），它在编辑状态下可以左边显示圆圈，didSelected会自动选中，再按一次didDeselect会自动消失</p>
-</li>
-<li><p>下面这句话的意思是获取aView在window中的位置，注意最前边是aView的父视图<br>   [aView.superview convertPoint:aView.frame.origin toView:nil];</p>
-</li>
-<li><p>UIView不能同事加多个由make生成的transform,如果加多个，第二个应该用原始方法，如下  </p>
-<pre><code>self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x, 0);
-self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
-</code></pre></li>
-<li><p>extern 是表明这个这个变量是全局的，在其他类里也可以使用这个变量不必把首次声明这个变量的类引入就行，但是必须得再次声明，static是仅限于此类里使用，其他类要想使用必须引入该类</p>
-</li>
-<li><p>图片的坐标原点在左下角</p>
-</li>
-<li><p>关于刷新子视图</p>
-<blockquote>
-<p>-layoutSubviews方法：这个方法，默认没有做任何事情，需要子类进行重写<br>-setNeedsLayout方法： 标记为需要重新布局，<strong>异步</strong>调用layoutIfNeeded刷新布局，不立即刷新，但layoutSubviews一定会被调用<br>-layoutIfNeeded方法：如果，有需要刷新的标记，立即调用layoutSubviews进行布局（如果没有标记，不会调用layoutSubviews）<br>如果要立即刷新，要先调用[view setNeedsLayout]，把标记设为需要布局，然后马上调用[view layoutIfNeeded]，实现布局</p>
-</blockquote>
-</li>
-<li><p>我勒个去哎，self.navigationController.toolbarHidden = NO 这样可以在View下边有显示一个toolbar哎，这个是可以利用的哟，完成任务必须抽时间好好研究一番，新发现啊</p>
-</li>
-<li><p>下面的代码输出什么</p>
-<pre><code>@implementation Son : Father
- - (id)init{
-      self = [super init]; if (self) {          
-          NSLog(@&quot;%@&quot;, NSStringFromClass([self class])); 
-          NSLog(@&quot;%@&quot;, NSStringFromClass([super class])); 
-     } 
-     return self;
-}
-@end
-</code></pre><blockquote>
-<p>答案：都输出”Son”解释：objc中super是<strong>编译器标示符</strong>，并不像self一样是一个对象，遇到向super发的方法时会转译成objc_msgSendSuper(…)，而参数中的对象还是self，于是从父类开始沿继承链寻找- class这个方法，最后在NSObject中找到（若override）此时，[self class]和[super class]已经等价了。</p>
-</blockquote>
-<p>所以，子类调用父类的某个方法，父类的这个方法又调用了一个跟子类有相同名字的某个方法，相当于子类直接调用了这个方法</p>
-</li>
-<li><p>UITextField是有leftView和rightView的，可以利用leftView在添加了背景图片后添加左边留白，但是得注意要设置属性</p>
-<pre><code>leftViewMode = UITextFieldViewModeAlways
-</code></pre></li>
-<li>load方法会在类实例话的时候调用，如果要用runtime黑魔法的话就可以在这里用。initializer方法会在第一次调用该类的方法时调用这个方法，属于懒加载</li>
-<li>UITableView的header是searchBar的时候拖拽时searchBar背景会被拉伸</li>
-<li><p>视图控制器切换方法</p>
-<pre><code>- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion NS_AVAILABLE_IOS(5_0);
-</code></pre><p>不用你再去给容器视图添加(addSubView)和删除(removeFromSuperView)子视图，它会帮你处理好</p>
-</li>
-<li><p>哈哈哈，XCode好傻哟，如果你在.m文件里提前有了 setX和x方法，然后才在.h文件里用<code>@property</code>声明x属性，.m里就不允许你使用_x这个变量。此时，<code>@synthesize</code> 就派上了用场。<code>@dynamic</code>与<code>@synthesize</code>的区别在于：使用<code>@synthesize</code>编译器会确实的产生getter和setter方法，而<code>@dynami</code>c仅仅是告诉编译器这两个方法在运行期会有的，无需产生警告。</p>
-<blockquote>
-<p>假设有这么个场景，B类，C类分别继承A类，A类实现某个协议（@protocol），协议中某个属性( somePropety )我不想在A中实现，而在B类，C类中分别实现。如果A中不写任何代码，编译器就会给出警告：<br>“use @synthesize, @dynamic or provide a method implementation”<br>这时你给用@dynamic somePropety; 编译器就不会警告，同时也不会产生任何默认代码。</p>
-</blockquote>
-</li>
-<li><p>UITableView在编辑状态下如果指定编辑样式是添加和删除，可以在视图上显示复选框，利用这个特性可以方便实现多选。</p>
-<pre><code>- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
-}
-</code></pre><p><em>注意：以上是在UITableView单选的情况下，如果是多选就会自动出现复选框，不会执行上段代码。😂说了好多废话哟</em></p>
-</li>
-<li><p>UITableView在调用了reloadData之后，tableView会在调用完cell的高度获知contentSize之后就调用reloadData之后的语句了，完了之后才去加载cell</p>
-</li>
-<li><blockquote>
-<p>在 MRC 下，使用 <strong>block 说明符也可以避免循环引用。因为当 block 从栈拷贝到堆时，</strong>block 对象类型的变量不会被 retain，没有 <strong>block 说明符的对象类型的变量则会被 retian。正是由于 </strong>block 在 ARC 和 MRC 下的巨大差异，我们在写代码时一定要区分清楚到底是 ARC 还是 MRC。</p>
-</blockquote>
-</li>
-<li><p>实现下面的方法，我们就可以对一个类进行使用想NSArray和NSDictionary那样的语法糖用下标或者key来存取数据了, so cool</p>
-<pre><code>- (id)objectAtIndexedSubscript:(NSUInteger)idx;
-- (void)setObject:(id)objatIndexedSubscript:(NSUInteger)idx;
-- (void)setObject:(id)objforKeyedSubscript:(id &lt;NSCopying&gt;)key;
-- (id)objectForKeyedSubscript:(id)key;
-</code></pre></li>
-<li>CALayer的border是出现在layer内部的，比如说layerWidth为10,那么border就会占据layer的content的四周宽度为10的空间。</li>
-<li>系统视频的上传必须拷贝到沙盒目录中才能上传。😥</li>
-<li>手撸NSLayoutConstraint需要注意firstItem和secondItem的顺序</li>
-<li>注意了，注意了，keyWindow不知道什么时候会被系统干掉，所以把hud加在keyWindow上的时候一定要注意哦。最近遇到的在把mov转换成mp4的时候系统起了个异步线程，然后kenWindow就被干掉了。</li>
-<li>用CGContextClearRect就可以实现画一张中间透明的图片了。</li>
-<li><p>想知道某个变量在程序调试时的状态，可以用借助dispatch_source_t 监控调试开始，打印变量  <a href="http://ios.jobbole.com/81566/" target="_blank" rel="noopener">from</a></p>
-<pre><code>dispatch_queue_t queue = dispatch_get_main_queue();
-static dispatch_source_t source = nil;
-__typeof(self) __weak weakSelf = self;
-static dispatch_once_t onceToken;
-dispatch_once(&amp;onceToken, ^{
-    source = dispatch_source_create(DISPATCH_SOURCE_TYPE_SIGNAL, SIGSTOP, 0, queue);
-    if (source)
-    {
-        dispatch_source_set_event_handler(source, ^{
-            NSLog(@&quot;Hi, I am: %@&quot;, weakSelf);
-        });
-        dispatch_resume(source); // 10
-    }
-});
-</code></pre></li>
-<li><p>当UINavigationController push或者pop操作时NavigationBar右侧底部会变灰，解决这种问题需要把最接近当前vc的view的view的背景色修改一下就可以了。</p>
-</li>
-<li><p><img src="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-</li>
-<li>企业账户 往App Store上发布应用必须是Agent账户</li>
-<li>用Xcode写C，即使仅仅有C也要把Compile Sources As改为Objective C++</li>
-<li>我一直以为下边的代码是默认的，然而并不是，需要明确写出来。😂<pre><code>self.tableView.rowHeight = UITableViewAutomaticDimension;
-</code></pre></li>
-<li>CALayer对path的动画执行完后path为初始值,如果想要最后停留住状态就可以把初始值设为toValue的值</li>
-<li>iOS11的本地通知要想在前台显示必须实现代理willPresent的方法,文档有说明的,记住</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看之UITableView-(基本代理方法及复用原理)/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/回头看之UITableView-(基本代理方法及复用原理)/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:19:48+08:00">
                 2018-11-09
               </time>
             
@@ -1444,7 +601,7 @@ NSMutableArray *visibleCells;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/iOS学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -1463,7 +620,7 @@ NSMutableArray *visibleCells;
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/hello-world/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/2018/11/09/iOS学习笔记/" itemprop="url">iOS学习笔记</a></h1>
         
 
         <div class="post-meta">
@@ -1475,7 +632,7 @@ NSMutableArray *visibleCells;
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T10:16:57+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:18:16+08:00">
                 2018-11-09
               </time>
             
@@ -1515,15 +672,343 @@ NSMutableArray *visibleCells;
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <ol>
+<li><p>autoLayout</p>
+<blockquote>
+<p>Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个view的大小，或者位置或者位置中的某一个项（比如x）的时候，就会出现约束不足的情况，在xib或者storyboard中，会以黄色的警告出现在左侧提示框内；如果你给出的约束推导出了两个甚至多个互相矛盾的位置尺寸结果的时候，就产生了布局错误，在编译的时候直接就build不过。</p>
+</blockquote>
+</li>
+<li><p>在画布中角度是顺时针转的<br><img src="http://upload-images.jianshu.io/upload_images/69809-3288012c6594faf8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="angle"></p>
+</li>
+<li><p>引用</p>
+<blockquote>
+<p>在绘制的方法中，使用 UIGraphicsBeginImageContextWithOptions 来取代 UIGraphicsGetCurrentContext <a href="http://objccn.io/issue-2-2/" target="_blank" rel="noopener">出处</a></p>
+</blockquote>
+</li>
+<li><p>应用间相互调用只要知道双方设置好的URL就行了，打开另一个应用时可以把当前应用的URL传过去，要打开的应用就可以根据响应的代码就可以让用户触发返回原始应用了</p>
+</li>
+<li><p><em>事件的响应链是从子视图到父视图层层传递的，模式是子视图调用父视图相同的方法（[super XXX]），所以触发该事件的先后顺序应该是从父视图到子视图，当然这是默认情况，如果你重写了事件方法，就可以控制是否把事件传递给父视图，或者哪个视图先触发事件</em><br>上面的理解貌似不够准确，重新整理如下：<br>. <strong>事件链的建立</strong>  简单讲是发生在addSubView时，被添加的视图的nextResponder(下一个响应者)就是它的父视图。如果一个veiw(下面简称A)不是普通的view，它是某个viewcontroller的根veiw,那么A的nextResponder在A从初始化完后就赋值为viewController。然后当A被addsubview到rootview的时候(addChildViewController时会发生)，Controller A的nextresponder被复制为rootview。<br>.  <strong>事件的传递</strong> 当用户触摸时，UIKit先创建一个事件对象，加到事件队列中去，然后UIAPPlication从中取出来，从window开始查找，发现点击位置在window的范围内，那就继续查找window的subViews,直到找到视图树最顶部的叶子视图，然后把事件交给这个顶部视图，视图处理事件，如果不处理就交给它的nextResponser,层层往下，直到window再到UIApplacation。</p>
+</li>
+<li><p>像素就是一个小点，px就表示一个真正的点，pt就是标准中定好的有大小的点,1/72英寸,分辨率是指指每单位面积（平方英寸）像素的个个数，即dpi,之所以谈到具体的设备时经常用W*H表示分辨率，是用了当前设备的长宽方向上的像素除以当前设备相应的尺寸</p>
+</li>
+<li><p>devices只有选择了universal(通用)才可以让iPhone和iPad共用界面或者说不同尺寸的设备共用界面</p>
+</li>
+<li><p>IQKeyboardManager 必须是在push或者present的VC的视图上才可以自动调整位置 事后问过作者，说怎么都可以，但是我用的版本却实不行，作者给意见，可以考虑addChildViewCOntroller</p>
+</li>
+<li><p>从UINavigationController里出来的UIViewController无法不会执行shouldAutorotate,这种情况必须自定义一个继承UINavigationController的类</p>
+</li>
+<li><p>要实现UITableViewCell的编辑必须实现下面两个方法</p>
+<pre><code>(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath; 
+(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+</code></pre></li>
+<li><p>关于堆栈的理解 ：栈 — 战死 栈是死的，一般是提前分配好的，除非你malloc出来，堆的可控性就比较强，也就是自己控制它的创建，当然它的消亡也应该你来控制<br>举个小栗：在一个函数中定义了 NSArray  *a = [[NSArray alloc] init]  a是个指针，他就是放在栈中的，但是它指向的那个数组就是存在堆中的。</p>
+</li>
+<li><p>objective-c因为字符串比较特殊，所以在写正则的时候，碰到转义字符必须多加一个”\\”，比如：全数字字符：@”^\\\\d\\+$”</p>
+</li>
+<li><p>UITableView竟然被我发现了一个新用法（当然这个用法是旧的），它在编辑状态下可以左边显示圆圈，didSelected会自动选中，再按一次didDeselect会自动消失</p>
+</li>
+<li><p>下面这句话的意思是获取aView在window中的位置，注意最前边是aView的父视图<br>   [aView.superview convertPoint:aView.frame.origin toView:nil];</p>
+</li>
+<li><p>UIView不能同事加多个由make生成的transform,如果加多个，第二个应该用原始方法，如下  </p>
+<pre><code>self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x, 0);
+self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
+</code></pre></li>
+<li><p>extern 是表明这个这个变量是全局的，在其他类里也可以使用这个变量不必把首次声明这个变量的类引入就行，但是必须得再次声明，static是仅限于此类里使用，其他类要想使用必须引入该类</p>
+</li>
+<li><p>图片的坐标原点在左下角</p>
+</li>
+<li><p>关于刷新子视图</p>
+<blockquote>
+<p>-layoutSubviews方法：这个方法，默认没有做任何事情，需要子类进行重写<br>-setNeedsLayout方法： 标记为需要重新布局，<strong>异步</strong>调用layoutIfNeeded刷新布局，不立即刷新，但layoutSubviews一定会被调用<br>-layoutIfNeeded方法：如果，有需要刷新的标记，立即调用layoutSubviews进行布局（如果没有标记，不会调用layoutSubviews）<br>如果要立即刷新，要先调用[view setNeedsLayout]，把标记设为需要布局，然后马上调用[view layoutIfNeeded]，实现布局</p>
+</blockquote>
+</li>
+<li><p>我勒个去哎，self.navigationController.toolbarHidden = NO 这样可以在View下边有显示一个toolbar哎，这个是可以利用的哟，完成任务必须抽时间好好研究一番，新发现啊</p>
+</li>
+<li><p>下面的代码输出什么</p>
+<pre><code>@implementation Son : Father
+ - (id)init{
+      self = [super init]; if (self) {          
+          NSLog(@&quot;%@&quot;, NSStringFromClass([self class])); 
+          NSLog(@&quot;%@&quot;, NSStringFromClass([super class])); 
+     } 
+     return self;
+}
+@end
+</code></pre><blockquote>
+<p>答案：都输出”Son”解释：objc中super是<strong>编译器标示符</strong>，并不像self一样是一个对象，遇到向super发的方法时会转译成objc_msgSendSuper(…)，而参数中的对象还是self，于是从父类开始沿继承链寻找- class这个方法，最后在NSObject中找到（若override）此时，[self class]和[super class]已经等价了。</p>
+</blockquote>
+<p>所以，子类调用父类的某个方法，父类的这个方法又调用了一个跟子类有相同名字的某个方法，相当于子类直接调用了这个方法</p>
+</li>
+<li><p>UITextField是有leftView和rightView的，可以利用leftView在添加了背景图片后添加左边留白，但是得注意要设置属性</p>
+<pre><code>leftViewMode = UITextFieldViewModeAlways
+</code></pre></li>
+<li>load方法会在类实例话的时候调用，如果要用runtime黑魔法的话就可以在这里用。initializer方法会在第一次调用该类的方法时调用这个方法，属于懒加载</li>
+<li>UITableView的header是searchBar的时候拖拽时searchBar背景会被拉伸</li>
+<li><p>视图控制器切换方法</p>
+<pre><code>- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion NS_AVAILABLE_IOS(5_0);
+</code></pre><p>不用你再去给容器视图添加(addSubView)和删除(removeFromSuperView)子视图，它会帮你处理好</p>
+</li>
+<li><p>哈哈哈，XCode好傻哟，如果你在.m文件里提前有了 setX和x方法，然后才在.h文件里用<code>@property</code>声明x属性，.m里就不允许你使用_x这个变量。此时，<code>@synthesize</code> 就派上了用场。<code>@dynamic</code>与<code>@synthesize</code>的区别在于：使用<code>@synthesize</code>编译器会确实的产生getter和setter方法，而<code>@dynami</code>c仅仅是告诉编译器这两个方法在运行期会有的，无需产生警告。</p>
+<blockquote>
+<p>假设有这么个场景，B类，C类分别继承A类，A类实现某个协议（@protocol），协议中某个属性( somePropety )我不想在A中实现，而在B类，C类中分别实现。如果A中不写任何代码，编译器就会给出警告：<br>“use @synthesize, @dynamic or provide a method implementation”<br>这时你给用@dynamic somePropety; 编译器就不会警告，同时也不会产生任何默认代码。</p>
+</blockquote>
+</li>
+<li><p>UITableView在编辑状态下如果指定编辑样式是添加和删除，可以在视图上显示复选框，利用这个特性可以方便实现多选。</p>
+<pre><code>- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
+}
+</code></pre><p><em>注意：以上是在UITableView单选的情况下，如果是多选就会自动出现复选框，不会执行上段代码。😂说了好多废话哟</em></p>
+</li>
+<li><p>UITableView在调用了reloadData之后，tableView会在调用完cell的高度获知contentSize之后就调用reloadData之后的语句了，完了之后才去加载cell</p>
+</li>
+<li><blockquote>
+<p>在 MRC 下，使用 <strong>block 说明符也可以避免循环引用。因为当 block 从栈拷贝到堆时，</strong>block 对象类型的变量不会被 retain，没有 <strong>block 说明符的对象类型的变量则会被 retian。正是由于 </strong>block 在 ARC 和 MRC 下的巨大差异，我们在写代码时一定要区分清楚到底是 ARC 还是 MRC。</p>
+</blockquote>
+</li>
+<li><p>实现下面的方法，我们就可以对一个类进行使用想NSArray和NSDictionary那样的语法糖用下标或者key来存取数据了, so cool</p>
+<pre><code>- (id)objectAtIndexedSubscript:(NSUInteger)idx;
+- (void)setObject:(id)objatIndexedSubscript:(NSUInteger)idx;
+- (void)setObject:(id)objforKeyedSubscript:(id &lt;NSCopying&gt;)key;
+- (id)objectForKeyedSubscript:(id)key;
+</code></pre></li>
+<li>CALayer的border是出现在layer内部的，比如说layerWidth为10,那么border就会占据layer的content的四周宽度为10的空间。</li>
+<li>系统视频的上传必须拷贝到沙盒目录中才能上传。😥</li>
+<li>手撸NSLayoutConstraint需要注意firstItem和secondItem的顺序</li>
+<li>注意了，注意了，keyWindow不知道什么时候会被系统干掉，所以把hud加在keyWindow上的时候一定要注意哦。最近遇到的在把mov转换成mp4的时候系统起了个异步线程，然后kenWindow就被干掉了。</li>
+<li>用CGContextClearRect就可以实现画一张中间透明的图片了。</li>
+<li>想知道某个变量在程序调试时的状态，可以用借助dispatch_source_t 监控调试开始，打印变量  <a href="http://ios.jobbole.com/81566/" target="_blank" rel="noopener">from</a><blockquote>
+</blockquote>
+<pre><code>dispatch_queue_t queue = dispatch_get_main_queue();
+static dispatch_source_t source = nil;
+__typeof(self) __weak weakSelf = self;
+static dispatch_once_t onceToken;
+dispatch_once(&amp;onceToken, ^{
+    source = dispatch_source_create(DISPATCH_SOURCE_TYPE_SIGNAL, SIGSTOP, 0, queue);
+    if (source)
+    {
+        dispatch_source_set_event_handler(source, ^{
+            NSLog(@&quot;Hi, I am: %@&quot;, weakSelf);
+        });
+        dispatch_resume(source); // 10
+    }
+});
+</code></pre></li>
+<li>当UINavigationController push或者pop操作时NavigationBar右侧底部会变灰，解决这种问题需要把最接近当前vc的view的view的背景色修改一下就可以了。</li>
+<li>企业账户 往App Store上发布应用必须是Agent账户</li>
+<li>用Xcode写C，即使仅仅有C也要把Compile Sources As改为Objective C++</li>
+<li>我一直以为下边的代码是默认的，然而并不是，需要明确写出来。😂<pre><code>self.tableView.rowHeight = UITableViewAutomaticDimension;
+</code></pre></li>
+<li>CALayer对path的动画执行完后path为初始值,如果想要最后停留住状态就可以把初始值设为toValue的值</li>
+<li>iOS11的本地通知要想在前台显示必须实现代理willPresent的方法,文档有说明的,记住</li>
+<li>像素就是绘画的基本单元，就是一个方格，但是并不一定是一个物理点，在高清屏上是有多个包含多个物理点的。DPI就是每英寸有多少个像素。分辨率在用ps的设计那里就是DPI，但是一般在移动开发那里就是图片的长宽。</li>
+<li><p>关于在Swift中<code>self.property</code>和<code>property</code>，提倡不用<code>self</code>，这样如果在闭包中使用的属性是属于当前的实例对象时编译器就会报错，你就必须加上<code>self</code>，当你加上<code>self</code>的时候你就意识到<code>self</code>要被循环引用了，你就知道要处理这个问题了。</p>
+</li>
+<li><p><img src="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/ReactiveCocoa解读-订阅信号/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/ReactiveCocoa解读-订阅信号/" itemprop="url">ReactiveCocoa解读-订阅信号</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:17:15+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>信号(Signal)和订阅者(Subscriber)是在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a>( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。</p>
+<p>先上一段RAC最简单的使用方法。</p>
+<pre><code> RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
+    [subscriber sendNext:@&quot;钢铁锅&quot;];
+    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
+    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+    return [RACDisposable disposableWithBlock:^{
+        NSLog(@&quot;曲终人散，抹点药酒&quot;);
+    }];
+}];
+[signal subscribeNext:^(id x) {
+    NSLog(@&quot;我听到:%@&quot;,x);
+}];
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是什么锅"></p>
+<blockquote>
+<p>信号是信息的载体</p>
+</blockquote>
+<p>对应上边的代码，我们创建了一个信号 <code>signal</code>，他承载着 <code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。</p>
+<pre><code>+ (RACSignal *)createSignal:(RACDisposable * (^)(id&lt;RACSubscriber&gt; subscriber))didSubscribe {
+    RACDynamicSignal *signal = [[self alloc] init];
+    signal-&gt;_didSubscribe = [didSubscribe copy];
+    return [signal setNameWithFormat:@&quot;+createSignal:&quot;];
+}
+</code></pre><p>创建信号很简单，其实就是创建了一个实例对象，并把将来有可能进行的一系列操作<code>didSubscribe</code>这个block记录下来，等发生了订阅行为时就会执行这些操作。<br>有人会问RACDisposable是什么东西，其实从字面就可以理解，销毁，它封装了当订阅行为消失时一些应该做的操作，当然像一开始的代码这种只是打印消息的操作其实是没必要的，所以这里可以返回nil。那什么时候订阅行为消失呢，当订阅者调用了sendError:或者sendCompleted方法时表示订阅行为就消失了，相应的dispose就会执行了，做一些清理操作。如下面的代码：</p>
+<pre><code>RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
+    [subscriber sendNext:@&quot;钢铁锅&quot;];
+    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+    [subscriber sendError:[NSError errorWithDomain:@&quot;singing&quot; code:748 userInfo:@{@&quot;reason&quot;:@&quot;麦克被歌迷拔掉了&quot;}]];
+    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
+    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+    [subscriber sendError:NULL];
+//        [subscriber sendCompleted];
+    return [RACDisposable disposableWithBlock:^{
+        NSLog(@&quot;曲终人散，抹点药酒&quot;);
+    }];
+}];
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-2a25a6514c7a7229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="我错了"><br>当然如果这两个方法如果你都不调用，那么当订阅者超出了自己的生命周期调用其dealloc方法时这个dispose也会执行。所以RACDisposable在RAC里使用非常广泛，比如在NSNotificationCenter的RAC扩展中用于取消观察者，在UITextField和UITextView的扩展里取消代理等等。</p>
+<p>说了半天大家可能会问，订阅者在哪里？别急，看下面:</p>
+<pre><code>[signal subscribeNext:^(id x) {
+    NSLog(@&quot;我听到:%@&quot;,x);
+}];
+</code></pre><p>当这句代码执行时就发生了订阅行为。其内部实现是这样：</p>
+<pre><code>- (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock {
+     NSCParameterAssert(nextBlock != NULL);
+     //看到了吗？我在这里，我就是订阅者。我把 nextBlock保存了下来。
+     RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock   error:NULL completed:NULL];
+     return [self subscribe:o];
+}
+
+- (RACDisposable *)subscribe:(id&lt;RACSubscriber&gt;)subscriber {
+     NSCParameterAssert(subscriber != nil);
+     RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];
+     //加工了一下，变成了RACPassthroughSubscriber,关于它的作用我们在以后的文章总具体场景下再讲述，现在你只需记住一个更具体的RACSubscriber子类就行了。
+     subscriber = [[RACPassthroughSubscriber alloc] initWithSubscriber:subscriber signal:self disposable:disposable];
+     //还记得信号在一开始创建时就存下来的那个block吗，就是这个didSubscribe
+     if (self.didSubscribe != NULL) {
+         RACDisposable *schedulingDisposable =  [RACScheduler.subscriptionScheduler schedule:^{
+             //在这里支行了信号一开始创建的block，并获得了它返回的RACDisposable
+             RACDisposable *innerDisposable = self.didSubscribe(subscriber);
+             [disposable addDisposable:innerDisposable];
+         }];
+        [disposable addDisposable:schedulingDisposable];
+    }
+    return disposable;
+}
+</code></pre><p>看到这里你可能有产生了很多疑问，且听我慢慢道来。首先你在头脑里先产生这个场景：生成了一个subscriber(代号007)，它保存了一个nextBlock：<code>^(id x) { NSLog(@&quot;我听到:%@&quot;,x);}</code>,然后当前这个信号开始执行didSubscribe这个block:</p>
+<pre><code>^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) { 
+  [subscriber sendNext:@&quot;钢铁锅&quot;];
+  [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+  [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;]; 
+  [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+  [subscriber sendCompleted]; 
+  return [RACDisposable disposableWithBlock:^{
+       NSLog(@&quot;曲终人散，抹点药酒&quot;); 
+  }];
+}
+</code></pre><p>注意，007被当作参数传了进去，也就是调用sendNext:这个方法的都是007，还记得007保存的那个nextBlock吗，此时在sendNext:内部就是执行了这个nextBlock，传进去了<code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。这样作为开发者的你就收到了订阅者发给你的有用信息，你就“听”到了一首美妙的歌曲。</p>
+<p>整个一个订阅流程就这样结束了，当然你会发现在你的代码中subscriber始终都没暴露出来，这也是造成你疑惑的原因，那么我问你，你需要的是subscriber呢，还是subscriber发给你的信息呢？因为我们需要的只是信息，所以完全没必要让我们知道subscriber的存在。所谓的订阅者也就是subscriber其实就是起了一个中间人的作用，获取信号(或者叫信号源更好理解)里的信息，然后发送到需要的地方。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-058f5b522000e7ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="keynote图形好少啊"></p>
+<p>RACCompoundDisposable(RACDisposable的子类)应该是大家的另一个疑问，它有一个方法<code>addDisposable:</code>可以添加另一个RACDisposable，它的最终形态是一个树形结构，第一个RACCompoundDisposable存了若干个RACDisposable或者RACCompoundDisposable，相应的RACCompoundDisposable又存了若干个RACDisposable或者RACCompoundDisposable…每个元素里边存的都是一些block形式存在的清理操作，这样当执行树的根节点的dispose时，整棵树就会按顺序执行清理操作了。</p>
+<p>那么，讲到这里就先告一段落了，等有时间我会把RAC更复杂场景下的使用流程介绍给大家。</p>
+<p>希望能对您有一点帮助。</p>
 
           
         
@@ -1609,7 +1094,7 @@ NSMutableArray *visibleCells;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
