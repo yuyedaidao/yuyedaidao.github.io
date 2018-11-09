@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,7 +83,7 @@
 <meta property="og:title" content="WYQ">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WYQ">
 
@@ -101,7 +101,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -133,7 +133,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首页
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -202,7 +202,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分类
           </a>
         </li>
       
@@ -212,7 +212,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -278,9 +278,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:20:40+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:20:40+08:00">
                 2018-11-09
               </time>
             
@@ -299,7 +299,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -342,47 +342,21 @@
       
         
           
-            <p>题目早早就定下了，现在想填充内容了，踌躇中却不知道从哪里开始了。<br>窗外突然下起雨来。虽然不愿承认，但夏天确实已经渐去渐远，凉意开始蔓延。索性放空身心，伴着雨声入眠吧。</p>
-<hr>
-<p>I’m back!</p>
-<p>众所周知，UITableView的父视图就是UIScrollView,UITableView之所以能滚动就是基于UIScrollView的特性，今天咱们就来深入理解一下UIScrollView。</p>
-<p>上图：<br><img src="http://upload-images.jianshu.io/upload_images/69809-1271f1a769cf8f6a.gif?imageMogr2/auto-orient/strip" alt="连续修改bounds属性"></p>
-<p>打码：</p>
-<pre><code>- (IBAction)boundsAction:(UIStepper *)sender {
-    self.redView.bounds = CGRectMake(0, sender.value, self.redView.bounds.size.width,   self.redView.bounds.size.height);
-    self.boundsLabel.text = [NSString stringWithFormat:@&quot;红色视图bounds%@&quot;,NSStringFromCGRect(self.redView.bounds)];
-}
-</code></pre><p>我如果说改变bounds的值不用UIStepper实现而是用手势实现，不知道大家有没有种恍然大悟的感觉。</p>
-<p>我们再复习一下UIView的frame和bounds是什么。<br>. frame:当前view在父view<code>坐标体系</code>中的位置和大小<br>. bounds:当前view的<code>坐标体系</code>，容纳子view的位置和大小<br>也就说一个view的位置是由当前view的frame和其父view的bounds决定的。</p>
-<p>回到上面的红绿视图，你已经看到:改变父view（红色视图）的bounds,子view（绿色视图）的位置就会相应的改变。如果我们给红色视图加一个UIPangestureRecognizer（拖动手势），滑动时根据其代理函数返回的值修改红色视图的bounds就实现了绿色视图的滑动。</p>
-<p>再上图：<br><img src="http://upload-images.jianshu.io/upload_images/69809-e13410ddeefc5903.gif?imageMogr2/auto-orient/strip" alt="手势修改bounds"><br>再打码：</p>
-<pre><code>- (IBAction)panHandler:(UIPanGestureRecognizer *)sender {
-    if(sender.state == UIGestureRecognizerStateChanged){
-        CGFloat distance = -[sender translationInView:sender.view].y;
-        self.redView.bounds = CGRectMake(0, self.redView.bounds.origin.y+distance, self.redView.bounds.size.width, self.redView.bounds.size.height);
-        [sender setTranslation:CGPointZero inView:sender.view];
-    }else if(sender.state == UIGestureRecognizerStateEnded){
-        self.boundsLabel.text = [NSString stringWithFormat:@&quot;红色视图bounds%@&quot;,NSStringFromCGRect(self.redView.bounds)];
-    }
-}
-</code></pre><p>果然图多可以少说话。那么你是不是可以自己手动写个UIScrollView了，如果你敢回答不能我就敢一星期不吃肉。顺便推荐一个录屏软件，个人感觉很好用，直接生成体积较小的gif。地址是<a href="http://www.cockos.com/licecap/" target="_blank" rel="noopener">http://www.cockos.com/licecap/</a></p>
-<p>当然，对于这个能滑动的视图的始祖，我们要想有强烈的掌控感，还需要了解几个属性。</p>
-<ol>
-<li>contentSize<br> 😓 又要提到上图了，好吧，如上图，contentSize其实就是绿色视图的大小，就是内容空间的大小。在UIScrollView里，当contentSize大于本身的frame.size的时候就可以滚动，否则不允许。</li>
-<li>contentOffset<br> 还是如上图，contentOffset其实就是红色视图的bounds.origin,所以你是否明白为什么当contentOffset的值是正值的时候视图往上，是负值的时候视图往下了吧。</li>
-<li>contentInset<br>这个属性很难说清楚，所以，那就更应该说了。如果你设置了这个属性后会对内容视图做一个偏移操作，或者说给内容视图添加了留白，比如说我们设置UIScrollView的contentInset为UIEdgeInsetsMake(64, 0, 0, 0)注意第一个参数是top,然后依次是left,bottom,right。那么添加的subview的<code>位置</code>纵坐标的起点就是subview.frame.origin.y+scrollView.contentInset.top(当然这是在不考虑父视图的bounds的情况下)。你也许注意到了一点，我用了<code>位置</code>一词，因为这其实是相对父视图的位置，它的frame并没有改变。</li>
-</ol>
-<p><img src="http://upload-images.jianshu.io/upload_images/69809-b6d1af36159f5390.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2DCEB800-BB02-4E2D-A58F-25C2247D2F21.png"></p>
-<p>啊哈哈，<img src="http://upload-images.jianshu.io/upload_images/69809-0c59506e8d1ecadc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<pre><code>self.scrollView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0);
-UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 50, self.scrollView.bounds.size.width, 200)];
-view.backgroundColor = [UIColor greenColor];
-[self.scrollView addSubview:view];
-</code></pre><p>如图，虽然view的起点是50，但是由于contentInset的原因，它相对于父视图的纵坐标位置是100。</p>
-<p>好了，先写到这里，办公室就我一个人了，兄弟我先回家了。</p>
-<p>预告：根据上边这些东东，咱们稍后谈谈怎么实现一个自定义的下拉刷新控件，我会尽快更新。<br>最后，诚心求一个Mac上方便作图的软件。如果你有破解版的sketch的话，给兄弟一个吧，先谢过了。</p>
+          题目早早就定下了，现在想填充内容了，踌躇中却不知道从哪里开始了。窗外突然下起雨来。虽然不愿承认，但夏天确实已经渐去渐远，凉意开始蔓延。索性放空身心，伴着雨声入眠吧。
 
-          
+I’m back!
+众所周知，UITableView的父视图就是UIScrollView,UITableView之所以能滚动就是基于UIScrollView的特性，今天咱们就来深入理解一下UIScrollView。
+上图：
+打码：
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/回头看UITableView-二-父视图UIScrollView/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -458,9 +432,9 @@ view.backgroundColor = [UIColor greenColor];
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:19:48+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:19:48+08:00">
                 2018-11-09
               </time>
             
@@ -479,7 +453,7 @@ view.backgroundColor = [UIColor greenColor];
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -522,101 +496,23 @@ view.backgroundColor = [UIColor greenColor];
       
         
           
-            <p>UITableVIew是iOS开发中最常见的视图中最经典的视图了，没有之一，相信对这个视图敢称精通的人开发个好应用应该是问题不大的。</p>
-<hr>
-<p>闲话少叙，进入正题。</p>
-<h3 id="怎么使用"><a href="#怎么使用" class="headerlink" title="怎么使用"></a>怎么使用</h3><p>掌握两个代理</p>
-<ol>
-<li><p><code>UITableViewDelegate</code></p>
-<pre><code>@optional  
+          UITableVIew是iOS开发中最常见的视图中最经典的视图了，没有之一，相信对这个视图敢称精通的人开发个好应用应该是问题不大的。
+
+闲话少叙，进入正题。
+怎么使用掌握两个代理
+
+UITableViewDelegate
+@optional  
 //下文再提到该方法用heightForRow代替
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-</code></pre></li>
-<li><p><code>UITableViewDataSource</code></p>
-<pre><code>@required
-//下文再提到该方法用numberOfRowsInSection代替
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-//下文再提到该方法用cellForRow代替
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
-//下文再提到该方法用numberOfSection代替
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-</code></pre><p><em>要想比较完整的展示你的数据，这四个方法是最经常被实现的。</em><br>调用过程大体是这样的：<code>tableView</code>会先询问代理(在一般MVC里大部分是当前视图控制器ViewController)要展示多少个<code>section</code>,就是调用<code>numberOfSections</code>,如果代理没有实现该方法默认就是1个<code>section</code>。然后<code>tableView</code>调用<code>numberOfRowsInSection</code>先询问第一个<code>section</code>有多少个<code>cell</code>,然后挨个执行<code>heightForRow</code>获取每个cell的高度。<code>tableView</code>对每个<code>section</code>都执行一遍这样的操作后，那么结果来了:<code>tableView</code>通过对这些<code>cell</code>高度的累加就知道了需要多大的空间才能安放得了所有的内容，于是它调整好了<code>contentSize</code>的值。这样走下来就为我们后续在滑动时能通过<code>scrollIndicator</code>观察到我们大体滑到了哪个位置做好了准备。<br>准备好空间之后接下来的任务就是准备内容了。当然大家都知道真正的内容是依附在<code>UITableViewCell</code>上的，<code>tableView</code>先调用<code>cellForRow</code>去获取代理返回给它的第一个<code>cell</code>，对于所有的<code>cell</code>来说<code>width</code>都是固定的，即<code>tableView</code>本身的宽度，对于第一个<code>cell</code>来说它的<code>origin</code>也是确定的，即<code>(0,0)</code>，也就是说要想确定这个<code>cell</code>的位置就只需要知道它的<code>height</code>了。于是<code>tableView</code>再去调用<code>heightForRow</code>去获取它的高度，这样一个视图能确定显示在屏幕什么位置的充要条件就具备了。剩下的<code>cell</code>同理，挨个放在上一个<code>cell</code>的下边就行了。</p>
-</li>
-</ol>
-<p>总结一下:</p>
-<ol>
-<li>调用<code>numberOfSection</code>获得 A个 <code>section</code></li>
-<li>先调用<code>numberOfRowsInSection</code>获得B个<code>cell</code>,再调用<code>heightForRow</code>B次。如此循环A次</li>
-<li>循环调用<code>cellForRow</code>和<code>heightForRow</code>，直到<code>cell</code>的个数充满当前屏幕。</li>
-</ol>
-<p>这就是一个普通的<code>tableView</code>一开始加载数据的过程，有几点需要说明：</p>
-<ol>
-<li>如果你展示在每个<code>cell</code>上的内容是相对固定的，准确点说是每个<code>cell</code>的高度是固定的，那么<code>heightForRow</code>是不建议让代理去实现的，而是通过<code>tableView</code>的<code>rowHeight</code>属性来代替，当数据量比较大，比如说有10000个(其实只要  &gt;= 2)<code>cell</code>时，<code>tableView</code>只需要<code>10000*rowHeight</code>就知道应该准备的空间大小了，而不是调用一个方法10000次通过累加获知需要的大小。而且你懂的，要想获取一个<code>cell</code>的高度并不是那么容易的事，尤其是在自动布局出现之前，你需要计算各种字符串的所占空间的大小，这对性能是相当大的损耗。</li>
-<li>如果每个<code>cell</code>高度确实不一样，数据量又很大时该怎么解决这个性能问题呢，iOS7之后系统提供了估算高度的办法，<code>estimatedRowHeight</code>和<code>- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath//下文再提到该方法用estimateHeightForRow代替</code>,这样每次在加载数据之前，<code>tableView</code>不再通过<code>heightForRow</code>消耗大量的性能获取空间大小了，而是通过在<code>estimateRowHeight</code>或者<code>estimatedHeightForRow</code>不需要费劲计算就能获取的一个估算值来获取一个大体的空间大小，等到真正的加载数据时才根据获取真实数据，并做出相应的调整，比如<code>contentSize</code>或者<code>scrollIndicator</code>的位置。关于动态计算高度，推荐羊教授的一篇文章<a href="http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/" target="_blank" rel="noopener">优化UITableViewCell高度计算的那些事</a></li>
-<li>这些方法的调用在保证大顺序不变的情况下，每个方法的调用次数是不一定的，每个iOS版本又不一样，你如果想知道可以动手去试验一下。尤其是在iOS8,它认为<code>cell</code>会随时变化，所以一滑动就重新计算<code>cell</code>的高度。</li>
-<li>这些方法的调用其实也是有插曲的，比如调用了<code>reloadData</code>之后，<code>tableView</code>只会调用能让它知道所需空间大小的代理方法，然后立马执行<code>reloadData</code>之后的语句，也就说<code>cellForRow</code>并不会在<code>reloadData</code>之后紧接着执行。所以<code>reloadData</code>之后尽量避免对数据源数组的操作。</li>
-</ol>
-<h3 id="复用机制"><a href="#复用机制" class="headerlink" title="复用机制"></a>复用机制</h3><p>了解<code>UITableView</code>的人肯定对这一著名特性多少有点了解。咱们先假设<code>UITableView</code>没有复用机制，那么我们要展示10000条数据的话，那就得生成10000个<code>UITableViewCell</code>,占用了大量内存不说，性能也可想而知了，必然是一滑一卡顿，一顿一暴怒啊，控制力弱的估计要摔手机了。</p>
-<p>复用机制大体是这样:<code>UITableView</code>首先加载一屏幕(假设<code>UITableView</code>的大小是整个屏幕的大小)所需要的<code>UITableViewCell</code>,具体个数要根据每个<code>cell</code>的高度而定，总之肯定要铺满整个屏幕,更准确说当前加载的<code>cell</code>的高度要大于屏幕高度。然后你往上滑动，想要查看更多的内容，那么肯定需要一个新的<code>cell</code>放在已经存在内容的下边。这时候先不去生成，而是先去<code>UITableView</code>自己的一个资源池里去获取。这个资源池里放了已经生成的而且能用的<code>cell</code>。如果资源池是空的话才会主动生成一个新的<code>cell</code>。那么这个资源池里的<code>cell</code>又来自哪里呢？当你滑动时视图是，位于最顶部的<code>cell</code>会相应的往上滑动，直到它彻底消失在屏幕上，消失的<code>cell</code>去了哪里呢？你肯定想到了，是的，它被<code>UITableView</code>放到资源池里了。其他<code>cell</code>也是这样，只要一滑出屏幕就放入资源池。这样，有进有出，总共需要大约一屏幕多一点的<code>cell</code>就够了。相对于1000来说节省的资源就是指数级啊，完美解决了性能问题。</p>
-<p>iOS6之后我们一般在代码里这样处理<code>cell</code></p>
-<ol>
-<li><p>先注册</p>
-<pre><code>[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;UITableViewCell&quot;];
-</code></pre><p>或</p>
-<pre><code>[self.tableView registerNib:[UINib nibWithNibName:@&quot;NibTableViewCell&quot; bundle:nil] forCellReuseIdentifier:@&quot;NibTableViewCell&quot;];
-</code></pre></li>
-<li><p>在代理方法里获取</p>
-<pre><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;UITableViewCell&quot; forIndexPath:indexPath];
-   // do something
-   return cell;
-}
-</code></pre></li>
-</ol>
-<p>那么具体在代码里是怎么实现的呢？我们可以大胆的猜测一下。</p>
-<p><code>UITableView</code>有几个属性(假想的)：</p>
-<pre><code>NSMutableDictionary *registerCellInfo;
-NSMutableDictionary *reusableCellsDictionary;
-NSMutableArray *visibleCells;
-</code></pre><p>我们推测两个注册方法的实现</p>
-<pre><code>- (void)registerNib:(UINib *)nib forCellReuseIdentifier:(NSString *)identifier{
-     [self.registerCellInfo setObject:nib forKey:identifier];
-     [self.registerCellsDictionary setObject:[NSMutableArray array] forKey:identifier];
-}
-- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString  *)identifier{
-    [self.registerCellInfo setObject:cellClass forKey:identifier];
-    [self.registerCellsDictionary setObject:[NSMutableArray array] forKey:identifier];
-}
-</code></pre><p>然后推测最关键的获取方法</p>
-<pre><code>- (UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath{
-    //indexPath这个参数是为了重置`cell`的大小，相关的处理并不是本文的重点，所以暂不实现
-    NSMutableArray *array = self.reusableCellsDictionary[identifier];
-    UITableViewCell *cell = nil;
-    if(array.count){
-        cell = array.lastObject;
-        [self.visibleCells addObject:cell];
-        [array removeLastObject];
-
-    }else{
-        id obj = self.registerCellInfo[identifier];
-        if([obj isKindOfClass:[UINib class]]){
-            cell = [[((UINib *)obj) instantiateWithOwner:nil options:nil] lastObject];
-        }else{
-            cell = [[(Class)obj alloc] init];
-        }
-        if(cell){
-            [self.visibleCells addObject:cell];
-         }
-    }
-
-    return cell;
-}
-</code></pre><p>😂，请忽略以上所有推测方法的不严谨，许多该有的条件判断并没有去处理。但是写到这里相信亲爱的读者已经了解了<code>UITableView</code>复用机制的原理了。现在，你已经具备了自己动手写一个<code>UITableView</code>的基础了(当然，假设你已经对<code>UIScrollView</code>有了充足的了解)。如果我的文章对你有用，烦请点个喜欢，好激励我继续写下去。。。</p>
-<p><em>关于<code>UITableView</code>的更多知识我们后续再谈</em></p>
-
-          
+- (CGFloat)tableView:(UITableView *)tableView heigh
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/回头看之UITableView-基本代理方法及复用原理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -692,9 +588,9 @@ NSMutableArray *visibleCells;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:18:16+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:18:16+08:00">
                 2018-11-09
               </time>
             
@@ -713,7 +609,7 @@ NSMutableArray *visibleCells;
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -756,143 +652,18 @@ NSMutableArray *visibleCells;
       
         
           
-            <ol>
-<li><p>autoLayout</p>
-<blockquote>
-<p>Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个view的大小，或者位置或者位置中的某一个项（比如x）的时候，就会出现约束不足的情况，在xib或者storyboard中，会以黄色的警告出现在左侧提示框内；如果你给出的约束推导出了两个甚至多个互相矛盾的位置尺寸结果的时候，就产生了布局错误，在编译的时候直接就build不过。</p>
-</blockquote>
-</li>
-<li><p>在画布中角度是顺时针转的<br><img src="http://upload-images.jianshu.io/upload_images/69809-3288012c6594faf8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="angle"></p>
-</li>
-<li><p>引用</p>
-<blockquote>
-<p>在绘制的方法中，使用 UIGraphicsBeginImageContextWithOptions 来取代 UIGraphicsGetCurrentContext <a href="http://objccn.io/issue-2-2/" target="_blank" rel="noopener">出处</a></p>
-</blockquote>
-</li>
-<li><p>应用间相互调用只要知道双方设置好的URL就行了，打开另一个应用时可以把当前应用的URL传过去，要打开的应用就可以根据响应的代码就可以让用户触发返回原始应用了</p>
-</li>
-<li><p><em>事件的响应链是从子视图到父视图层层传递的，模式是子视图调用父视图相同的方法（[super XXX]），所以触发该事件的先后顺序应该是从父视图到子视图，当然这是默认情况，如果你重写了事件方法，就可以控制是否把事件传递给父视图，或者哪个视图先触发事件</em><br>上面的理解貌似不够准确，重新整理如下：<br>. <strong>事件链的建立</strong>  简单讲是发生在addSubView时，被添加的视图的nextResponder(下一个响应者)就是它的父视图。如果一个veiw(下面简称A)不是普通的view，它是某个viewcontroller的根veiw,那么A的nextResponder在A从初始化完后就赋值为viewController。然后当A被addsubview到rootview的时候(addChildViewController时会发生)，Controller A的nextresponder被复制为rootview。<br>.  <strong>事件的传递</strong> 当用户触摸时，UIKit先创建一个事件对象，加到事件队列中去，然后UIAPPlication从中取出来，从window开始查找，发现点击位置在window的范围内，那就继续查找window的subViews,直到找到视图树最顶部的叶子视图，然后把事件交给这个顶部视图，视图处理事件，如果不处理就交给它的nextResponser,层层往下，直到window再到UIApplacation。</p>
-</li>
-<li><p>像素就是一个小点，px就表示一个真正的点，pt就是标准中定好的有大小的点,1/72英寸,分辨率是指指每单位面积（平方英寸）像素的个个数，即dpi,之所以谈到具体的设备时经常用W*H表示分辨率，是用了当前设备的长宽方向上的像素除以当前设备相应的尺寸</p>
-</li>
-<li><p>devices只有选择了universal(通用)才可以让iPhone和iPad共用界面或者说不同尺寸的设备共用界面</p>
-</li>
-<li><p>IQKeyboardManager 必须是在push或者present的VC的视图上才可以自动调整位置 事后问过作者，说怎么都可以，但是我用的版本却实不行，作者给意见，可以考虑addChildViewCOntroller</p>
-</li>
-<li><p>从UINavigationController里出来的UIViewController无法不会执行shouldAutorotate,这种情况必须自定义一个继承UINavigationController的类</p>
-</li>
-<li><p>要实现UITableViewCell的编辑必须实现下面两个方法</p>
-<pre><code>(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath; 
-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
-</code></pre></li>
-<li><p>关于堆栈的理解 ：栈 — 战死 栈是死的，一般是提前分配好的，除非你malloc出来，堆的可控性就比较强，也就是自己控制它的创建，当然它的消亡也应该你来控制<br>举个小栗：在一个函数中定义了 NSArray  *a = [[NSArray alloc] init]  a是个指针，他就是放在栈中的，但是它指向的那个数组就是存在堆中的。</p>
-</li>
-<li><p>objective-c因为字符串比较特殊，所以在写正则的时候，碰到转义字符必须多加一个”\\”，比如：全数字字符：@”^\\\\d\\+$”</p>
-</li>
-<li><p>UITableView竟然被我发现了一个新用法（当然这个用法是旧的），它在编辑状态下可以左边显示圆圈，didSelected会自动选中，再按一次didDeselect会自动消失</p>
-</li>
-<li><p>下面这句话的意思是获取aView在window中的位置，注意最前边是aView的父视图<br>   [aView.superview convertPoint:aView.frame.origin toView:nil];</p>
-</li>
-<li><p>UIView不能同事加多个由make生成的transform,如果加多个，第二个应该用原始方法，如下  </p>
-<pre><code>self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x, 0);
-self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
-</code></pre></li>
-<li><p>extern 是表明这个这个变量是全局的，在其他类里也可以使用这个变量不必把首次声明这个变量的类引入就行，但是必须得再次声明，static是仅限于此类里使用，其他类要想使用必须引入该类</p>
-</li>
-<li><p>图片的坐标原点在左下角</p>
-</li>
-<li><p>关于刷新子视图</p>
-<blockquote>
-<p>-layoutSubviews方法：这个方法，默认没有做任何事情，需要子类进行重写<br>-setNeedsLayout方法： 标记为需要重新布局，<strong>异步</strong>调用layoutIfNeeded刷新布局，不立即刷新，但layoutSubviews一定会被调用<br>-layoutIfNeeded方法：如果，有需要刷新的标记，立即调用layoutSubviews进行布局（如果没有标记，不会调用layoutSubviews）<br>如果要立即刷新，要先调用[view setNeedsLayout]，把标记设为需要布局，然后马上调用[view layoutIfNeeded]，实现布局</p>
-</blockquote>
-</li>
-<li><p>我勒个去哎，self.navigationController.toolbarHidden = NO 这样可以在View下边有显示一个toolbar哎，这个是可以利用的哟，完成任务必须抽时间好好研究一番，新发现啊</p>
-</li>
-<li><p>下面的代码输出什么</p>
-<pre><code>@implementation Son : Father
- - (id)init{
-      self = [super init]; if (self) {          
-          NSLog(@&quot;%@&quot;, NSStringFromClass([self class])); 
-          NSLog(@&quot;%@&quot;, NSStringFromClass([super class])); 
-     } 
-     return self;
-}
-@end
-</code></pre><blockquote>
-<p>答案：都输出”Son”解释：objc中super是<strong>编译器标示符</strong>，并不像self一样是一个对象，遇到向super发的方法时会转译成objc_msgSendSuper(…)，而参数中的对象还是self，于是从父类开始沿继承链寻找- class这个方法，最后在NSObject中找到（若override）此时，[self class]和[super class]已经等价了。</p>
-</blockquote>
-<p>所以，子类调用父类的某个方法，父类的这个方法又调用了一个跟子类有相同名字的某个方法，相当于子类直接调用了这个方法</p>
-</li>
-<li><p>UITextField是有leftView和rightView的，可以利用leftView在添加了背景图片后添加左边留白，但是得注意要设置属性</p>
-<pre><code>leftViewMode = UITextFieldViewModeAlways
-</code></pre></li>
-<li>load方法会在类实例话的时候调用，如果要用runtime黑魔法的话就可以在这里用。initializer方法会在第一次调用该类的方法时调用这个方法，属于懒加载</li>
-<li>UITableView的header是searchBar的时候拖拽时searchBar背景会被拉伸</li>
-<li><p>视图控制器切换方法</p>
-<pre><code>- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion NS_AVAILABLE_IOS(5_0);
-</code></pre><p>不用你再去给容器视图添加(addSubView)和删除(removeFromSuperView)子视图，它会帮你处理好</p>
-</li>
-<li><p>哈哈哈，XCode好傻哟，如果你在.m文件里提前有了 setX和x方法，然后才在.h文件里用<code>@property</code>声明x属性，.m里就不允许你使用_x这个变量。此时，<code>@synthesize</code> 就派上了用场。<code>@dynamic</code>与<code>@synthesize</code>的区别在于：使用<code>@synthesize</code>编译器会确实的产生getter和setter方法，而<code>@dynami</code>c仅仅是告诉编译器这两个方法在运行期会有的，无需产生警告。</p>
-<blockquote>
-<p>假设有这么个场景，B类，C类分别继承A类，A类实现某个协议（@protocol），协议中某个属性( somePropety )我不想在A中实现，而在B类，C类中分别实现。如果A中不写任何代码，编译器就会给出警告：<br>“use @synthesize, @dynamic or provide a method implementation”<br>这时你给用@dynamic somePropety; 编译器就不会警告，同时也不会产生任何默认代码。</p>
-</blockquote>
-</li>
-<li><p>UITableView在编辑状态下如果指定编辑样式是添加和删除，可以在视图上显示复选框，利用这个特性可以方便实现多选。</p>
-<pre><code>- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
-}
-</code></pre><p><em>注意：以上是在UITableView单选的情况下，如果是多选就会自动出现复选框，不会执行上段代码。😂说了好多废话哟</em></p>
-</li>
-<li><p>UITableView在调用了reloadData之后，tableView会在调用完cell的高度获知contentSize之后就调用reloadData之后的语句了，完了之后才去加载cell</p>
-</li>
-<li><blockquote>
-<p>在 MRC 下，使用 <strong>block 说明符也可以避免循环引用。因为当 block 从栈拷贝到堆时，</strong>block 对象类型的变量不会被 retain，没有 <strong>block 说明符的对象类型的变量则会被 retian。正是由于 </strong>block 在 ARC 和 MRC 下的巨大差异，我们在写代码时一定要区分清楚到底是 ARC 还是 MRC。</p>
-</blockquote>
-</li>
-<li><p>实现下面的方法，我们就可以对一个类进行使用想NSArray和NSDictionary那样的语法糖用下标或者key来存取数据了, so cool</p>
-<pre><code>- (id)objectAtIndexedSubscript:(NSUInteger)idx;
-- (void)setObject:(id)objatIndexedSubscript:(NSUInteger)idx;
-- (void)setObject:(id)objforKeyedSubscript:(id &lt;NSCopying&gt;)key;
-- (id)objectForKeyedSubscript:(id)key;
-</code></pre></li>
-<li>CALayer的border是出现在layer内部的，比如说layerWidth为10,那么border就会占据layer的content的四周宽度为10的空间。</li>
-<li>系统视频的上传必须拷贝到沙盒目录中才能上传。😥</li>
-<li>手撸NSLayoutConstraint需要注意firstItem和secondItem的顺序</li>
-<li>注意了，注意了，keyWindow不知道什么时候会被系统干掉，所以把hud加在keyWindow上的时候一定要注意哦。最近遇到的在把mov转换成mp4的时候系统起了个异步线程，然后kenWindow就被干掉了。</li>
-<li>用CGContextClearRect就可以实现画一张中间透明的图片了。</li>
-<li>想知道某个变量在程序调试时的状态，可以用借助dispatch_source_t 监控调试开始，打印变量  <a href="http://ios.jobbole.com/81566/" target="_blank" rel="noopener">from</a><blockquote>
-</blockquote>
-<pre><code>dispatch_queue_t queue = dispatch_get_main_queue();
-static dispatch_source_t source = nil;
-__typeof(self) __weak weakSelf = self;
-static dispatch_once_t onceToken;
-dispatch_once(&amp;onceToken, ^{
-    source = dispatch_source_create(DISPATCH_SOURCE_TYPE_SIGNAL, SIGSTOP, 0, queue);
-    if (source)
-    {
-        dispatch_source_set_event_handler(source, ^{
-            NSLog(@&quot;Hi, I am: %@&quot;, weakSelf);
-        });
-        dispatch_resume(source); // 10
-    }
-});
-</code></pre></li>
-<li>当UINavigationController push或者pop操作时NavigationBar右侧底部会变灰，解决这种问题需要把最接近当前vc的view的view的背景色修改一下就可以了。</li>
-<li>企业账户 往App Store上发布应用必须是Agent账户</li>
-<li>用Xcode写C，即使仅仅有C也要把Compile Sources As改为Objective C++</li>
-<li>我一直以为下边的代码是默认的，然而并不是，需要明确写出来。😂<pre><code>self.tableView.rowHeight = UITableViewAutomaticDimension;
-</code></pre></li>
-<li>CALayer对path的动画执行完后path为初始值,如果想要最后停留住状态就可以把初始值设为toValue的值</li>
-<li>iOS11的本地通知要想在前台显示必须实现代理willPresent的方法,文档有说明的,记住</li>
-<li>像素就是绘画的基本单元，就是一个方格，但是并不一定是一个物理点，在高清屏上是有多个包含多个物理点的。DPI就是每英寸有多少个像素。分辨率在用ps的设计那里就是DPI，但是一般在移动开发那里就是图片的长宽。</li>
-<li><p>关于在Swift中<code>self.property</code>和<code>property</code>，提倡不用<code>self</code>，这样如果在闭包中使用的属性是属于当前的实例对象时编译器就会报错，你就必须加上<code>self</code>，当你加上<code>self</code>的时候你就意识到<code>self</code>要被循环引用了，你就知道要处理这个问题了。</p>
-</li>
-<li><p><img src="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-</li>
-</ol>
-
           
+autoLayout
+
+Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个v
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/iOS学习笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -968,9 +739,9 @@ dispatch_once(&amp;onceToken, ^{
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:17:15+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:17:15+08:00">
                 2018-11-09
               </time>
             
@@ -989,7 +760,7 @@ dispatch_once(&amp;onceToken, ^{
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1032,91 +803,17 @@ dispatch_once(&amp;onceToken, ^{
       
         
           
-            <p>信号(Signal)和订阅者(Subscriber)是在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a>( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。</p>
-<p>先上一段RAC最简单的使用方法。</p>
-<pre><code> RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
-    [subscriber sendNext:@&quot;钢铁锅&quot;];
-    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
-    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
-    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
-    return [RACDisposable disposableWithBlock:^{
-        NSLog(@&quot;曲终人散，抹点药酒&quot;);
-    }];
-}];
-[signal subscribeNext:^(id x) {
-    NSLog(@&quot;我听到:%@&quot;,x);
-}];
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是什么锅"></p>
-<blockquote>
-<p>信号是信息的载体</p>
-</blockquote>
-<p>对应上边的代码，我们创建了一个信号 <code>signal</code>，他承载着 <code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。</p>
-<pre><code>+ (RACSignal *)createSignal:(RACDisposable * (^)(id&lt;RACSubscriber&gt; subscriber))didSubscribe {
-    RACDynamicSignal *signal = [[self alloc] init];
-    signal-&gt;_didSubscribe = [didSubscribe copy];
-    return [signal setNameWithFormat:@&quot;+createSignal:&quot;];
-}
-</code></pre><p>创建信号很简单，其实就是创建了一个实例对象，并把将来有可能进行的一系列操作<code>didSubscribe</code>这个block记录下来，等发生了订阅行为时就会执行这些操作。<br>有人会问RACDisposable是什么东西，其实从字面就可以理解，销毁，它封装了当订阅行为消失时一些应该做的操作，当然像一开始的代码这种只是打印消息的操作其实是没必要的，所以这里可以返回nil。那什么时候订阅行为消失呢，当订阅者调用了sendError:或者sendCompleted方法时表示订阅行为就消失了，相应的dispose就会执行了，做一些清理操作。如下面的代码：</p>
-<pre><code>RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
-    [subscriber sendNext:@&quot;钢铁锅&quot;];
-    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
-    [subscriber sendError:[NSError errorWithDomain:@&quot;singing&quot; code:748 userInfo:@{@&quot;reason&quot;:@&quot;麦克被歌迷拔掉了&quot;}]];
-    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
-    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
-    [subscriber sendError:NULL];
-//        [subscriber sendCompleted];
-    return [RACDisposable disposableWithBlock:^{
-        NSLog(@&quot;曲终人散，抹点药酒&quot;);
-    }];
-}];
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-2a25a6514c7a7229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="我错了"><br>当然如果这两个方法如果你都不调用，那么当订阅者超出了自己的生命周期调用其dealloc方法时这个dispose也会执行。所以RACDisposable在RAC里使用非常广泛，比如在NSNotificationCenter的RAC扩展中用于取消观察者，在UITextField和UITextView的扩展里取消代理等等。</p>
-<p>说了半天大家可能会问，订阅者在哪里？别急，看下面:</p>
-<pre><code>[signal subscribeNext:^(id x) {
-    NSLog(@&quot;我听到:%@&quot;,x);
-}];
-</code></pre><p>当这句代码执行时就发生了订阅行为。其内部实现是这样：</p>
-<pre><code>- (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock {
-     NSCParameterAssert(nextBlock != NULL);
-     //看到了吗？我在这里，我就是订阅者。我把 nextBlock保存了下来。
-     RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock   error:NULL completed:NULL];
-     return [self subscribe:o];
-}
-
-- (RACDisposable *)subscribe:(id&lt;RACSubscriber&gt;)subscriber {
-     NSCParameterAssert(subscriber != nil);
-     RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];
-     //加工了一下，变成了RACPassthroughSubscriber,关于它的作用我们在以后的文章总具体场景下再讲述，现在你只需记住一个更具体的RACSubscriber子类就行了。
-     subscriber = [[RACPassthroughSubscriber alloc] initWithSubscriber:subscriber signal:self disposable:disposable];
-     //还记得信号在一开始创建时就存下来的那个block吗，就是这个didSubscribe
-     if (self.didSubscribe != NULL) {
-         RACDisposable *schedulingDisposable =  [RACScheduler.subscriptionScheduler schedule:^{
-             //在这里支行了信号一开始创建的block，并获得了它返回的RACDisposable
-             RACDisposable *innerDisposable = self.didSubscribe(subscriber);
-             [disposable addDisposable:innerDisposable];
-         }];
-        [disposable addDisposable:schedulingDisposable];
-    }
-    return disposable;
-}
-</code></pre><p>看到这里你可能有产生了很多疑问，且听我慢慢道来。首先你在头脑里先产生这个场景：生成了一个subscriber(代号007)，它保存了一个nextBlock：<code>^(id x) { NSLog(@&quot;我听到:%@&quot;,x);}</code>,然后当前这个信号开始执行didSubscribe这个block:</p>
-<pre><code>^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) { 
-  [subscriber sendNext:@&quot;钢铁锅&quot;];
-  [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
-  [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;]; 
-  [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
-  [subscriber sendCompleted]; 
-  return [RACDisposable disposableWithBlock:^{
-       NSLog(@&quot;曲终人散，抹点药酒&quot;); 
-  }];
-}
-</code></pre><p>注意，007被当作参数传了进去，也就是调用sendNext:这个方法的都是007，还记得007保存的那个nextBlock吗，此时在sendNext:内部就是执行了这个nextBlock，传进去了<code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。这样作为开发者的你就收到了订阅者发给你的有用信息，你就“听”到了一首美妙的歌曲。</p>
-<p>整个一个订阅流程就这样结束了，当然你会发现在你的代码中subscriber始终都没暴露出来，这也是造成你疑惑的原因，那么我问你，你需要的是subscriber呢，还是subscriber发给你的信息呢？因为我们需要的只是信息，所以完全没必要让我们知道subscriber的存在。所谓的订阅者也就是subscriber其实就是起了一个中间人的作用，获取信号(或者叫信号源更好理解)里的信息，然后发送到需要的地方。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/69809-058f5b522000e7ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="keynote图形好少啊"></p>
-<p>RACCompoundDisposable(RACDisposable的子类)应该是大家的另一个疑问，它有一个方法<code>addDisposable:</code>可以添加另一个RACDisposable，它的最终形态是一个树形结构，第一个RACCompoundDisposable存了若干个RACDisposable或者RACCompoundDisposable，相应的RACCompoundDisposable又存了若干个RACDisposable或者RACCompoundDisposable…每个元素里边存的都是一些block形式存在的清理操作，这样当执行树的根节点的dispose时，整棵树就会按顺序执行清理操作了。</p>
-<p>那么，讲到这里就先告一段落了，等有时间我会把RAC更复杂场景下的使用流程介绍给大家。</p>
-<p>希望能对您有一点帮助。</p>
-
-          
+          信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。
+先上一段RAC最简单的使用方法。
+ RACSignal *signal = [RA
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/ReactiveCocoa解读-订阅信号/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1201,7 +898,7 @@ dispatch_once(&amp;onceToken, ^{
                 <a href="/archives/">
               
                   <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -1212,7 +909,7 @@ dispatch_once(&amp;onceToken, ^{
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">categories</span>
+                  <span class="site-state-item-name">分类</span>
                 </a>
               </div>
             
@@ -1223,7 +920,7 @@ dispatch_once(&amp;onceToken, ^{
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">15</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
@@ -1291,7 +988,7 @@ dispatch_once(&amp;onceToken, ^{
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -1299,7 +996,7 @@ dispatch_once(&amp;onceToken, ^{
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 

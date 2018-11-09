@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,7 +83,7 @@
 <meta property="og:title" content="WYQ">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WYQ">
 
@@ -101,7 +101,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -133,7 +133,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首页
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -202,7 +202,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分类
           </a>
         </li>
       
@@ -212,7 +212,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -278,9 +278,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:40:54+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:40:54+08:00">
                 2018-11-09
               </time>
             
@@ -299,7 +299,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -342,13 +342,20 @@
       
         
           
-            <p>我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行</p>
-<pre><code>dispatch_async(dispatch_get_main_queue(), ^{ //some code}
-</code></pre><p>竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以<br>如图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/69809-192d31537be63fe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>奇怪的问题，特此记录</p>
+          我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行
+dispatch_async(dispatch_get_main_queue(), ^{ //some code}
+竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以如图：
+
+奇怪的问题，特此记录
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/IBInspectable无法取值的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -424,9 +431,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:35:43+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:35:43+08:00">
                 2018-11-09
               </time>
             
@@ -445,7 +452,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -488,20 +495,17 @@
       
         
           
-            <p>通过手表向手机端发送消息时出现Payload could not be delivered(中文环境下:未能传送负载)的错误提示,如果你保证你的设置都对的情况下,请记得检查手机端WCSession实现的代理方法全不全</p>
-<p>如果你是这样发送消息</p>
-<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: nil, errorHandler: { (error) in print(error)})
-</code></pre><p>那么在手机端你要有这样的代理方法</p>
-<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any])
-</code></pre><p>如果你是这样发送消息</p>
-<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: { (result) in
-                    print(result)
-                }, errorHandler: { (error) in print(error) })
-</code></pre><p>那么在手机端你要有这样的代理方法</p>
-<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Swift.Void)
-</code></pre><p>根据发送时有没有replyHandler来决定调用哪个代理方法,如果不匹配就会发送失败</p>
-
-          
+          通过手表向手机端发送消息时出现Payload could not be delivered(中文环境下:未能传送负载)的错误提示,如果你保证你的设置都对的情况下,请记得检查手机端WCSession实现的代理方法全不全
+如果你是这样发送消息
+session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: nil,
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/WCSession-sendMessage-失败处理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -577,9 +581,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:35:13+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:35:13+08:00">
                 2018-11-09
               </time>
             
@@ -598,7 +602,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -641,17 +645,15 @@
       
         
           
-            <p>ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个<br>最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above error is not helpful, you may want to try EJS-Lint: https://github.com/RyanZim/EJS-Lint</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs</span><br><span class="line"></span><br><span class="line">If the above error is not helpful, you may want to try EJS-Lint:</span><br><span class="line">https://github.com/RyanZim/EJS-Lint</span><br><span class="line">    at new Function (&lt;anonymous&gt;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>完全看不到有用的信息,shit</p>
-<p>于是我就按提示用 <a href="https://github.com/RyanZim/EJS-Lint" target="_blank" rel="noopener">https://github.com/RyanZim/EJS-Lint</a> 来试试能不能看到更多信息…<br>心累啊,用命令号执行直接返回了没有任何信息.加在工程里返回undefined, MMP.姿势不对?有掌握动作要领的请指教.</p>
-<p>在折磨了接近两天的时间后我不得对我接近千行的ejs文件一行行ejs代码进行查看,还是没错啊…要你你能不崩溃?</p>
-<p>最最后,我就重新把带有ejs代码的片段一段段摘出来,然后一遍遍部署运行,终于…苍天啊.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \ &apos;&apos; %&gt;</span><br></pre></td></tr></table></figure>
-<p>如上这就是问题代码,估计再细心你可能也没法很多发现问题吧…<br>其实我的原始代码是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \&apos;&apos; %&gt;</span><br></pre></td></tr></table></figure></p>
-<p>发现了,他妈的最后一个转义斜杠<code>\</code>后边接了个空格…wtf.<br>而这都是我在保存时vs给我自动格式化造成的.</p>
-<p>说了太多脏话.反思</p>
-
-          
+          ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下12345678Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above erro
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/VS保存时自动格式化导致ejs编译错误/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -727,9 +729,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:34:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:34:45+08:00">
                 2018-11-09
               </time>
             
@@ -748,7 +750,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -791,20 +793,16 @@
       
         
           
-            <h4 id="今天又遇到了一个奇怪的问题"><a href="#今天又遇到了一个奇怪的问题" class="headerlink" title="今天又遇到了一个奇怪的问题"></a>今天又遇到了一个奇怪的问题</h4><p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];</span><br><span class="line">imagePicker.allowsEditing = YES;</span><br><span class="line">imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;</span><br><span class="line">imagePicker.delegate = self;</span><br><span class="line">[self presentViewController:imagePicker animated:YES completion:nil];</span><br></pre></td></tr></table></figure>
-<p>用法很对，没毛病，可就是不调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info</span><br></pre></td></tr></table></figure></p>
-<h4 id="分析原因"><a href="#分析原因" class="headerlink" title="分析原因"></a>分析原因</h4><ul>
-<li>UIImagePickerController实例对象被释放了 //这不可能，如果iOS系统没疯那肯定是我疯了</li>
-<li>UIImagePickerControllerd的delegate被释放了 //但是delegate是当前视图控制器肯定也没有释放</li>
-<li>delegate被改了 //看了看代码没有改动的地方啊</li>
-</ul>
-<p>???<br>诡异的事件<br>。。。</p>
-<p>后来我用kvo监测了一下delegate，发现果然被改了，改成了 <code>_JZNavigationDelegating</code> …</p>
-<h4 id="真相大白"><a href="#真相大白" class="headerlink" title="真相大白"></a>真相大白</h4><p>原来是我在pod里加入了一个帮助处理NavigationBar颜色的第三方库，这个库对UINavigationController做了一些处理，如下图<br><img src="http://upload-images.jianshu.io/upload_images/69809-032f067659e35474.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>而我们今天的主角 <em>UIImagePickerController</em>恰恰就是UINavigationController的子类</p>
-
-          
+          今天又遇到了一个奇怪的问题代码如下：
+12345UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];imagePicker.allowsEditing = YES;imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLib
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/UIImagePickerController不走回调的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -880,9 +878,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:25:54+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:25:54+08:00">
                 2018-11-09
               </time>
             
@@ -901,7 +899,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -944,16 +942,17 @@
       
         
           
-            <h2 id="0x1"><a href="#0x1" class="headerlink" title="0x1"></a>0x1</h2><p>今天我在开发AppleWatch应用时发现了一个关于CoreData的极其古怪的问题,特此记录下来</p>
-<h2 id="0x2"><a href="#0x2" class="headerlink" title="0x2"></a>0x2</h2><p>因为CoreData是支持UUID类型的属性的,所以我在设计某个Model时就用了UUID的属性,但是因为不是连续开发导致我后来把这个属性的类型忘了,以为是String.</p>
-<p>于是我在手机端的代码里写了类似这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let uuid: String = &quot;7BD09D86-8941-4E50-9A42-7240E970FEE7&quot;</span><br><span class="line">let predicate = NSPredicate(format: &quot;uuid = %@&quot;, argumentArray: [uuid])</span><br><span class="line">//省略CoreData根据predicate获取数据的代码</span><br></pre></td></tr></table></figure></p>
-<p><em>注意Model里uuid的属性类型是UUID,我在这里直接用的是String</em><br>然后,我…很成功的获取到了预期的数据.<br>当然,我当时并没有意识到类型不匹配.</p>
-<p>于是乎,我把相同的代码放到了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//MARK: -WCSession的代理方法 Watch向iPhone发送的消息在这里接收</span><br><span class="line"> func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Void)</span><br></pre></td></tr></table></figure></p>
-<p>然后,我怎么也获取不到数据了,一模一样的代码,我曾一度变成了有神论者,简直诡异至极….<br>获取数据的方法我放在什么线程里都不行,这个代理函数的执行环境我不知道跟主应用的程序执行环境有什么不同</p>
-<h2 id="0x3"><a href="#0x3" class="headerlink" title="0x3"></a>0x3</h2><p>结果到目前为止大家肯定已经知道了,就是把查询时的String类型的uuid修改成UUID类型</p>
-<h2 id="0x4"><a href="#0x4" class="headerlink" title="0x4"></a>0x4</h2><p>原因未知</p>
-
-          
+          0x1今天我在开发AppleWatch应用时发现了一个关于CoreData的极其古怪的问题,特此记录下来
+0x2因为CoreData是支持UUID类型的属性的,所以我在设计某个Model时就用了UUID的属性,但是因为不是连续开发导致我后来把这个属性的类型忘了,以为是String.
+于是我在手机端的代码里写了类似这样的代码123let uuid: String = &quot;7BD09D86-8
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/CoreData里UUID的奇怪问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1029,9 +1028,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:25:29+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:25:29+08:00">
                 2018-11-09
               </time>
             
@@ -1050,7 +1049,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1093,9 +1092,16 @@
       
         
           
-            <p>我发现我在拥有CADisplayLink且其没有invilidate的情况下，会让其所有者没法销毁</p>
+          我发现我在拥有CADisplayLink且其没有invilidate的情况下，会让其所有者没法销毁
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/CADisplayLink不销毁导致其拥有者也不释放/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1171,9 +1177,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:24:12+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:24:12+08:00">
                 2018-11-09
               </time>
             
@@ -1192,7 +1198,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1235,39 +1241,21 @@
       
         
           
-            <p>首先看下面一段代码</p>
-<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;abc&quot;, DISPATCH_QUEUE_SERIAL);
+          首先看下面一段代码
+dispatch_queue_t queue = dispatch_queue_create(&quot;abc&quot;, DISPATCH_QUEUE_SERIAL);
 dispatch_sync(queue, ^{//taskA
     //do something
     dispatch_sync(queue, ^{//taskB
     //啥也干不了
-    });
-});
-</code></pre><p>dispatch_sync函数用于将一个block(任务)提交到队列中同步执行，直到block执行完后，这个函数才会返回。queue是一个串行队列，如果先后加入两个任务，taskA和taskB, 那么只有taskA执行完之后taskB才能执行。如果taskB是在taskA中加进队列的，那么它们依然遵守先进先出原则，即taskA执行完之后taskB才执行，也就是taskB在等待taskA完成。但是因为dispatch_sync的同步特性,taskB执行不完taskA就不算完成，即taskA在等待taskB的完成，这样就发生了死锁。</p>
-<p>根据上面那份代码，我们就可以理解下面的代码为什么会阻塞主线程了。</p>
-<pre><code>dispatch_queue_t mainQueue = dispatch_get_main_queue();
-dispatch_sync(mainQueue, ^{
-    NSLog(@&quot;hello&quot;);
-});
-</code></pre><p>mainQueue是系统创建的，在执行上面的代码之前就已经加进去了很多任务</p>
-<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;Main&quot;, DISPATCH_QUEUE_SERIAL);
-dispatch_sync(queue, ^{
-//Task A
-});
-...
-dispatch_sync(queue, ^{
-//Task N
-});
-</code></pre><p>在这N个任务里有一个任务是这样的：</p>
-<pre><code>dispatch_sync(queue, ^{
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    dispatch_sync(mainQueue, ^{
-        NSLog(@&quot;hello&quot;);
-    });
-});
-</code></pre><p>所以，发生死锁就是必然的了。</p>
-
-          
+    }
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/为什么dispatch-sync在主线程会死锁/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1343,9 +1331,9 @@ dispatch_sync(queue, ^{
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:23:37+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:23:37+08:00">
                 2018-11-09
               </time>
             
@@ -1364,7 +1352,7 @@ dispatch_sync(queue, ^{
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1407,9 +1395,15 @@ dispatch_sync(queue, ^{
       
         
           
-            <p>我想要的过程是这样的，我有两个label像球场上的广告牌一样交替滚动，当前的往上移动逐渐消失下边的从下边同时往上移动逐渐出现。我为了在autolayout下也能实现所以一开始准备用transform实现，但是发现往上移动的动画异常，不知道什么原因，让人郁闷。。。便秘的感觉很久之后，我决定退而求其次，用改变center来实现，问题解决了，但是是建立在我这两个label没有autolayout的基础之上。今天特此记下，留待以后研究。</p>
-
-          
+          我想要的过程是这样的，我有两个label像球场上的广告牌一样交替滚动，当前的往上移动逐渐消失下边的从下边同时往上移动逐渐出现。我为了在autolayout下也能实现所以一开始准备用transform实现，但是发现往上移动的动画异常，不知道什么原因，让人郁闷。。。便秘的感觉很久之后，我决定退而求其次，用改变center来实现，问题解决了，但是是建立在我这两个label没有autolayout的基础之
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/关于连续触发的函数中动画异常的描述/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1485,9 +1479,9 @@ dispatch_sync(queue, ^{
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:21:34+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:21:34+08:00">
                 2018-11-09
               </time>
             
@@ -1506,7 +1500,7 @@ dispatch_sync(queue, ^{
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1549,85 +1543,15 @@ dispatch_sync(queue, ^{
       
         
           
-            <h2 id="冲动"><a href="#冲动" class="headerlink" title="##冲动"></a>##冲动</h2><p>最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢休的决心。好吧，最近看三国看的有点多了。</p>
-<h2 id="暗渡陈仓"><a href="#暗渡陈仓" class="headerlink" title="##暗渡陈仓"></a>##暗渡陈仓</h2><p>我在无所不能的GitHub上搜索侧滑菜单项目，试验了各种，发觉没有能很好的符合当前项目需求。我们当前的项目需求是跟手机QQ左侧滑动菜单一样的效果，有个默认的主视图，然后其他视图的展示都是在这个视图的基础上push出来的。当然把这些项目改造出这种功能其实也不难，但是左侧菜单的视差效果都跟QQ相差甚远，唯一相似的就是RESideMenu这个比较有名的项目，但是它的视差效果是菜单在展示过程中由比较大然后缩放到实际大小，感觉不如QQ的效果好，怎奈我当时心情比骄傲浮躁，改了个参数也没调出想要的效果来，于是一怒之下决定自己写一个。事后，发现有个Swift版的特别炫酷，完全模仿的QQ，点<a href="https://github.com/johnlui/SwiftSideslipLikeQQ" target="_blank" rel="noopener">这里</a>查看<br><img src="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966" alt="Swift版手机QQ侧滑菜单"></p>
-<p>大哭，此大神还有相应的教程，如果各位看官不想听我接下来的实现思路又能看懂Swift的可以瞬移到此大神的<a href="http://lvwenhan.com/ios/445.html" target="_blank" rel="noopener">博客</a>了。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="##思路"></a>##思路</h2><p>不送….. 呜呜呜……<br>先看我寒碜的效果<br><img src="http://upload-images.jianshu.io/upload_images/69809-0d47f8c72db4239c.gif" alt="本人的手机QQ侧滑菜单"></p>
-<p><strong>实在忍不了，换了小图了</strong></p>
-<p>哎，炫酷没法比啊。</p>
-<p>iOS5之后每个UIViewController都可以轻松当一个容器了，可以同时管理许多其他的UIViewController了。</p>
-<pre><code>addChildViewController:
-willMoveToParentViewController: 
-didMoveToParentViewController:
-</code></pre><p>拿去，不谢！具体怎么写一个容器不在本文的讨论重点，还请大家自行谷歌。<del>好吧，我是在用<a href="http://honx.in/_VHWETOz5NE7ZQrbz" target="_blank" rel="noopener">红杏</a>翻墙</del> <em>软广取消，红杏被郭嘉干掉后我的钱也追不回来了</em></p>
-<p>现在的话我有两个子视图控制器了，把他们的view分别放在了我自定义的menuViewContainer和contentViewContainer这两个View里。OK，基础已打好。<br>理所应当，我在contentViewCcontainer上添加一个滑动手势，滑动时移动视图的位置就行了。那怎么确定手指在滑动时相应的视图应该滑动到哪呢？滑动到哪里结束呢？怎么确定同时改缩放到什么程度呢？<br>这些问题我本来想一一说讲一遍，发现自己太啰嗦，又不知道该怎么讲，所以还是直接上代码吧。</p>
-<pre><code>- (void)panGestureRecognizer:(UIScreenEdgePanGestureRecognizer *)recognizer{
-
-    CGPoint point = [recognizer translationInView:self.view];
-
-    if(recognizer.state == UIGestureRecognizerStateBegan) {
-       [self updateContentViewShadow];
-    }else if(recognizer.state == UIGestureRecognizerStateChanged){
-
-       CGFloat menuVisibleWidth = self.view.bounds.size.width-self.realContentViewVisibleWidth;
-       CGFloat delta = self.menuHidden ? point.x/menuVisibleWidth : (menuVisibleWidth+point.x)/menuVisibleWidth;
-       CGFloat scale = 1-(1-MinScaleContentView)*delta;
-       CGFloat menuScale = MinScaleMenuView + (1-MinScaleMenuView)*delta;
-
-       if(self.menuHidden){
-          //以内容视图最小缩放为界限
-          if(scale &lt; MinScaleContentView){//A
-            self.contentViewContainer.transform = CGAffineTransformMakeTranslation(menuVisibleWidth, 0);
-            self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,MinScaleContentView,MinScaleContentView);
-            self.contentViewScale = MinScaleContentView;
-            self.menuViewContainer.transform = CGAffineTransformMakeScale(1, 1);
-            self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, 0, 0);
-           }else{//大于最小界限又分大于等于1和小于1两种情况
-             if(scale &lt; 1){//B
-                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
-                self.contentViewScale = scale;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(menuScale, menuScale);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView *(1-delta), 0);
-             }else{//C
-                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(0, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,1, 1);
-                self.contentViewScale = 1;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(MinScaleMenuView, MinScaleMenuView);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView, 0);
-            }
-        }          
-    }else{         
-        if(scale &gt; 1){//D
-            self.contentViewContainer.transform = CGAffineTransformMakeTranslation(0, 0);
-            self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,1,1);
-            self.contentViewScale = 1;
-            self.menuViewContainer.transform = CGAffineTransformMakeScale(MinScaleMenuView, MinScaleMenuView);
-            self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView, 0);
-        }else{
-            if(scale&gt;MinScaleContentView){//E
-                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x+menuVisibleWidth, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
-                self.contentViewScale = scale;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(menuScale, menuScale);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView * (1-delta), 0);
-            }else{//F
-                self.contentViewContainer.transform =CGAffineTransformMakeTranslation(self.view.bounds.size.width-self.realContentViewVisibleWidth, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,MinScaleContentView, MinScaleContentView);
-                self.contentViewScale = MinScaleContentView;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(1, 1);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, 0, 0);
-            }
-        }
-    }        
-  }else if(recognizer.state == UIGestureRecognizerStateEnded){
-    [self showMenu:(self.contentViewContainer.frame.origin.x &gt; self.view.bounds.size.width/2)];
-  }
-}
-</code></pre><p>这样的结尾是不是太不负责任了？？？<br>好吧，我提醒大家，整段代码的精华全在delta的计算，视图滑动后的最终状态是由menuVisibleWidth和MinSacleContentView来决定。根据当前手势滑动的距离占menuVisibleWidth的百分比来计算滑动动作完成度，然后根据这个值来移动和缩放相应的视图。</p>
-<p>最后，上我的<a href="https://github.com/yuyedaidao/YQSlideMenuControllerDemo" target="_blank" rel="noopener">项目地址</a>，如果大家不嫌弃，请给star，如果有问题，烦请留言。感激涕零</p>
-
-          
+          ##冲动最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/仿QQ左侧滑动菜单的实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1703,9 +1627,9 @@ didMoveToParentViewController:
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:21:09+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:21:09+08:00">
                 2018-11-09
               </time>
             
@@ -1724,7 +1648,7 @@ didMoveToParentViewController:
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1767,87 +1691,18 @@ didMoveToParentViewController:
       
         
           
-            <p>最近陷入了项目中一个日历月视图与周视图切换效果的实现，长时间没有实现想要的效果，沮丧至极。烦请有好想法的同学指点一二，在线等<a href="http://weibo.com/u/2242240253/home?wvr=5&amp;lf=reg" target="_blank" rel="noopener">@留什么白</a>。</p>
-<hr>
-<p>结束例行的啰嗦，进入正题。</p>
-<p>大家可能都用过MJRefresh,十分之方便，李明杰老师借助runtime的特性，极尽之能，让千千万万小白开发者和遵循不重复制造轮子原则的开发者用最少的代码就实现了界面下拉刷新的功能。我们今天不谈runtime的黑魔法，而是UITableView最常见的刷新数据方式下拉刷新的实现过程。</p>
-<p>首先，我们定义三个枚举值</p>
-<pre><code>typedef NS_ENUM(NSUInteger, RefreshState) {
-    RefreshStateNormal,//正常
-    RefreshStatePulling,//释放即可刷新
-    RefreshStateLoading,//加载中
-};
-</code></pre><p>分别表示正常状态、释放即可刷新状态、加载中状态</p>
-<p>为了简单说明，我们只用一个UILabel来表现就可以，把它放在内容上方，也就是正常情况下看不到的地方，只有下拉的时候才能看到。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/69809-218b9752173c81ce.gif?imageMogr2/auto-orient/strip" alt="UILabel的位置"></p>
-<p>然后我们估算一个大体的距离，从而确定触发加载状态的临界点。</p>
-<p>简单描述一下将要实现的情形：</p>
-<p>我们往下滑动视图，如果视图下滑到触发点，状态变为<code>RefreshStatePulling</code>,即标签文字变为“松手即可刷新”。<br>接下来有两种状况会发生：一，松开手；二，不松手，又向初始位置滑。第一种情况，当你松开手时，因为UIScrollView有回弹效果，视图会往上滑动，当到达触发点时，状态改为<code>RefreshStateLoading</code>,即视图停在当前位置，不受回弹作用影响，标签文字变为“加载中…”,等加载动作完成之后，手动触发复原动作，视图滑到原始状态 <code>RefreshStateNormal</code>,同时标签文字变为‘下拉刷新’；第二种情况，你没有松手，然后又往回滑动，当到达触发点以上时，状态变为初始状态<code>RefreshStateNormal</code>。</p>
-<p>如果你对上述过程不是很了解的话，那你随便找个带下拉刷新的应用试试就行了，不用温柔，越暴力越好。弄清上述过程是实现整个流程的基础。</p>
-<p>接下来要做的就是决定什么时候改变状态了，参照上述过程，我们在UIScrollView的代理函数<code>scrollViewDidScroll:</code>监控<code>contentOffset</code>的变化，再结合<code>isDragging</code>属性就可以改变状态了。</p>
-<pre><code>- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if(scrollView.contentOffset.y &lt; -SwitchPoint-self.originalInsetTop){
-        if(self.refreshState == RefreshStateNormal){//小于临界值（在触发点以下），如果状态是正常就转为下拉刷新，如果正在刷新或者已经是下拉刷新则不变
-            self.refreshState = RefreshStatePulling;
-        }
-    }else{//大于临界值（在触发点以上，包括触发点）
-        if(scrollView.isDragging){//手指没有离开屏幕
-            if(self.refreshState == RefreshStatePulling){//原来是下拉的话变成正常，原来是刷新或者正常的话不变
-                self.refreshState = RefreshStateNormal;
-            }
-        }else{//手指离开屏幕
-            if(self.refreshState == RefreshStatePulling){//原来是下拉的话变成加载中，原来是加载中或者正常的话不变
-                self.tableView.contentInset = UIEdgeInsetsMake(self.originalInsetTop+SwitchPoint, 0, 0, 0);//改变contentInset的值就可以取消回弹效果停留在当前位置了 关于contentIinset的介绍，可以查看我的上一篇文章
-                self.refreshState = RefreshStateLoading;
-            }
-        }
-    }    
-}
-</code></pre><p>这段代码决定了UIScrollView每个时刻的状态，那么接下来的就简单多了，只要重写一下<code>setRefreshState:</code>方法就可以了。</p>
-<pre><code>- (void)setRefreshState:(RefreshState)refreshState{
-    _refreshState = refreshState;
-    switch (refreshState) {
-        case RefreshStateNormal:
-            self.pulldownLabel.text = @&quot;下拉刷新&quot;;
-            [self.pulldownLabel sizeToFit];
-            break;
-        case RefreshStateLoading:
-            self.pulldownLabel.text = @&quot;正在刷新...&quot;;
-            [self.pulldownLabel sizeToFit];
-            if(self.refreshBlock){
-                self.refreshBlock();//这里就是你要执行的耗时的操作
-            }            
-            break;
-        case RefreshStatePulling:
-            self.pulldownLabel.text = @&quot;松开即可刷新&quot;;
-            [self.pulldownLabel sizeToFit];
-            break;
-        default:
-            break;
-    }
-}
-</code></pre><p>看一下我们的效果：<br><img src="http://upload-images.jianshu.io/upload_images/69809-72950bd579e695a9.gif?imageMogr2/auto-orient/strip" alt="平凡而简单的效果"><br>当然你会说这不够diao,不够炫酷，人家的效果都是这样：</p>
-<p><img src="https://camo.githubusercontent.com/15577b87be4403d9e2ede4d5cd5b9fccbd1d03ae/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343334333438363135312e676966" alt=""> <img src="https://camo.githubusercontent.com/911191d46157ea3961728b16696aea4440ffeb92/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343430323233383338392e676966" alt=""></p>
-<p>又被你发现了，😂，我满(hao)是(wu)虔(jie)诚(cao)地盗了大神的图，@M了个J，大神，膝盖已发货，请验收。</p>
-<p>那么我们怎么实现这样的效果呢，很简单，在上边设置状态的代码里添加动画就行了。来一段伪的代码：</p>
-<pre><code>case RefreshStateNormal:
-     self.pulldownLabel.text = @&quot;下拉刷新&quot;;
-     [UIView animateWithDuration:0.3 animations:^{
-         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI/2);//箭头旋转180º
-     }];
-     break;
-</code></pre><p>还有一点需要强调，在<code>scrollViewDidScroll:</code>里保持加载状态时修改了<code>contentInset</code>,所以取消加载状态恢复原状时只需…如此如此：</p>
-<pre><code>- (void)endRefresh{
-    if(self.refreshState == RefreshStateLoading){
-        self.refreshState = RefreshStateNormal;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.tableView.contentInset = UIEdgeInsetsMake(self.originalInsetTop, 0, 0, 0);
-        } completion:nil];
-    }
-}
-</code></pre><p>OK，希望看到这里你能理解下拉刷新的整个过程及原理了，欢迎指正和打击。</p>
+          最近陷入了项目中一个日历月视图与周视图切换效果的实现，长时间没有实现想要的效果，沮丧至极。烦请有好想法的同学指点一二，在线等@留什么白。
 
-          
+结束例行的啰嗦，进入正题。
+大家可能都用过MJRefresh,十分之方便，李明杰老师借助runtime的特性，极尽之能，让千千万万小白开发者和遵循不重复制造轮子原则的开发者用最少的代码就实现了界面下拉刷新的功能。我们今天不谈runtime的黑魔法，而是UITa
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/回头看UITableView-三-下拉刷新的实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1932,7 +1787,7 @@ didMoveToParentViewController:
                 <a href="/archives/">
               
                   <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -1943,7 +1798,7 @@ didMoveToParentViewController:
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">categories</span>
+                  <span class="site-state-item-name">分类</span>
                 </a>
               </div>
             
@@ -1954,7 +1809,7 @@ didMoveToParentViewController:
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">15</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
@@ -2022,7 +1877,7 @@ didMoveToParentViewController:
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -2030,7 +1885,7 @@ didMoveToParentViewController:
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
