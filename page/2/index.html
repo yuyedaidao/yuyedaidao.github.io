@@ -229,6 +229,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/关于连续触发的函数中动画异常的描述/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/关于连续触发的函数中动画异常的描述/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我想要的过程是这样的，我有两个label像球场上的广告牌一样交替滚动，当前的往上移动逐渐消失下边的从下边同时往上移动逐渐出现。我为了在autolayout下也能实现所以一开始准备用transform实现，但是发现往上移动的动画异常，不知道什么原因，让人郁闷。。。便秘的感觉很久之后，我决定退而求其次，用改变center来实现，问题解决了，但是是建立在我这两个label没有autolayout的基础之上。今天特此记下，留待以后研究。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/为什么dispatch_sync在主线程会死锁/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -331,6 +451,130 @@ dispatch_sync(queue, ^{
     });
 });
 </code></pre><p>所以，发生死锁就是必然的了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/打破Swift里带有引用计数的结构体/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/打破Swift里带有引用计数的结构体/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在Swift里，一个类<code>class</code>是分配在堆<code>heap</code>上的，它通过引用计数<code>reference counting</code>的方式来追踪自己的生命周期并能在生命走到尽头的时候执行一些清理工作<code>clean behaviors</code>，比如留点什么遗言。结构体<code>struct</code>却是相反的，它不是单独分配在堆上，没有引用计数，也不能在生命结束时留什么遗言。</p>
+<p>事实上，堆、引用计数和清理工作这些特性也可以适用于结构体。不过要特别小心的是：出格的行为很容易导致问题。笔者接下来就讲告诉你结构体是怎么带着那些你把它们跟一个类联系起来的特性销毁的以及这可能是导致内存泄露、错误行为和编译崩溃的根源。</p>
+<blockquote>
+<p><strong>OUT OF DATE AS OF SWIFT 3</strong>: While it is still possible to have a heap allocated, reference counted struct with cleanup behaviors in Swift 3, it is no longer possible to capture a reference to self<br> in a struct method as described in this article. The problems detailed in section 2 in this article have been fixed in Swift 3 and the remainder of this article is merely a historical artefact. Don’t worry: you’re better off as a result.</p>
+</blockquote>
 
           
         
@@ -577,126 +821,6 @@ dispatch_sync(queue, ^{
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/关于连续触发的函数中动画异常的描述/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/关于连续触发的函数中动画异常的描述/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我想要的过程是这样的，我有两个label像球场上的广告牌一样交替滚动，当前的往上移动逐渐消失下边的从下边同时往上移动逐渐出现。我为了在autolayout下也能实现所以一开始准备用transform实现，但是发现往上移动的动画异常，不知道什么原因，让人郁闷。。。便秘的感觉很久之后，我决定退而求其次，用改变center来实现，问题解决了，但是是建立在我这两个label没有autolayout的基础之上。今天特此记下，留待以后研究。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看UITableView(二)-父视图UIScrollView/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -807,130 +931,6 @@ view.backgroundColor = [UIColor greenColor];
 </code></pre><p>如图，虽然view的起点是50，但是由于contentInset的原因，它相对于父视图的纵坐标位置是100。</p>
 <p>好了，先写到这里，办公室就我一个人了，兄弟我先回家了。</p>
 <p>预告：根据上边这些东东，咱们稍后谈谈怎么实现一个自定义的下拉刷新控件，我会尽快更新。<br>最后，诚心求一个Mac上方便作图的软件。如果你有破解版的sketch的话，给兄弟一个吧，先谢过了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/打破Swift里带有引用计数的结构体/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/打破Swift里带有引用计数的结构体/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Swift里，一个类<code>class</code>是分配在堆<code>heap</code>上的，它通过引用计数<code>reference counting</code>的方式来追踪自己的生命周期并能在生命走到尽头的时候执行一些清理工作<code>clean behaviors</code>，比如留点什么遗言。结构体<code>struct</code>却是相反的，它不是单独分配在堆上，没有引用计数，也不能在生命结束时留什么遗言。</p>
-<p>事实上，堆、引用计数和清理工作这些特性也可以适用于结构体。不过要特别小心的是：出格的行为很容易导致问题。笔者接下来就讲告诉你结构体是怎么带着那些你把它们跟一个类联系起来的特性销毁的以及这可能是导致内存泄露、错误行为和编译崩溃的根源。</p>
-<blockquote>
-<p><strong>OUT OF DATE AS OF SWIFT 3</strong>: While it is still possible to have a heap allocated, reference counted struct with cleanup behaviors in Swift 3, it is no longer possible to capture a reference to self<br> in a struct method as described in this article. The problems detailed in section 2 in this article have been fixed in Swift 3 and the remainder of this article is merely a historical artefact. Don’t worry: you’re better off as a result.</p>
-</blockquote>
 
           
         

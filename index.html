@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/一个奇怪的问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/CoreData里UUID的奇怪问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/一个奇怪的问题/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/CoreData里UUID的奇怪问题/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -300,11 +300,14 @@
       
         
           
-            <p>我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行</p>
-<pre><code>dispatch_async(dispatch_get_main_queue(), ^{ //some code}
-</code></pre><p>竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以<br>如图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/69809-192d31537be63fe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>奇怪的问题，特此记录</p>
+            <h2 id="0x1"><a href="#0x1" class="headerlink" title="0x1"></a>0x1</h2><p>今天我在开发AppleWatch应用时发现了一个关于CoreData的极其古怪的问题,特此记录下来</p>
+<h2 id="0x2"><a href="#0x2" class="headerlink" title="0x2"></a>0x2</h2><p>因为CoreData是支持UUID类型的属性的,所以我在设计某个Model时就用了UUID的属性,但是因为不是连续开发导致我后来把这个属性的类型忘了,以为是String.</p>
+<p>于是我在手机端的代码里写了类似这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let uuid: String = &quot;7BD09D86-8941-4E50-9A42-7240E970FEE7&quot;</span><br><span class="line">let predicate = NSPredicate(format: &quot;uuid = %@&quot;, argumentArray: [uuid])</span><br><span class="line">//省略CoreData根据predicate获取数据的代码</span><br></pre></td></tr></table></figure></p>
+<p><em>注意Model里uuid的属性类型是UUID,我在这里直接用的是String</em><br>然后,我…很成功的获取到了预期的数据.<br>当然,我当时并没有意识到类型不匹配.</p>
+<p>于是乎,我把相同的代码放到了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//MARK: -WCSession的代理方法 Watch向iPhone发送的消息在这里接收</span><br><span class="line"> func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Void)</span><br></pre></td></tr></table></figure></p>
+<p>然后,我怎么也获取不到数据了,一模一样的代码,我曾一度变成了有神论者,简直诡异至极….<br>获取数据的方法我放在什么线程里都不行,这个代理函数的执行环境我不知道跟主应用的程序执行环境有什么不同</p>
+<h2 id="0x3"><a href="#0x3" class="headerlink" title="0x3"></a>0x3</h2><p>结果到目前为止大家肯定已经知道了,就是把查询时的String类型的uuid修改成UUID类型</p>
+<h2 id="0x4"><a href="#0x4" class="headerlink" title="0x4"></a>0x4</h2><p>原因未知</p>
 
           
         
@@ -567,7 +570,7 @@ NSMutableArray *visibleCells;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/CoreData里UUID的奇怪问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/CADisplayLink不销毁导致其拥有者也不释放/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -586,7 +589,7 @@ NSMutableArray *visibleCells;
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/CoreData里UUID的奇怪问题/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/CADisplayLink不销毁导致其拥有者也不释放/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -638,137 +641,7 @@ NSMutableArray *visibleCells;
       
         
           
-            <h2 id="0x1"><a href="#0x1" class="headerlink" title="0x1"></a>0x1</h2><p>今天我在开发AppleWatch应用时发现了一个关于CoreData的极其古怪的问题,特此记录下来</p>
-<h2 id="0x2"><a href="#0x2" class="headerlink" title="0x2"></a>0x2</h2><p>因为CoreData是支持UUID类型的属性的,所以我在设计某个Model时就用了UUID的属性,但是因为不是连续开发导致我后来把这个属性的类型忘了,以为是String.</p>
-<p>于是我在手机端的代码里写了类似这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let uuid: String = &quot;7BD09D86-8941-4E50-9A42-7240E970FEE7&quot;</span><br><span class="line">let predicate = NSPredicate(format: &quot;uuid = %@&quot;, argumentArray: [uuid])</span><br><span class="line">//省略CoreData根据predicate获取数据的代码</span><br></pre></td></tr></table></figure></p>
-<p><em>注意Model里uuid的属性类型是UUID,我在这里直接用的是String</em><br>然后,我…很成功的获取到了预期的数据.<br>当然,我当时并没有意识到类型不匹配.</p>
-<p>于是乎,我把相同的代码放到了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//MARK: -WCSession的代理方法 Watch向iPhone发送的消息在这里接收</span><br><span class="line"> func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Void)</span><br></pre></td></tr></table></figure></p>
-<p>然后,我怎么也获取不到数据了,一模一样的代码,我曾一度变成了有神论者,简直诡异至极….<br>获取数据的方法我放在什么线程里都不行,这个代理函数的执行环境我不知道跟主应用的程序执行环境有什么不同</p>
-<h2 id="0x3"><a href="#0x3" class="headerlink" title="0x3"></a>0x3</h2><p>结果到目前为止大家肯定已经知道了,就是把查询时的String类型的uuid修改成UUID类型</p>
-<h2 id="0x4"><a href="#0x4" class="headerlink" title="0x4"></a>0x4</h2><p>原因未知</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/Day-Day-Up/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/Day-Day-Up/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>像素就是绘画的基本单元，就是一个方格，但是并不一定是一个物理点，在高清屏上是有多个包含多个物理点的。DPI就是每英寸有多少个像素。分辨率在用ps的设计那里就是DPI，但是一般在移动开发那里就是图片的长宽。</li>
-<li>关于在Swift中<code>self.property</code>和<code>property</code>，提倡不用<code>self</code>，这样如果在闭包中使用的属性是属于当前的实例对象时编译器就会报错，你就必须加上<code>self</code>，当你加上<code>self</code>的时候你就意识到<code>self</code>要被循环引用了，你就知道要处理这个问题了。</li>
-</ol>
+            <p>我发现我在拥有CADisplayLink且其没有invilidate的情况下，会让其所有者没法销毁</p>
 
           
         
@@ -944,6 +817,265 @@ swapValue(&amp;someInt, &amp;anotherInt)
 swapValue(&amp;someString, &amp;anotherString)
 </code></pre><h2 id="RXSwift"><a href="#RXSwift" class="headerlink" title="####RXSwift"></a>####<a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="noopener">RXSwift</a></h2><p>RxSwift是一个提供函数响应式编程的框架。函数式编程咱们之前介绍过，那又何谓响应式呢，举个例子，y = fun(x),当输入值x变换时会相应的引起输出值y的变换。两个特征加在一起就是函数响应式编程了，哈哈，简直太聪明了，😂。函数响应式编程避免了很多线程问题，没有副作用，以比接近人的正常思维习惯提高了开发效率（借助RxSwift）。<br>By the way! 本篇作者是靛青k(宋旭陶)，95年的，其他的啥也不说了。</p>
 <h2 id="架构"><a href="#架构" class="headerlink" title="##架构"></a>##架构</h2><h2 id="美团"><a href="#美团" class="headerlink" title="####美团"></a>####美团</h2><h2 id="手机天猫"><a href="#手机天猫" class="headerlink" title="####手机天猫"></a>####手机天猫</h2><h2 id="微博"><a href="#微博" class="headerlink" title="####微博"></a>####微博</h2><h2 id="链家"><a href="#链家" class="headerlink" title="####链家"></a>####链家</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/WCSession-sendMessage-失败处理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/WCSession-sendMessage-失败处理/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>通过手表向手机端发送消息时出现Payload could not be delivered(中文环境下:未能传送负载)的错误提示,如果你保证你的设置都对的情况下,请记得检查手机端WCSession实现的代理方法全不全</p>
+<p>如果你是这样发送消息</p>
+<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: nil, errorHandler: { (error) in print(error)})
+</code></pre><p>那么在手机端你要有这样的代理方法</p>
+<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any])
+</code></pre><p>如果你是这样发送消息</p>
+<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: { (result) in
+                    print(result)
+                }, errorHandler: { (error) in print(error) })
+</code></pre><p>那么在手机端你要有这样的代理方法</p>
+<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Swift.Void)
+</code></pre><p>根据发送时有没有replyHandler来决定调用哪个代理方法,如果不匹配就会发送失败</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/VS保存时自动格式化导致ejs编译错误/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/VS保存时自动格式化导致ejs编译错误/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个<br>最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above error is not helpful, you may want to try EJS-Lint: https://github.com/RyanZim/EJS-Lint</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs</span><br><span class="line"></span><br><span class="line">If the above error is not helpful, you may want to try EJS-Lint:</span><br><span class="line">https://github.com/RyanZim/EJS-Lint</span><br><span class="line">    at new Function (&lt;anonymous&gt;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>完全看不到有用的信息,shit</p>
+<p>于是我就按提示用 <a href="https://github.com/RyanZim/EJS-Lint" target="_blank" rel="noopener">https://github.com/RyanZim/EJS-Lint</a> 来试试能不能看到更多信息…<br>心累啊,用命令号执行直接返回了没有任何信息.加在工程里返回undefined, MMP.姿势不对?有掌握动作要领的请指教.</p>
+<p>在折磨了接近两天的时间后我不得对我接近千行的ejs文件一行行ejs代码进行查看,还是没错啊…要你你能不崩溃?</p>
+<p>最最后,我就重新把带有ejs代码的片段一段段摘出来,然后一遍遍部署运行,终于…苍天啊.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \ &apos;&apos; %&gt;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>如上这就是问题代码,估计再细心你可能也没法很多发现问题吧…<br>其实我的原始代码是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \&apos;&apos; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>发现了,他妈的最后一个转义斜杠<code>\</code>后边接了个空格…wtf.<br>而这都是我在保存时vs给我自动格式化造成的.</p>
+<p>说了太多脏话.反思</p>
+
           
         
       
@@ -1324,7 +1456,7 @@ swapValue(&amp;someString, &amp;anotherString)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/VS保存时自动格式化导致ejs编译错误/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/一个奇怪的问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -1343,7 +1475,7 @@ swapValue(&amp;someString, &amp;anotherString)
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/VS保存时自动格式化导致ejs编译错误/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/一个奇怪的问题/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -1395,15 +1527,11 @@ swapValue(&amp;someString, &amp;anotherString)
       
         
           
-            <p>ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个<br>最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above error is not helpful, you may want to try EJS-Lint: https://github.com/RyanZim/EJS-Lint</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs</span><br><span class="line"></span><br><span class="line">If the above error is not helpful, you may want to try EJS-Lint:</span><br><span class="line">https://github.com/RyanZim/EJS-Lint</span><br><span class="line">    at new Function (&lt;anonymous&gt;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>完全看不到有用的信息,shit</p>
-<p>于是我就按提示用 <a href="https://github.com/RyanZim/EJS-Lint" target="_blank" rel="noopener">https://github.com/RyanZim/EJS-Lint</a> 来试试能不能看到更多信息…<br>心累啊,用命令号执行直接返回了没有任何信息.加在工程里返回undefined, MMP.姿势不对?有掌握动作要领的请指教.</p>
-<p>在折磨了接近两天的时间后我不得对我接近千行的ejs文件一行行ejs代码进行查看,还是没错啊…要你你能不崩溃?</p>
-<p>最最后,我就重新把带有ejs代码的片段一段段摘出来,然后一遍遍部署运行,终于…苍天啊.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \ &apos;&apos; %&gt;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
-<p>如上这就是问题代码,估计再细心你可能也没法很多发现问题吧…<br>其实我的原始代码是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \&apos;&apos; %&gt;</span><br></pre></td></tr></table></figure></p>
-<p>发现了,他妈的最后一个转义斜杠<code>\</code>后边接了个空格…wtf.<br>而这都是我在保存时vs给我自动格式化造成的.</p>
-<p>说了太多脏话.反思</p>
+            <p>我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行</p>
+<pre><code>dispatch_async(dispatch_get_main_queue(), ^{ //some code}
+</code></pre><p>竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以<br>如图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-192d31537be63fe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>奇怪的问题，特此记录</p>
 
           
         
@@ -1452,7 +1580,7 @@ swapValue(&amp;someString, &amp;anotherString)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/WCSession-sendMessage-失败处理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/Day-Day-Up/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -1471,7 +1599,7 @@ swapValue(&amp;someString, &amp;anotherString)
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/WCSession-sendMessage-失败处理/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/Day-Day-Up/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -1523,138 +1651,10 @@ swapValue(&amp;someString, &amp;anotherString)
       
         
           
-            <p>通过手表向手机端发送消息时出现Payload could not be delivered(中文环境下:未能传送负载)的错误提示,如果你保证你的设置都对的情况下,请记得检查手机端WCSession实现的代理方法全不全</p>
-<p>如果你是这样发送消息</p>
-<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: nil, errorHandler: { (error) in print(error)})
-</code></pre><p>那么在手机端你要有这样的代理方法</p>
-<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any])
-</code></pre><p>如果你是这样发送消息</p>
-<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: { (result) in
-                    print(result)
-                }, errorHandler: { (error) in print(error) })
-</code></pre><p>那么在手机端你要有这样的代理方法</p>
-<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Swift.Void)
-</code></pre><p>根据发送时有没有replyHandler来决定调用哪个代理方法,如果不匹配就会发送失败</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/CADisplayLink不销毁导致其拥有者也不释放/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/CADisplayLink不销毁导致其拥有者也不释放/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我发现我在拥有CADisplayLink且其没有invilidate的情况下，会让其所有者没法销毁</p>
+            <ol>
+<li>像素就是绘画的基本单元，就是一个方格，但是并不一定是一个物理点，在高清屏上是有多个包含多个物理点的。DPI就是每英寸有多少个像素。分辨率在用ps的设计那里就是DPI，但是一般在移动开发那里就是图片的长宽。</li>
+<li>关于在Swift中<code>self.property</code>和<code>property</code>，提倡不用<code>self</code>，这样如果在闭包中使用的属性是属于当前的实例对象时编译器就会报错，你就必须加上<code>self</code>，当你加上<code>self</code>的时候你就意识到<code>self</code>要被循环引用了，你就知道要处理这个问题了。</li>
+</ol>
 
           
         
