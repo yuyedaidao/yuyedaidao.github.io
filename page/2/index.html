@@ -229,126 +229,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/关于连续触发的函数中动画异常的描述/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yeqing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WYQ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/09/关于连续触发的函数中动画异常的描述/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
-                2018-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我想要的过程是这样的，我有两个label像球场上的广告牌一样交替滚动，当前的往上移动逐渐消失下边的从下边同时往上移动逐渐出现。我为了在autolayout下也能实现所以一开始准备用transform实现，但是发现往上移动的动画异常，不知道什么原因，让人郁闷。。。便秘的感觉很久之后，我决定退而求其次，用改变center来实现，问题解决了，但是是建立在我这两个label没有autolayout的基础之上。今天特此记下，留待以后研究。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/为什么dispatch_sync在主线程会死锁/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -499,7 +379,7 @@ dispatch_sync(queue, ^{
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/打破Swift里带有引用计数的结构体/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/关于连续触发的函数中动画异常的描述/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -518,7 +398,7 @@ dispatch_sync(queue, ^{
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/打破Swift里带有引用计数的结构体/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/关于连续触发的函数中动画异常的描述/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -570,11 +450,7 @@ dispatch_sync(queue, ^{
       
         
           
-            <p>在Swift里，一个类<code>class</code>是分配在堆<code>heap</code>上的，它通过引用计数<code>reference counting</code>的方式来追踪自己的生命周期并能在生命走到尽头的时候执行一些清理工作<code>clean behaviors</code>，比如留点什么遗言。结构体<code>struct</code>却是相反的，它不是单独分配在堆上，没有引用计数，也不能在生命结束时留什么遗言。</p>
-<p>事实上，堆、引用计数和清理工作这些特性也可以适用于结构体。不过要特别小心的是：出格的行为很容易导致问题。笔者接下来就讲告诉你结构体是怎么带着那些你把它们跟一个类联系起来的特性销毁的以及这可能是导致内存泄露、错误行为和编译崩溃的根源。</p>
-<blockquote>
-<p><strong>OUT OF DATE AS OF SWIFT 3</strong>: While it is still possible to have a heap allocated, reference counted struct with cleanup behaviors in Swift 3, it is no longer possible to capture a reference to self<br> in a struct method as described in this article. The problems detailed in section 2 in this article have been fixed in Swift 3 and the remainder of this article is merely a historical artefact. Don’t worry: you’re better off as a result.</p>
-</blockquote>
+            <p>我想要的过程是这样的，我有两个label像球场上的广告牌一样交替滚动，当前的往上移动逐渐消失下边的从下边同时往上移动逐渐出现。我为了在autolayout下也能实现所以一开始准备用transform实现，但是发现往上移动的动画异常，不知道什么原因，让人郁闷。。。便秘的感觉很久之后，我决定退而求其次，用改变center来实现，问题解决了，但是是建立在我这两个label没有autolayout的基础之上。今天特此记下，留待以后研究。</p>
 
           
         
@@ -979,6 +855,130 @@ view.backgroundColor = [UIColor greenColor];
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/打破Swift里带有引用计数的结构体/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/打破Swift里带有引用计数的结构体/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在Swift里，一个类<code>class</code>是分配在堆<code>heap</code>上的，它通过引用计数<code>reference counting</code>的方式来追踪自己的生命周期并能在生命走到尽头的时候执行一些清理工作<code>clean behaviors</code>，比如留点什么遗言。结构体<code>struct</code>却是相反的，它不是单独分配在堆上，没有引用计数，也不能在生命结束时留什么遗言。</p>
+<p>事实上，堆、引用计数和清理工作这些特性也可以适用于结构体。不过要特别小心的是：出格的行为很容易导致问题。笔者接下来就讲告诉你结构体是怎么带着那些你把它们跟一个类联系起来的特性销毁的以及这可能是导致内存泄露、错误行为和编译崩溃的根源。</p>
+<blockquote>
+<p><strong>OUT OF DATE AS OF SWIFT 3</strong>: While it is still possible to have a heap allocated, reference counted struct with cleanup behaviors in Swift 3, it is no longer possible to capture a reference to self<br> in a struct method as described in this article. The problems detailed in section 2 in this article have been fixed in Swift 3 and the remainder of this article is merely a historical artefact. Don’t worry: you’re better off as a result.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/iOS学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1230,7 +1230,7 @@ dispatch_once(&amp;onceToken, ^{
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/仿QQ左侧滑动菜单的实现/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看之UITableView-(基本代理方法及复用原理)/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -1249,7 +1249,7 @@ dispatch_once(&amp;onceToken, ^{
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/仿QQ左侧滑动菜单的实现/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/09/回头看之UITableView-(基本代理方法及复用原理)/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -1301,83 +1301,101 @@ dispatch_once(&amp;onceToken, ^{
       
         
           
-            <h2 id="冲动"><a href="#冲动" class="headerlink" title="##冲动"></a>##冲动</h2><p>最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢休的决心。好吧，最近看三国看的有点多了。</p>
-<h2 id="暗渡陈仓"><a href="#暗渡陈仓" class="headerlink" title="##暗渡陈仓"></a>##暗渡陈仓</h2><p>我在无所不能的GitHub上搜索侧滑菜单项目，试验了各种，发觉没有能很好的符合当前项目需求。我们当前的项目需求是跟手机QQ左侧滑动菜单一样的效果，有个默认的主视图，然后其他视图的展示都是在这个视图的基础上push出来的。当然把这些项目改造出这种功能其实也不难，但是左侧菜单的视差效果都跟QQ相差甚远，唯一相似的就是RESideMenu这个比较有名的项目，但是它的视差效果是菜单在展示过程中由比较大然后缩放到实际大小，感觉不如QQ的效果好，怎奈我当时心情比骄傲浮躁，改了个参数也没调出想要的效果来，于是一怒之下决定自己写一个。事后，发现有个Swift版的特别炫酷，完全模仿的QQ，点<a href="https://github.com/johnlui/SwiftSideslipLikeQQ" target="_blank" rel="noopener">这里</a>查看<br><img src="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966" alt="Swift版手机QQ侧滑菜单"></p>
-<p>大哭，此大神还有相应的教程，如果各位看官不想听我接下来的实现思路又能看懂Swift的可以瞬移到此大神的<a href="http://lvwenhan.com/ios/445.html" target="_blank" rel="noopener">博客</a>了。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="##思路"></a>##思路</h2><p>不送….. 呜呜呜……<br>先看我寒碜的效果<br><img src="http://upload-images.jianshu.io/upload_images/69809-0d47f8c72db4239c.gif" alt="本人的手机QQ侧滑菜单"></p>
-<p><strong>实在忍不了，换了小图了</strong></p>
-<p>哎，炫酷没法比啊。</p>
-<p>iOS5之后每个UIViewController都可以轻松当一个容器了，可以同时管理许多其他的UIViewController了。</p>
-<pre><code>addChildViewController:
-willMoveToParentViewController: 
-didMoveToParentViewController:
-</code></pre><p>拿去，不谢！具体怎么写一个容器不在本文的讨论重点，还请大家自行谷歌。<del>好吧，我是在用<a href="http://honx.in/_VHWETOz5NE7ZQrbz" target="_blank" rel="noopener">红杏</a>翻墙</del> <em>软广取消，红杏被郭嘉干掉后我的钱也追不回来了</em></p>
-<p>现在的话我有两个子视图控制器了，把他们的view分别放在了我自定义的menuViewContainer和contentViewContainer这两个View里。OK，基础已打好。<br>理所应当，我在contentViewCcontainer上添加一个滑动手势，滑动时移动视图的位置就行了。那怎么确定手指在滑动时相应的视图应该滑动到哪呢？滑动到哪里结束呢？怎么确定同时改缩放到什么程度呢？<br>这些问题我本来想一一说讲一遍，发现自己太啰嗦，又不知道该怎么讲，所以还是直接上代码吧。</p>
-<pre><code>- (void)panGestureRecognizer:(UIScreenEdgePanGestureRecognizer *)recognizer{
+            <p>UITableVIew是iOS开发中最常见的视图中最经典的视图了，没有之一，相信对这个视图敢称精通的人开发个好应用应该是问题不大的。</p>
+<hr>
+<p>闲话少叙，进入正题。</p>
+<p>###怎么使用</p>
+<p>掌握两个代理</p>
+<ol>
+<li><p><code>UITableViewDelegate</code></p>
+<pre><code>@optional  
+//下文再提到该方法用heightForRow代替
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+</code></pre></li>
+<li><p><code>UITableViewDataSource</code></p>
+<pre><code>@required
+//下文再提到该方法用numberOfRowsInSection代替
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+//下文再提到该方法用cellForRow代替
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
-    CGPoint point = [recognizer translationInView:self.view];
-
-    if(recognizer.state == UIGestureRecognizerStateBegan) {
-       [self updateContentViewShadow];
-    }else if(recognizer.state == UIGestureRecognizerStateChanged){
-
-       CGFloat menuVisibleWidth = self.view.bounds.size.width-self.realContentViewVisibleWidth;
-       CGFloat delta = self.menuHidden ? point.x/menuVisibleWidth : (menuVisibleWidth+point.x)/menuVisibleWidth;
-       CGFloat scale = 1-(1-MinScaleContentView)*delta;
-       CGFloat menuScale = MinScaleMenuView + (1-MinScaleMenuView)*delta;
-
-       if(self.menuHidden){
-          //以内容视图最小缩放为界限
-          if(scale &lt; MinScaleContentView){//A
-            self.contentViewContainer.transform = CGAffineTransformMakeTranslation(menuVisibleWidth, 0);
-            self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,MinScaleContentView,MinScaleContentView);
-            self.contentViewScale = MinScaleContentView;
-            self.menuViewContainer.transform = CGAffineTransformMakeScale(1, 1);
-            self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, 0, 0);
-           }else{//大于最小界限又分大于等于1和小于1两种情况
-             if(scale &lt; 1){//B
-                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
-                self.contentViewScale = scale;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(menuScale, menuScale);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView *(1-delta), 0);
-             }else{//C
-                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(0, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,1, 1);
-                self.contentViewScale = 1;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(MinScaleMenuView, MinScaleMenuView);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView, 0);
-            }
-        }          
-    }else{         
-        if(scale &gt; 1){//D
-            self.contentViewContainer.transform = CGAffineTransformMakeTranslation(0, 0);
-            self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,1,1);
-            self.contentViewScale = 1;
-            self.menuViewContainer.transform = CGAffineTransformMakeScale(MinScaleMenuView, MinScaleMenuView);
-            self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView, 0);
-        }else{
-            if(scale&gt;MinScaleContentView){//E
-                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x+menuVisibleWidth, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
-                self.contentViewScale = scale;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(menuScale, menuScale);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView * (1-delta), 0);
-            }else{//F
-                self.contentViewContainer.transform =CGAffineTransformMakeTranslation(self.view.bounds.size.width-self.realContentViewVisibleWidth, 0);
-                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,MinScaleContentView, MinScaleContentView);
-                self.contentViewScale = MinScaleContentView;
-                self.menuViewContainer.transform = CGAffineTransformMakeScale(1, 1);
-                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, 0, 0);
-            }
-        }
-    }        
-  }else if(recognizer.state == UIGestureRecognizerStateEnded){
-    [self showMenu:(self.contentViewContainer.frame.origin.x &gt; self.view.bounds.size.width/2)];
-  }
+@optional
+//下文再提到该方法用numberOfSection代替
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+</code></pre><p><em>要想比较完整的展示你的数据，这四个方法是最经常被实现的。</em><br>调用过程大体是这样的：<code>tableView</code>会先询问代理(在一般MVC里大部分是当前视图控制器ViewController)要展示多少个<code>section</code>,就是调用<code>numberOfSections</code>,如果代理没有实现该方法默认就是1个<code>section</code>。然后<code>tableView</code>调用<code>numberOfRowsInSection</code>先询问第一个<code>section</code>有多少个<code>cell</code>,然后挨个执行<code>heightForRow</code>获取每个cell的高度。<code>tableView</code>对每个<code>section</code>都执行一遍这样的操作后，那么结果来了:<code>tableView</code>通过对这些<code>cell</code>高度的累加就知道了需要多大的空间才能安放得了所有的内容，于是它调整好了<code>contentSize</code>的值。这样走下来就为我们后续在滑动时能通过<code>scrollIndicator</code>观察到我们大体滑到了哪个位置做好了准备。<br>准备好空间之后接下来的任务就是准备内容了。当然大家都知道真正的内容是依附在<code>UITableViewCell</code>上的，<code>tableView</code>先调用<code>cellForRow</code>去获取代理返回给它的第一个<code>cell</code>，对于所有的<code>cell</code>来说<code>width</code>都是固定的，即<code>tableView</code>本身的宽度，对于第一个<code>cell</code>来说它的<code>origin</code>也是确定的，即<code>(0,0)</code>，也就是说要想确定这个<code>cell</code>的位置就只需要知道它的<code>height</code>了。于是<code>tableView</code>再去调用<code>heightForRow</code>去获取它的高度，这样一个视图能确定显示在屏幕什么位置的充要条件就具备了。剩下的<code>cell</code>同理，挨个放在上一个<code>cell</code>的下边就行了。</p>
+</li>
+</ol>
+<p>总结一下:</p>
+<ol>
+<li>调用<code>numberOfSection</code>获得 A个 <code>section</code></li>
+<li>先调用<code>numberOfRowsInSection</code>获得B个<code>cell</code>,再调用<code>heightForRow</code>B次。如此循环A次</li>
+<li>循环调用<code>cellForRow</code>和<code>heightForRow</code>，直到<code>cell</code>的个数充满当前屏幕。</li>
+</ol>
+<p>这就是一个普通的<code>tableView</code>一开始加载数据的过程，有几点需要说明：</p>
+<ol>
+<li>如果你展示在每个<code>cell</code>上的内容是相对固定的，准确点说是每个<code>cell</code>的高度是固定的，那么<code>heightForRow</code>是不建议让代理去实现的，而是通过<code>tableView</code>的<code>rowHeight</code>属性来代替，当数据量比较大，比如说有10000个(其实只要  &gt;= 2)<code>cell</code>时，<code>tableView</code>只需要<code>10000*rowHeight</code>就知道应该准备的空间大小了，而不是调用一个方法10000次通过累加获知需要的大小。而且你懂的，要想获取一个<code>cell</code>的高度并不是那么容易的事，尤其是在自动布局出现之前，你需要计算各种字符串的所占空间的大小，这对性能是相当大的损耗。</li>
+<li>如果每个<code>cell</code>高度确实不一样，数据量又很大时该怎么解决这个性能问题呢，iOS7之后系统提供了估算高度的办法，<code>estimatedRowHeight</code>和<code>- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath//下文再提到该方法用estimateHeightForRow代替</code>,这样每次在加载数据之前，<code>tableView</code>不再通过<code>heightForRow</code>消耗大量的性能获取空间大小了，而是通过在<code>estimateRowHeight</code>或者<code>estimatedHeightForRow</code>不需要费劲计算就能获取的一个估算值来获取一个大体的空间大小，等到真正的加载数据时才根据获取真实数据，并做出相应的调整，比如<code>contentSize</code>或者<code>scrollIndicator</code>的位置。关于动态计算高度，推荐羊教授的一篇文章<a href="http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/" target="_blank" rel="noopener">优化UITableViewCell高度计算的那些事</a></li>
+<li>这些方法的调用在保证大顺序不变的情况下，每个方法的调用次数是不一定的，每个iOS版本又不一样，你如果想知道可以动手去试验一下。尤其是在iOS8,它认为<code>cell</code>会随时变化，所以一滑动就重新计算<code>cell</code>的高度。</li>
+<li>这些方法的调用其实也是有插曲的，比如调用了<code>reloadData</code>之后，<code>tableView</code>只会调用能让它知道所需空间大小的代理方法，然后立马执行<code>reloadData</code>之后的语句，也就说<code>cellForRow</code>并不会在<code>reloadData</code>之后紧接着执行。所以<code>reloadData</code>之后尽量避免对数据源数组的操作。</li>
+</ol>
+<p>###复用机制</p>
+<p>了解<code>UITableView</code>的人肯定对这一著名特性多少有点了解。咱们先假设<code>UITableView</code>没有复用机制，那么我们要展示10000条数据的话，那就得生成10000个<code>UITableViewCell</code>,占用了大量内存不说，性能也可想而知了，必然是一滑一卡顿，一顿一暴怒啊，控制力弱的估计要摔手机了。</p>
+<p>复用机制大体是这样:<code>UITableView</code>首先加载一屏幕(假设<code>UITableView</code>的大小是整个屏幕的大小)所需要的<code>UITableViewCell</code>,具体个数要根据每个<code>cell</code>的高度而定，总之肯定要铺满整个屏幕,更准确说当前加载的<code>cell</code>的高度要大于屏幕高度。然后你往上滑动，想要查看更多的内容，那么肯定需要一个新的<code>cell</code>放在已经存在内容的下边。这时候先不去生成，而是先去<code>UITableView</code>自己的一个资源池里去获取。这个资源池里放了已经生成的而且能用的<code>cell</code>。如果资源池是空的话才会主动生成一个新的<code>cell</code>。那么这个资源池里的<code>cell</code>又来自哪里呢？当你滑动时视图是，位于最顶部的<code>cell</code>会相应的往上滑动，直到它彻底消失在屏幕上，消失的<code>cell</code>去了哪里呢？你肯定想到了，是的，它被<code>UITableView</code>放到资源池里了。其他<code>cell</code>也是这样，只要一滑出屏幕就放入资源池。这样，有进有出，总共需要大约一屏幕多一点的<code>cell</code>就够了。相对于1000来说节省的资源就是指数级啊，完美解决了性能问题。</p>
+<p>iOS6之后我们一般在代码里这样处理<code>cell</code></p>
+<ol>
+<li><p>先注册</p>
+<pre><code>[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;UITableViewCell&quot;];
+</code></pre><p>或</p>
+<pre><code>[self.tableView registerNib:[UINib nibWithNibName:@&quot;NibTableViewCell&quot; bundle:nil] forCellReuseIdentifier:@&quot;NibTableViewCell&quot;];
+</code></pre></li>
+<li><p>在代理方法里获取</p>
+<pre><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;UITableViewCell&quot; forIndexPath:indexPath];
+   // do something
+   return cell;
 }
-</code></pre><p>这样的结尾是不是太不负责任了？？？<br>好吧，我提醒大家，整段代码的精华全在delta的计算，视图滑动后的最终状态是由menuVisibleWidth和MinSacleContentView来决定。根据当前手势滑动的距离占menuVisibleWidth的百分比来计算滑动动作完成度，然后根据这个值来移动和缩放相应的视图。</p>
-<p>最后，上我的<a href="https://github.com/yuyedaidao/YQSlideMenuControllerDemo" target="_blank" rel="noopener">项目地址</a>，如果大家不嫌弃，请给star，如果有问题，烦请留言。感激涕零</p>
+</code></pre></li>
+</ol>
+<p>那么具体在代码里是怎么实现的呢？我们可以大胆的猜测一下。</p>
+<p><code>UITableView</code>有几个属性(假想的)：</p>
+<pre><code>NSMutableDictionary *registerCellInfo;
+NSMutableDictionary *reusableCellsDictionary;
+NSMutableArray *visibleCells;
+</code></pre><p>我们推测两个注册方法的实现</p>
+<pre><code>- (void)registerNib:(UINib *)nib forCellReuseIdentifier:(NSString *)identifier{
+     [self.registerCellInfo setObject:nib forKey:identifier];
+     [self.registerCellsDictionary setObject:[NSMutableArray array] forKey:identifier];
+}
+- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString  *)identifier{
+    [self.registerCellInfo setObject:cellClass forKey:identifier];
+    [self.registerCellsDictionary setObject:[NSMutableArray array] forKey:identifier];
+}
+</code></pre><p>然后推测最关键的获取方法</p>
+<pre><code>- (UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath{
+    //indexPath这个参数是为了重置`cell`的大小，相关的处理并不是本文的重点，所以暂不实现
+    NSMutableArray *array = self.reusableCellsDictionary[identifier];
+    UITableViewCell *cell = nil;
+    if(array.count){
+        cell = array.lastObject;
+        [self.visibleCells addObject:cell];
+        [array removeLastObject];
+
+    }else{
+        id obj = self.registerCellInfo[identifier];
+        if([obj isKindOfClass:[UINib class]]){
+            cell = [[((UINib *)obj) instantiateWithOwner:nil options:nil] lastObject];
+        }else{
+            cell = [[(Class)obj alloc] init];
+        }
+        if(cell){
+            [self.visibleCells addObject:cell];
+         }
+    }
+
+    return cell;
+}
+</code></pre><p>😂，请忽略以上所有推测方法的不严谨，许多该有的条件判断并没有去处理。但是写到这里相信亲爱的读者已经了解了<code>UITableView</code>复用机制的原理了。现在，你已经具备了自己动手写一个<code>UITableView</code>的基础了(当然，假设你已经对<code>UIScrollView</code>有了充足的了解)。如果我的文章对你有用，烦请点个喜欢，好激励我继续写下去。。。</p>
+<p><em>关于<code>UITableView</code>的更多知识我们后续再谈</em></p>
 
           
         
