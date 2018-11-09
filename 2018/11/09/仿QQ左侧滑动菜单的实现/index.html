@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="##冲动最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不">
+<meta name="description" content="冲动 最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="仿QQ左侧滑动菜单的实现">
 <meta property="og:url" content="http://yoursite.com/2018/11/09/仿QQ左侧滑动菜单的实现/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:description" content="##冲动最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不">
+<meta property="og:description" content="冲动 最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-0d47f8c72db4239c.gif">
-<meta property="og:updated_time" content="2018-11-09T08:05:21.919Z">
+<meta property="og:updated_time" content="2018-11-09T08:17:51.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="仿QQ左侧滑动菜单的实现">
-<meta name="twitter:description" content="##冲动最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不">
+<meta name="twitter:description" content="冲动 最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢">
 <meta name="twitter:image" content="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966">
 
 
@@ -345,10 +345,13 @@
       
 
       
-        <h2 id="冲动"><a href="#冲动" class="headerlink" title="##冲动"></a>##冲动</h2><p>最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢休的决心。好吧，最近看三国看的有点多了。</p>
-<h2 id="暗渡陈仓"><a href="#暗渡陈仓" class="headerlink" title="##暗渡陈仓"></a>##暗渡陈仓</h2><p>我在无所不能的GitHub上搜索侧滑菜单项目，试验了各种，发觉没有能很好的符合当前项目需求。我们当前的项目需求是跟手机QQ左侧滑动菜单一样的效果，有个默认的主视图，然后其他视图的展示都是在这个视图的基础上push出来的。当然把这些项目改造出这种功能其实也不难，但是左侧菜单的视差效果都跟QQ相差甚远，唯一相似的就是RESideMenu这个比较有名的项目，但是它的视差效果是菜单在展示过程中由比较大然后缩放到实际大小，感觉不如QQ的效果好，怎奈我当时心情比骄傲浮躁，改了个参数也没调出想要的效果来，于是一怒之下决定自己写一个。事后，发现有个Swift版的特别炫酷，完全模仿的QQ，点<a href="https://github.com/johnlui/SwiftSideslipLikeQQ" target="_blank" rel="noopener">这里</a>查看<br><img src="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966" alt="Swift版手机QQ侧滑菜单"></p>
+        <h2 id="冲动"><a href="#冲动" class="headerlink" title="冲动"></a>冲动</h2><hr>
+<p>最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢休的决心。好吧，最近看三国看的有点多了。</p>
+<h2 id="暗渡陈仓"><a href="#暗渡陈仓" class="headerlink" title="暗渡陈仓"></a>暗渡陈仓</h2><hr>
+<p>我在无所不能的GitHub上搜索侧滑菜单项目，试验了各种，发觉没有能很好的符合当前项目需求。我们当前的项目需求是跟手机QQ左侧滑动菜单一样的效果，有个默认的主视图，然后其他视图的展示都是在这个视图的基础上push出来的。当然把这些项目改造出这种功能其实也不难，但是左侧菜单的视差效果都跟QQ相差甚远，唯一相似的就是RESideMenu这个比较有名的项目，但是它的视差效果是菜单在展示过程中由比较大然后缩放到实际大小，感觉不如QQ的效果好，怎奈我当时心情比骄傲浮躁，改了个参数也没调出想要的效果来，于是一怒之下决定自己写一个。事后，发现有个Swift版的特别炫酷，完全模仿的QQ，点<a href="https://github.com/johnlui/SwiftSideslipLikeQQ" target="_blank" rel="noopener">这里</a>查看<br><img src="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966" alt="Swift版手机QQ侧滑菜单"></p>
 <p>大哭，此大神还有相应的教程，如果各位看官不想听我接下来的实现思路又能看懂Swift的可以瞬移到此大神的<a href="http://lvwenhan.com/ios/445.html" target="_blank" rel="noopener">博客</a>了。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="##思路"></a>##思路</h2><p>不送….. 呜呜呜……<br>先看我寒碜的效果<br><img src="http://upload-images.jianshu.io/upload_images/69809-0d47f8c72db4239c.gif" alt="本人的手机QQ侧滑菜单"></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><hr>
+<p>不送….. 呜呜呜……<br>先看我寒碜的效果<br><img src="http://upload-images.jianshu.io/upload_images/69809-0d47f8c72db4239c.gif" alt="本人的手机QQ侧滑菜单"></p>
 <p><strong>实在忍不了，换了小图了</strong></p>
 <p>哎，炫酷没法比啊。</p>
 <p>iOS5之后每个UIViewController都可以轻松当一个容器了，可以同时管理许多其他的UIViewController了。</p>
@@ -618,7 +621,7 @@ didMoveToParentViewController:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#冲动"><span class="nav-number">1.</span> <span class="nav-text">##冲动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暗渡陈仓"><span class="nav-number">2.</span> <span class="nav-text">##暗渡陈仓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">##思路</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#冲动"><span class="nav-number">1.</span> <span class="nav-text">冲动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暗渡陈仓"><span class="nav-number">2.</span> <span class="nav-text">暗渡陈仓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">思路</span></a></li></ol></div>
             
 
           </div>
