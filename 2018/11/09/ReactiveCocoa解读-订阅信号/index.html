@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYQ">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/ReactiveCocoa解读-订阅信号/index.html">
+<meta property="og:site_name" content="WYQ">
+<meta property="og:description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-2a25a6514c7a7229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-058f5b522000e7ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-11-09T04:05:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WYQ">
+<meta name="twitter:description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/ReactiveCocoa解读-订阅信号/">
+
+
+
+
+
+  <title> | WYQ</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WYQ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/ReactiveCocoa解读-订阅信号/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>信号(Signal)和订阅者(Subscriber)是在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a>( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。</p>
+<p>先上一段RAC最简单的使用方法。</p>
+<pre><code> RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
+    [subscriber sendNext:@&quot;钢铁锅&quot;];
+    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
+    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+    return [RACDisposable disposableWithBlock:^{
+        NSLog(@&quot;曲终人散，抹点药酒&quot;);
+    }];
+}];
+[signal subscribeNext:^(id x) {
+    NSLog(@&quot;我听到:%@&quot;,x);
+}];
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是什么锅"></p>
+<blockquote>
+<p>信号是信息的载体</p>
+</blockquote>
+<p>对应上边的代码，我们创建了一个信号 <code>signal</code>，他承载着 <code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。</p>
+<pre><code>+ (RACSignal *)createSignal:(RACDisposable * (^)(id&lt;RACSubscriber&gt; subscriber))didSubscribe {
+    RACDynamicSignal *signal = [[self alloc] init];
+    signal-&gt;_didSubscribe = [didSubscribe copy];
+    return [signal setNameWithFormat:@&quot;+createSignal:&quot;];
+}
+</code></pre><p>创建信号很简单，其实就是创建了一个实例对象，并把将来有可能进行的一系列操作<code>didSubscribe</code>这个block记录下来，等发生了订阅行为时就会执行这些操作。<br>有人会问RACDisposable是什么东西，其实从字面就可以理解，销毁，它封装了当订阅行为消失时一些应该做的操作，当然像一开始的代码这种只是打印消息的操作其实是没必要的，所以这里可以返回nil。那什么时候订阅行为消失呢，当订阅者调用了sendError:或者sendCompleted方法时表示订阅行为就消失了，相应的dispose就会执行了，做一些清理操作。如下面的代码：</p>
+<pre><code>RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
+    [subscriber sendNext:@&quot;钢铁锅&quot;];
+    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+    [subscriber sendError:[NSError errorWithDomain:@&quot;singing&quot; code:748 userInfo:@{@&quot;reason&quot;:@&quot;麦克被歌迷拔掉了&quot;}]];
+    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
+    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+    [subscriber sendError:NULL];
+//        [subscriber sendCompleted];
+    return [RACDisposable disposableWithBlock:^{
+        NSLog(@&quot;曲终人散，抹点药酒&quot;);
+    }];
+}];
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-2a25a6514c7a7229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="我错了"><br>当然如果这两个方法如果你都不调用，那么当订阅者超出了自己的生命周期调用其dealloc方法时这个dispose也会执行。所以RACDisposable在RAC里使用非常广泛，比如在NSNotificationCenter的RAC扩展中用于取消观察者，在UITextField和UITextView的扩展里取消代理等等。</p>
+<p>说了半天大家可能会问，订阅者在哪里？别急，看下面:</p>
+<pre><code>[signal subscribeNext:^(id x) {
+    NSLog(@&quot;我听到:%@&quot;,x);
+}];
+</code></pre><p>当这句代码执行时就发生了订阅行为。其内部实现是这样：</p>
+<pre><code>- (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock {
+     NSCParameterAssert(nextBlock != NULL);
+     //看到了吗？我在这里，我就是订阅者。我把 nextBlock保存了下来。
+     RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock   error:NULL completed:NULL];
+     return [self subscribe:o];
+}
+
+- (RACDisposable *)subscribe:(id&lt;RACSubscriber&gt;)subscriber {
+     NSCParameterAssert(subscriber != nil);
+     RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];
+     //加工了一下，变成了RACPassthroughSubscriber,关于它的作用我们在以后的文章总具体场景下再讲述，现在你只需记住一个更具体的RACSubscriber子类就行了。
+     subscriber = [[RACPassthroughSubscriber alloc] initWithSubscriber:subscriber signal:self disposable:disposable];
+     //还记得信号在一开始创建时就存下来的那个block吗，就是这个didSubscribe
+     if (self.didSubscribe != NULL) {
+         RACDisposable *schedulingDisposable =  [RACScheduler.subscriptionScheduler schedule:^{
+             //在这里支行了信号一开始创建的block，并获得了它返回的RACDisposable
+             RACDisposable *innerDisposable = self.didSubscribe(subscriber);
+             [disposable addDisposable:innerDisposable];
+         }];
+        [disposable addDisposable:schedulingDisposable];
+    }
+    return disposable;
+}
+</code></pre><p>看到这里你可能有产生了很多疑问，且听我慢慢道来。首先你在头脑里先产生这个场景：生成了一个subscriber(代号007)，它保存了一个nextBlock：<code>^(id x) { NSLog(@&quot;我听到:%@&quot;,x);}</code>,然后当前这个信号开始执行didSubscribe这个block:</p>
+<pre><code>^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) { 
+  [subscriber sendNext:@&quot;钢铁锅&quot;];
+  [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+  [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;]; 
+  [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+  [subscriber sendCompleted]; 
+  return [RACDisposable disposableWithBlock:^{
+       NSLog(@&quot;曲终人散，抹点药酒&quot;); 
+  }];
+}
+</code></pre><p>注意，007被当作参数传了进去，也就是调用sendNext:这个方法的都是007，还记得007保存的那个nextBlock吗，此时在sendNext:内部就是执行了这个nextBlock，传进去了<code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。这样作为开发者的你就收到了订阅者发给你的有用信息，你就“听”到了一首美妙的歌曲。</p>
+<p>整个一个订阅流程就这样结束了，当然你会发现在你的代码中subscriber始终都没暴露出来，这也是造成你疑惑的原因，那么我问你，你需要的是subscriber呢，还是subscriber发给你的信息呢？因为我们需要的只是信息，所以完全没必要让我们知道subscriber的存在。所谓的订阅者也就是subscriber其实就是起了一个中间人的作用，获取信号(或者叫信号源更好理解)里的信息，然后发送到需要的地方。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-058f5b522000e7ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="keynote图形好少啊"></p>
+<p>RACCompoundDisposable(RACDisposable的子类)应该是大家的另一个疑问，它有一个方法<code>addDisposable:</code>可以添加另一个RACDisposable，它的最终形态是一个树形结构，第一个RACCompoundDisposable存了若干个RACDisposable或者RACCompoundDisposable，相应的RACCompoundDisposable又存了若干个RACDisposable或者RACCompoundDisposable…每个元素里边存的都是一些block形式存在的清理操作，这样当执行树的根节点的dispose时，整棵树就会按顺序执行清理操作了。</p>
+<p>那么，讲到这里就先告一段落了，等有时间我会把RAC更复杂场景下的使用流程介绍给大家。</p>
+<p>希望能对您有一点帮助。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/09/UIImagePickerController不走回调的问题/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/09/GMTC1600块的总结/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Wang Yeqing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Yeqing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

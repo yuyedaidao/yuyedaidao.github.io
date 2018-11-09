@@ -80,12 +80,12 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="WYQ">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="WYQ">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="WYQ">
 
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <title>Hexo</title>
+  <title>WYQ</title>
   
 
 
@@ -152,7 +152,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">WYQ</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -229,16 +229,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/一个奇怪的问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Wang Yeqing">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="WYQ">
     </span>
 
     
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/09/hello-world/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/2018/11/09/一个奇怪的问题/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -260,7 +260,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T10:16:57+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
                 2018-11-09
               </time>
             
@@ -300,15 +300,1361 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <p>我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行</p>
+<pre><code>dispatch_async(dispatch_get_main_queue(), ^{ //some code}
+</code></pre><p>竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以<br>如图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-192d31537be63fe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>奇怪的问题，特此记录</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看之UITableView-(基本代理方法及复用原理)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/回头看之UITableView-(基本代理方法及复用原理)/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>UITableVIew是iOS开发中最常见的视图中最经典的视图了，没有之一，相信对这个视图敢称精通的人开发个好应用应该是问题不大的。</p>
+<hr>
+<p>闲话少叙，进入正题。</p>
+<p>###怎么使用</p>
+<p>掌握两个代理</p>
+<ol>
+<li><p><code>UITableViewDelegate</code></p>
+<pre><code>@optional  
+//下文再提到该方法用heightForRow代替
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+</code></pre></li>
+<li><p><code>UITableViewDataSource</code></p>
+<pre><code>@required
+//下文再提到该方法用numberOfRowsInSection代替
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+//下文再提到该方法用cellForRow代替
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@optional
+//下文再提到该方法用numberOfSection代替
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+</code></pre><p><em>要想比较完整的展示你的数据，这四个方法是最经常被实现的。</em><br>调用过程大体是这样的：<code>tableView</code>会先询问代理(在一般MVC里大部分是当前视图控制器ViewController)要展示多少个<code>section</code>,就是调用<code>numberOfSections</code>,如果代理没有实现该方法默认就是1个<code>section</code>。然后<code>tableView</code>调用<code>numberOfRowsInSection</code>先询问第一个<code>section</code>有多少个<code>cell</code>,然后挨个执行<code>heightForRow</code>获取每个cell的高度。<code>tableView</code>对每个<code>section</code>都执行一遍这样的操作后，那么结果来了:<code>tableView</code>通过对这些<code>cell</code>高度的累加就知道了需要多大的空间才能安放得了所有的内容，于是它调整好了<code>contentSize</code>的值。这样走下来就为我们后续在滑动时能通过<code>scrollIndicator</code>观察到我们大体滑到了哪个位置做好了准备。<br>准备好空间之后接下来的任务就是准备内容了。当然大家都知道真正的内容是依附在<code>UITableViewCell</code>上的，<code>tableView</code>先调用<code>cellForRow</code>去获取代理返回给它的第一个<code>cell</code>，对于所有的<code>cell</code>来说<code>width</code>都是固定的，即<code>tableView</code>本身的宽度，对于第一个<code>cell</code>来说它的<code>origin</code>也是确定的，即<code>(0,0)</code>，也就是说要想确定这个<code>cell</code>的位置就只需要知道它的<code>height</code>了。于是<code>tableView</code>再去调用<code>heightForRow</code>去获取它的高度，这样一个视图能确定显示在屏幕什么位置的充要条件就具备了。剩下的<code>cell</code>同理，挨个放在上一个<code>cell</code>的下边就行了。</p>
+</li>
+</ol>
+<p>总结一下:</p>
+<ol>
+<li>调用<code>numberOfSection</code>获得 A个 <code>section</code></li>
+<li>先调用<code>numberOfRowsInSection</code>获得B个<code>cell</code>,再调用<code>heightForRow</code>B次。如此循环A次</li>
+<li>循环调用<code>cellForRow</code>和<code>heightForRow</code>，直到<code>cell</code>的个数充满当前屏幕。</li>
+</ol>
+<p>这就是一个普通的<code>tableView</code>一开始加载数据的过程，有几点需要说明：</p>
+<ol>
+<li>如果你展示在每个<code>cell</code>上的内容是相对固定的，准确点说是每个<code>cell</code>的高度是固定的，那么<code>heightForRow</code>是不建议让代理去实现的，而是通过<code>tableView</code>的<code>rowHeight</code>属性来代替，当数据量比较大，比如说有10000个(其实只要  &gt;= 2)<code>cell</code>时，<code>tableView</code>只需要<code>10000*rowHeight</code>就知道应该准备的空间大小了，而不是调用一个方法10000次通过累加获知需要的大小。而且你懂的，要想获取一个<code>cell</code>的高度并不是那么容易的事，尤其是在自动布局出现之前，你需要计算各种字符串的所占空间的大小，这对性能是相当大的损耗。</li>
+<li>如果每个<code>cell</code>高度确实不一样，数据量又很大时该怎么解决这个性能问题呢，iOS7之后系统提供了估算高度的办法，<code>estimatedRowHeight</code>和<code>- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath//下文再提到该方法用estimateHeightForRow代替</code>,这样每次在加载数据之前，<code>tableView</code>不再通过<code>heightForRow</code>消耗大量的性能获取空间大小了，而是通过在<code>estimateRowHeight</code>或者<code>estimatedHeightForRow</code>不需要费劲计算就能获取的一个估算值来获取一个大体的空间大小，等到真正的加载数据时才根据获取真实数据，并做出相应的调整，比如<code>contentSize</code>或者<code>scrollIndicator</code>的位置。关于动态计算高度，推荐羊教授的一篇文章<a href="http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/" target="_blank" rel="noopener">优化UITableViewCell高度计算的那些事</a></li>
+<li>这些方法的调用在保证大顺序不变的情况下，每个方法的调用次数是不一定的，每个iOS版本又不一样，你如果想知道可以动手去试验一下。尤其是在iOS8,它认为<code>cell</code>会随时变化，所以一滑动就重新计算<code>cell</code>的高度。</li>
+<li>这些方法的调用其实也是有插曲的，比如调用了<code>reloadData</code>之后，<code>tableView</code>只会调用能让它知道所需空间大小的代理方法，然后立马执行<code>reloadData</code>之后的语句，也就说<code>cellForRow</code>并不会在<code>reloadData</code>之后紧接着执行。所以<code>reloadData</code>之后尽量避免对数据源数组的操作。</li>
+</ol>
+<p>###复用机制</p>
+<p>了解<code>UITableView</code>的人肯定对这一著名特性多少有点了解。咱们先假设<code>UITableView</code>没有复用机制，那么我们要展示10000条数据的话，那就得生成10000个<code>UITableViewCell</code>,占用了大量内存不说，性能也可想而知了，必然是一滑一卡顿，一顿一暴怒啊，控制力弱的估计要摔手机了。</p>
+<p>复用机制大体是这样:<code>UITableView</code>首先加载一屏幕(假设<code>UITableView</code>的大小是整个屏幕的大小)所需要的<code>UITableViewCell</code>,具体个数要根据每个<code>cell</code>的高度而定，总之肯定要铺满整个屏幕,更准确说当前加载的<code>cell</code>的高度要大于屏幕高度。然后你往上滑动，想要查看更多的内容，那么肯定需要一个新的<code>cell</code>放在已经存在内容的下边。这时候先不去生成，而是先去<code>UITableView</code>自己的一个资源池里去获取。这个资源池里放了已经生成的而且能用的<code>cell</code>。如果资源池是空的话才会主动生成一个新的<code>cell</code>。那么这个资源池里的<code>cell</code>又来自哪里呢？当你滑动时视图是，位于最顶部的<code>cell</code>会相应的往上滑动，直到它彻底消失在屏幕上，消失的<code>cell</code>去了哪里呢？你肯定想到了，是的，它被<code>UITableView</code>放到资源池里了。其他<code>cell</code>也是这样，只要一滑出屏幕就放入资源池。这样，有进有出，总共需要大约一屏幕多一点的<code>cell</code>就够了。相对于1000来说节省的资源就是指数级啊，完美解决了性能问题。</p>
+<p>iOS6之后我们一般在代码里这样处理<code>cell</code></p>
+<ol>
+<li><p>先注册</p>
+<pre><code>[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;UITableViewCell&quot;];
+</code></pre><p>或</p>
+<pre><code>[self.tableView registerNib:[UINib nibWithNibName:@&quot;NibTableViewCell&quot; bundle:nil] forCellReuseIdentifier:@&quot;NibTableViewCell&quot;];
+</code></pre></li>
+<li><p>在代理方法里获取</p>
+<pre><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;UITableViewCell&quot; forIndexPath:indexPath];
+   // do something
+   return cell;
+}
+</code></pre></li>
+</ol>
+<p>那么具体在代码里是怎么实现的呢？我们可以大胆的猜测一下。</p>
+<p><code>UITableView</code>有几个属性(假想的)：</p>
+<pre><code>NSMutableDictionary *registerCellInfo;
+NSMutableDictionary *reusableCellsDictionary;
+NSMutableArray *visibleCells;
+</code></pre><p>我们推测两个注册方法的实现</p>
+<pre><code>- (void)registerNib:(UINib *)nib forCellReuseIdentifier:(NSString *)identifier{
+     [self.registerCellInfo setObject:nib forKey:identifier];
+     [self.registerCellsDictionary setObject:[NSMutableArray array] forKey:identifier];
+}
+- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString  *)identifier{
+    [self.registerCellInfo setObject:cellClass forKey:identifier];
+    [self.registerCellsDictionary setObject:[NSMutableArray array] forKey:identifier];
+}
+</code></pre><p>然后推测最关键的获取方法</p>
+<pre><code>- (UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath{
+    //indexPath这个参数是为了重置`cell`的大小，相关的处理并不是本文的重点，所以暂不实现
+    NSMutableArray *array = self.reusableCellsDictionary[identifier];
+    UITableViewCell *cell = nil;
+    if(array.count){
+        cell = array.lastObject;
+        [self.visibleCells addObject:cell];
+        [array removeLastObject];
+
+    }else{
+        id obj = self.registerCellInfo[identifier];
+        if([obj isKindOfClass:[UINib class]]){
+            cell = [[((UINib *)obj) instantiateWithOwner:nil options:nil] lastObject];
+        }else{
+            cell = [[(Class)obj alloc] init];
+        }
+        if(cell){
+            [self.visibleCells addObject:cell];
+         }
+    }
+
+    return cell;
+}
+</code></pre><p>😂，请忽略以上所有推测方法的不严谨，许多该有的条件判断并没有去处理。但是写到这里相信亲爱的读者已经了解了<code>UITableView</code>复用机制的原理了。现在，你已经具备了自己动手写一个<code>UITableView</code>的基础了(当然，假设你已经对<code>UIScrollView</code>有了充足的了解)。如果我的文章对你有用，烦请点个喜欢，好激励我继续写下去。。。</p>
+<p><em>关于<code>UITableView</code>的更多知识我们后续再谈</em></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/CoreData里UUID的奇怪问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/CoreData里UUID的奇怪问题/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x1"><a href="#0x1" class="headerlink" title="0x1"></a>0x1</h2><p>今天我在开发AppleWatch应用时发现了一个关于CoreData的极其古怪的问题,特此记录下来</p>
+<h2 id="0x2"><a href="#0x2" class="headerlink" title="0x2"></a>0x2</h2><p>因为CoreData是支持UUID类型的属性的,所以我在设计某个Model时就用了UUID的属性,但是因为不是连续开发导致我后来把这个属性的类型忘了,以为是String.</p>
+<p>于是我在手机端的代码里写了类似这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let uuid: String = &quot;7BD09D86-8941-4E50-9A42-7240E970FEE7&quot;</span><br><span class="line">let predicate = NSPredicate(format: &quot;uuid = %@&quot;, argumentArray: [uuid])</span><br><span class="line">//省略CoreData根据predicate获取数据的代码</span><br></pre></td></tr></table></figure></p>
+<p><em>注意Model里uuid的属性类型是UUID,我在这里直接用的是String</em><br>然后,我…很成功的获取到了预期的数据.<br>当然,我当时并没有意识到类型不匹配.</p>
+<p>于是乎,我把相同的代码放到了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//MARK: -WCSession的代理方法 Watch向iPhone发送的消息在这里接收</span><br><span class="line"> func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Void)</span><br></pre></td></tr></table></figure></p>
+<p>然后,我怎么也获取不到数据了,一模一样的代码,我曾一度变成了有神论者,简直诡异至极….<br>获取数据的方法我放在什么线程里都不行,这个代理函数的执行环境我不知道跟主应用的程序执行环境有什么不同</p>
+<h2 id="0x3"><a href="#0x3" class="headerlink" title="0x3"></a>0x3</h2><p>结果到目前为止大家肯定已经知道了,就是把查询时的String类型的uuid修改成UUID类型</p>
+<h2 id="0x4"><a href="#0x4" class="headerlink" title="0x4"></a>0x4</h2><p>原因未知</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/Day-Day-Up/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/Day-Day-Up/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>像素就是绘画的基本单元，就是一个方格，但是并不一定是一个物理点，在高清屏上是有多个包含多个物理点的。DPI就是每英寸有多少个像素。分辨率在用ps的设计那里就是DPI，但是一般在移动开发那里就是图片的长宽。</li>
+<li>关于在Swift中<code>self.property</code>和<code>property</code>，提倡不用<code>self</code>，这样如果在闭包中使用的属性是属于当前的实例对象时编译器就会报错，你就必须加上<code>self</code>，当你加上<code>self</code>的时候你就意识到<code>self</code>要被循环引用了，你就知道要处理这个问题了。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/GMTC1600块的总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/GMTC1600块的总结/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="启程"><a href="#启程" class="headerlink" title="##启程"></a>##启程</h2><p>有幸参加了2106年6月24日到25日的GMTC全球移动技术大会，目睹了众多业内响当当的大神倍感兴奋，简直夜不能寐啊…..非得把天热说的这么冠冕堂皇估计也没谁了。</p>
+<p>兴奋之余不能忘了自己的本职使命，学习才是第一要务，现在暂时忘了那旷日持久的项目总结一下，希望能对自己和读者能有一丝丝帮助。</p>
+<h2 id="开幕"><a href="#开幕" class="headerlink" title="##开幕"></a>##开幕</h2><p>务实的技术人不喜欢虚空，历史发展的潮流是很难左右的，所以关于移动开发未来展望不提也罢，踏踏实实做事，未来自会展现在你眼前。</p>
+<p>来自早期Facebook的工程师覃超讲的《Facebook iOS 技术发展十年》让我印象深刻。Facebook当初为了解决跨平台问题意气风发的用html5重写了整个应用。当然，正如大家所了解的，想法是美好的，结局是无情的，Facebook遭遇了包括股价在内的各种跌落。大梦初醒的Facebook又重新拥抱了native(native为主,webview为辅)。<br>整个过程带给了我们一些启发：</p>
+<ul>
+<li>跨平台充满了各种陷阱,并不适用于任何产品</li>
+<li>开发过程应该为了用户优化而不是开发者</li>
+<li>开发过程中尽量用不可变数据并远离Core Data</li>
+</ul>
+<h2 id="Swift"><a href="#Swift" class="headerlink" title="##Swift"></a>##Swift</h2><p>人类已经无法阻止Swift的发展了，从iOS到macOS，再延伸到后端服务器，Swift大有一统江湖的气势。</p>
+<p>SwiftyJson的作者付若愚给大家讲解了Swift中的函数式编程。函数式编程到底应该怎么理解，相信只有写过很多种语言的人对它的理解才会更深。高手就是高手，无论什么行业高手最后都会问题提升到哲学的高度。</p>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="####函数式编程"></a>####<a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html" target="_blank" rel="noopener">函数式编程</a></h2><p>以武功来类比，各种招数对应我们开发中的各种语法，而内功心法就是编程范式,心法是招数的引导。函数式编程就是一种编程范式，是一种编程时的思维方式。<br>命令式编程是针对设备的抽象，比如计算(a+b)*c，命令式的思维是：</p>
+<ol>
+<li>在内存里存a,在内存里存b</li>
+</ol>
+<ul>
+<li>在内存里取出a,b，计算得A，在内存里存下A</li>
+<li>在内存里取出A,c，计算的B</li>
+</ul>
+<p>函数式思维则是:</p>
+<ol>
+<li>FunA 可以计算两个数的和，FunB可以计算两个数乘积</li>
+</ol>
+<ul>
+<li>先相加再相乘  FunB(FunA(a,b),c)就得到最终的值</li>
+</ul>
+<h2 id="Swift中的泛型"><a href="#Swift中的泛型" class="headerlink" title="####Swift中的泛型"></a>####Swift中的泛型</h2><blockquote>
+<p>泛型编程也是一种编程范式，它允许程序员在编写代码时不需要立刻指定类型，而是在实例化后再指明这些类型</p>
+</blockquote>
+<p>没用泛型</p>
+<pre><code>func swapInt(inout a: Int, inout _ b: Int) { 
+    let tmp = a
+    a=b
+    b = tmp
+}
+var someInt = 1var anotherInt = 5swapInt(&amp;someInt, &amp;anotherInt)
+
+func swapString(inout a: String, inout _ b: String) { 
+    let tmp = a
+    a=b
+    b = tmp
+}
+</code></pre><p>用了泛型</p>
+<pre><code>func swapValue&lt;T&gt;(inout a: T, inout _ b: T) { 
+    let tmp = a
+    a=b
+    b = tmp
+}
+var someInt = 1
+var anotherInt = 5
+var someString = &quot;some&quot;
+var anotherString = &quot;another&quot;
+swapValue(&amp;someInt, &amp;anotherInt)
+swapValue(&amp;someString, &amp;anotherString)
+</code></pre><h2 id="RXSwift"><a href="#RXSwift" class="headerlink" title="####RXSwift"></a>####<a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="noopener">RXSwift</a></h2><p>RxSwift是一个提供函数响应式编程的框架。函数式编程咱们之前介绍过，那又何谓响应式呢，举个例子，y = fun(x),当输入值x变换时会相应的引起输出值y的变换。两个特征加在一起就是函数响应式编程了，哈哈，简直太聪明了，😂。函数响应式编程避免了很多线程问题，没有副作用，以比接近人的正常思维习惯提高了开发效率（借助RxSwift）。<br>By the way! 本篇作者是靛青k(宋旭陶)，95年的，其他的啥也不说了。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="##架构"></a>##架构</h2><h2 id="美团"><a href="#美团" class="headerlink" title="####美团"></a>####美团</h2><h2 id="手机天猫"><a href="#手机天猫" class="headerlink" title="####手机天猫"></a>####手机天猫</h2><h2 id="微博"><a href="#微博" class="headerlink" title="####微博"></a>####微博</h2><h2 id="链家"><a href="#链家" class="headerlink" title="####链家"></a>####链家</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/ReactiveCocoa解读-订阅信号/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/ReactiveCocoa解读-订阅信号/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>信号(Signal)和订阅者(Subscriber)是在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a>( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。</p>
+<p>先上一段RAC最简单的使用方法。</p>
+<pre><code> RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
+    [subscriber sendNext:@&quot;钢铁锅&quot;];
+    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
+    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+    return [RACDisposable disposableWithBlock:^{
+        NSLog(@&quot;曲终人散，抹点药酒&quot;);
+    }];
+}];
+[signal subscribeNext:^(id x) {
+    NSLog(@&quot;我听到:%@&quot;,x);
+}];
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是什么锅"></p>
+<blockquote>
+<p>信号是信息的载体</p>
+</blockquote>
+<p>对应上边的代码，我们创建了一个信号 <code>signal</code>，他承载着 <code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。</p>
+<pre><code>+ (RACSignal *)createSignal:(RACDisposable * (^)(id&lt;RACSubscriber&gt; subscriber))didSubscribe {
+    RACDynamicSignal *signal = [[self alloc] init];
+    signal-&gt;_didSubscribe = [didSubscribe copy];
+    return [signal setNameWithFormat:@&quot;+createSignal:&quot;];
+}
+</code></pre><p>创建信号很简单，其实就是创建了一个实例对象，并把将来有可能进行的一系列操作<code>didSubscribe</code>这个block记录下来，等发生了订阅行为时就会执行这些操作。<br>有人会问RACDisposable是什么东西，其实从字面就可以理解，销毁，它封装了当订阅行为消失时一些应该做的操作，当然像一开始的代码这种只是打印消息的操作其实是没必要的，所以这里可以返回nil。那什么时候订阅行为消失呢，当订阅者调用了sendError:或者sendCompleted方法时表示订阅行为就消失了，相应的dispose就会执行了，做一些清理操作。如下面的代码：</p>
+<pre><code>RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {
+    [subscriber sendNext:@&quot;钢铁锅&quot;];
+    [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+    [subscriber sendError:[NSError errorWithDomain:@&quot;singing&quot; code:748 userInfo:@{@&quot;reason&quot;:@&quot;麦克被歌迷拔掉了&quot;}]];
+    [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;];
+    [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+    [subscriber sendError:NULL];
+//        [subscriber sendCompleted];
+    return [RACDisposable disposableWithBlock:^{
+        NSLog(@&quot;曲终人散，抹点药酒&quot;);
+    }];
+}];
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/69809-2a25a6514c7a7229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="我错了"><br>当然如果这两个方法如果你都不调用，那么当订阅者超出了自己的生命周期调用其dealloc方法时这个dispose也会执行。所以RACDisposable在RAC里使用非常广泛，比如在NSNotificationCenter的RAC扩展中用于取消观察者，在UITextField和UITextView的扩展里取消代理等等。</p>
+<p>说了半天大家可能会问，订阅者在哪里？别急，看下面:</p>
+<pre><code>[signal subscribeNext:^(id x) {
+    NSLog(@&quot;我听到:%@&quot;,x);
+}];
+</code></pre><p>当这句代码执行时就发生了订阅行为。其内部实现是这样：</p>
+<pre><code>- (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock {
+     NSCParameterAssert(nextBlock != NULL);
+     //看到了吗？我在这里，我就是订阅者。我把 nextBlock保存了下来。
+     RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock   error:NULL completed:NULL];
+     return [self subscribe:o];
+}
+
+- (RACDisposable *)subscribe:(id&lt;RACSubscriber&gt;)subscriber {
+     NSCParameterAssert(subscriber != nil);
+     RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];
+     //加工了一下，变成了RACPassthroughSubscriber,关于它的作用我们在以后的文章总具体场景下再讲述，现在你只需记住一个更具体的RACSubscriber子类就行了。
+     subscriber = [[RACPassthroughSubscriber alloc] initWithSubscriber:subscriber signal:self disposable:disposable];
+     //还记得信号在一开始创建时就存下来的那个block吗，就是这个didSubscribe
+     if (self.didSubscribe != NULL) {
+         RACDisposable *schedulingDisposable =  [RACScheduler.subscriptionScheduler schedule:^{
+             //在这里支行了信号一开始创建的block，并获得了它返回的RACDisposable
+             RACDisposable *innerDisposable = self.didSubscribe(subscriber);
+             [disposable addDisposable:innerDisposable];
+         }];
+        [disposable addDisposable:schedulingDisposable];
+    }
+    return disposable;
+}
+</code></pre><p>看到这里你可能有产生了很多疑问，且听我慢慢道来。首先你在头脑里先产生这个场景：生成了一个subscriber(代号007)，它保存了一个nextBlock：<code>^(id x) { NSLog(@&quot;我听到:%@&quot;,x);}</code>,然后当前这个信号开始执行didSubscribe这个block:</p>
+<pre><code>^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) { 
+  [subscriber sendNext:@&quot;钢铁锅&quot;];
+  [subscriber sendNext:@&quot;含眼泪喊修瓢锅&quot;];
+  [subscriber sendNext:@&quot;坏缺烂角的换新锅瓢乱放&quot;]; 
+  [subscriber sendNext:@&quot;哎...哎,哎,谁的鞋,不要乱扔...&quot;];
+  [subscriber sendCompleted]; 
+  return [RACDisposable disposableWithBlock:^{
+       NSLog(@&quot;曲终人散，抹点药酒&quot;); 
+  }];
+}
+</code></pre><p>注意，007被当作参数传了进去，也就是调用sendNext:这个方法的都是007，还记得007保存的那个nextBlock吗，此时在sendNext:内部就是执行了这个nextBlock，传进去了<code>钢铁锅</code> <code>含眼泪喊修瓢锅</code> <code>坏缺烂角的换新锅瓢乱放</code> <code>哎...哎,哎,谁的鞋,不要乱扔...</code>这些信息。这样作为开发者的你就收到了订阅者发给你的有用信息，你就“听”到了一首美妙的歌曲。</p>
+<p>整个一个订阅流程就这样结束了，当然你会发现在你的代码中subscriber始终都没暴露出来，这也是造成你疑惑的原因，那么我问你，你需要的是subscriber呢，还是subscriber发给你的信息呢？因为我们需要的只是信息，所以完全没必要让我们知道subscriber的存在。所谓的订阅者也就是subscriber其实就是起了一个中间人的作用，获取信号(或者叫信号源更好理解)里的信息，然后发送到需要的地方。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-058f5b522000e7ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="keynote图形好少啊"></p>
+<p>RACCompoundDisposable(RACDisposable的子类)应该是大家的另一个疑问，它有一个方法<code>addDisposable:</code>可以添加另一个RACDisposable，它的最终形态是一个树形结构，第一个RACCompoundDisposable存了若干个RACDisposable或者RACCompoundDisposable，相应的RACCompoundDisposable又存了若干个RACDisposable或者RACCompoundDisposable…每个元素里边存的都是一些block形式存在的清理操作，这样当执行树的根节点的dispose时，整棵树就会按顺序执行清理操作了。</p>
+<p>那么，讲到这里就先告一段落了，等有时间我会把RAC更复杂场景下的使用流程介绍给大家。</p>
+<p>希望能对您有一点帮助。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/UIImagePickerController不走回调的问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/UIImagePickerController不走回调的问题/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天又遇到了一个奇怪的问题，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];</span><br><span class="line">imagePicker.allowsEditing = YES;</span><br><span class="line">imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;</span><br><span class="line">imagePicker.delegate = self;</span><br><span class="line">[self presentViewController:imagePicker animated:YES completion:nil];</span><br></pre></td></tr></table></figure></p>
+<p>用法很对，没毛病，可就是不调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info</span><br></pre></td></tr></table></figure></p>
+<p>分析原因</p>
+<ul>
+<li>UIImagePickerController实例对象被释放了 //这不可能，如果iOS系统没疯那肯定是我疯了</li>
+<li>UIImagePickerControllerd的delegate被释放了 //但是delegate是当前视图控制器肯定也没有释放</li>
+<li>delegate被改了 //看了看代码没有改动的地方啊</li>
+</ul>
+<p>???<br>诡异的事件<br>。。。</p>
+<p>后来我用kvo监测了一下delegate，发现果然被改了，改成了 <code>_JZNavigationDelegating</code> …</p>
+<h4 id="真相大白"><a href="#真相大白" class="headerlink" title="真相大白"></a>真相大白</h4><p>原来是我在pod里加入了一个帮助处理NavigationBar颜色的第三方库，这个库对UINavigationController做了一些处理，如下图<br><img src="http://upload-images.jianshu.io/upload_images/69809-032f067659e35474.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>而我们今天的主角 <em>UIImagePickerController</em>恰恰就是UINavigationController的子类</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/VS保存时自动格式化导致ejs编译错误/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/VS保存时自动格式化导致ejs编译错误/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ejs模板引擎不知道大家有没有好的格式化插件,有的话,求一个<br>最近遇到一个ejs解析的问题,非常小心的写好ejs文件,一运行出了错,如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs If the above error is not helpful, you may want to try EJS-Lint: https://github.com/RyanZim/EJS-Lint</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token in /Users/wang/Desktop/Work/Node/nobook/views/web-index.ejs while compiling ejs</span><br><span class="line"></span><br><span class="line">If the above error is not helpful, you may want to try EJS-Lint:</span><br><span class="line">https://github.com/RyanZim/EJS-Lint</span><br><span class="line">    at new Function (&lt;anonymous&gt;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>完全看不到有用的信息,shit</p>
+<p>于是我就按提示用 <a href="https://github.com/RyanZim/EJS-Lint" target="_blank" rel="noopener">https://github.com/RyanZim/EJS-Lint</a> 来试试能不能看到更多信息…<br>心累啊,用命令号执行直接返回了没有任何信息.加在工程里返回undefined, MMP.姿势不对?有掌握动作要领的请指教.</p>
+<p>在折磨了接近两天的时间后我不得对我接近千行的ejs文件一行行ejs代码进行查看,还是没错啊…要你你能不崩溃?</p>
+<p>最最后,我就重新把带有ejs代码的片段一段段摘出来,然后一遍遍部署运行,终于…苍天啊.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \ &apos;&apos; %&gt;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>如上这就是问题代码,估计再细心你可能也没法很多发现问题吧…<br>其实我的原始代码是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:void(0)&quot; onclick=&lt;%- &apos;\&apos;deleteAlert( &quot;&apos;+ item.name + &apos;&quot;, &quot;&apos; + item._id + &apos;&quot;) \&apos;&apos; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>发现了,他妈的最后一个转义斜杠<code>\</code>后边接了个空格…wtf.<br>而这都是我在保存时vs给我自动格式化造成的.</p>
+<p>说了太多脏话.反思</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/WCSession-sendMessage-失败处理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/WCSession-sendMessage-失败处理/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>通过手表向手机端发送消息时出现Payload could not be delivered(中文环境下:未能传送负载)的错误提示,如果你保证你的设置都对的情况下,请记得检查手机端WCSession实现的代理方法全不全</p>
+<p>如果你是这样发送消息</p>
+<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: nil, errorHandler: { (error) in print(error)})
+</code></pre><p>那么在手机端你要有这样的代理方法</p>
+<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any])
+</code></pre><p>如果你是这样发送消息</p>
+<pre><code>session.sendMessage([&quot;request&quot; : &quot;list&quot;], replyHandler: { (result) in
+                    print(result)
+                }, errorHandler: { (error) in print(error) })
+</code></pre><p>那么在手机端你要有这样的代理方法</p>
+<pre><code>public func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -&gt; Swift.Void)
+</code></pre><p>根据发送时有没有replyHandler来决定调用哪个代理方法,如果不匹配就会发送失败</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/CADisplayLink不销毁导致其拥有者也不释放/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/CADisplayLink不销毁导致其拥有者也不释放/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我发现我在拥有CADisplayLink且其没有invilidate的情况下，会让其所有者没法销毁</p>
 
           
         
@@ -347,6 +1693,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -379,7 +1729,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-author-name" itemprop="name">Wang Yeqing</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -390,7 +1740,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -435,7 +1785,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Wang Yeqing</span>
 
   
 </div>

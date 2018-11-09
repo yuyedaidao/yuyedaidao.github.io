@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近陷入了项目中一个日历月视图与周视图切换效果的实现，长时间没有实现想要的效果，沮丧至极。烦请有好想法的同学指点一二，在线等@留什么白。  结束例行的啰嗦，进入正题。 大家可能都用过MJRefresh,十分之方便，李明杰老师借助runtime的特性，极尽之能，让千千万万小白开发者和遵循不重复制造轮子原则的开发者用最少的代码就实现了界面下拉刷新的功能。我们今天不谈runtime的黑魔法，而是UITa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYQ">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/回头看UITableView(三)-下拉刷新的实现/index.html">
+<meta property="og:site_name" content="WYQ">
+<meta property="og:description" content="最近陷入了项目中一个日历月视图与周视图切换效果的实现，长时间没有实现想要的效果，沮丧至极。烦请有好想法的同学指点一二，在线等@留什么白。  结束例行的啰嗦，进入正题。 大家可能都用过MJRefresh,十分之方便，李明杰老师借助runtime的特性，极尽之能，让千千万万小白开发者和遵循不重复制造轮子原则的开发者用最少的代码就实现了界面下拉刷新的功能。我们今天不谈runtime的黑魔法，而是UITa">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-218b9752173c81ce.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-72950bd579e695a9.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://camo.githubusercontent.com/15577b87be4403d9e2ede4d5cd5b9fccbd1d03ae/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343334333438363135312e676966">
+<meta property="og:image" content="https://camo.githubusercontent.com/911191d46157ea3961728b16696aea4440ffeb92/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343430323233383338392e676966">
+<meta property="og:updated_time" content="2018-11-09T04:05:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WYQ">
+<meta name="twitter:description" content="最近陷入了项目中一个日历月视图与周视图切换效果的实现，长时间没有实现想要的效果，沮丧至极。烦请有好想法的同学指点一二，在线等@留什么白。  结束例行的啰嗦，进入正题。 大家可能都用过MJRefresh,十分之方便，李明杰老师借助runtime的特性，极尽之能，让千千万万小白开发者和遵循不重复制造轮子原则的开发者用最少的代码就实现了界面下拉刷新的功能。我们今天不谈runtime的黑魔法，而是UITa">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/69809-218b9752173c81ce.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/回头看UITableView(三)-下拉刷新的实现/">
+
+
+
+
+
+  <title> | WYQ</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WYQ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看UITableView(三)-下拉刷新的实现/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近陷入了项目中一个日历月视图与周视图切换效果的实现，长时间没有实现想要的效果，沮丧至极。烦请有好想法的同学指点一二，在线等<a href="http://weibo.com/u/2242240253/home?wvr=5&amp;lf=reg" target="_blank" rel="noopener">@留什么白</a>。</p>
+<hr>
+<p>结束例行的啰嗦，进入正题。</p>
+<p>大家可能都用过MJRefresh,十分之方便，李明杰老师借助runtime的特性，极尽之能，让千千万万小白开发者和遵循不重复制造轮子原则的开发者用最少的代码就实现了界面下拉刷新的功能。我们今天不谈runtime的黑魔法，而是UITableView最常见的刷新数据方式下拉刷新的实现过程。</p>
+<p>首先，我们定义三个枚举值</p>
+<pre><code>typedef NS_ENUM(NSUInteger, RefreshState) {
+    RefreshStateNormal,//正常
+    RefreshStatePulling,//释放即可刷新
+    RefreshStateLoading,//加载中
+};
+</code></pre><p>分别表示正常状态、释放即可刷新状态、加载中状态</p>
+<p>为了简单说明，我们只用一个UILabel来表现就可以，把它放在内容上方，也就是正常情况下看不到的地方，只有下拉的时候才能看到。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-218b9752173c81ce.gif?imageMogr2/auto-orient/strip" alt="UILabel的位置"></p>
+<p>然后我们估算一个大体的距离，从而确定触发加载状态的临界点。</p>
+<p>简单描述一下将要实现的情形：</p>
+<p>我们往下滑动视图，如果视图下滑到触发点，状态变为<code>RefreshStatePulling</code>,即标签文字变为“松手即可刷新”。<br>接下来有两种状况会发生：一，松开手；二，不松手，又向初始位置滑。第一种情况，当你松开手时，因为UIScrollView有回弹效果，视图会往上滑动，当到达触发点时，状态改为<code>RefreshStateLoading</code>,即视图停在当前位置，不受回弹作用影响，标签文字变为“加载中…”,等加载动作完成之后，手动触发复原动作，视图滑到原始状态 <code>RefreshStateNormal</code>,同时标签文字变为‘下拉刷新’；第二种情况，你没有松手，然后又往回滑动，当到达触发点以上时，状态变为初始状态<code>RefreshStateNormal</code>。</p>
+<p>如果你对上述过程不是很了解的话，那你随便找个带下拉刷新的应用试试就行了，不用温柔，越暴力越好。弄清上述过程是实现整个流程的基础。</p>
+<p>接下来要做的就是决定什么时候改变状态了，参照上述过程，我们在UIScrollView的代理函数<code>scrollViewDidScroll:</code>监控<code>contentOffset</code>的变化，再结合<code>isDragging</code>属性就可以改变状态了。</p>
+<pre><code>- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(scrollView.contentOffset.y &lt; -SwitchPoint-self.originalInsetTop){
+        if(self.refreshState == RefreshStateNormal){//小于临界值（在触发点以下），如果状态是正常就转为下拉刷新，如果正在刷新或者已经是下拉刷新则不变
+            self.refreshState = RefreshStatePulling;
+        }
+    }else{//大于临界值（在触发点以上，包括触发点）
+        if(scrollView.isDragging){//手指没有离开屏幕
+            if(self.refreshState == RefreshStatePulling){//原来是下拉的话变成正常，原来是刷新或者正常的话不变
+                self.refreshState = RefreshStateNormal;
+            }
+        }else{//手指离开屏幕
+            if(self.refreshState == RefreshStatePulling){//原来是下拉的话变成加载中，原来是加载中或者正常的话不变
+                self.tableView.contentInset = UIEdgeInsetsMake(self.originalInsetTop+SwitchPoint, 0, 0, 0);//改变contentInset的值就可以取消回弹效果停留在当前位置了 关于contentIinset的介绍，可以查看我的上一篇文章
+                self.refreshState = RefreshStateLoading;
+            }
+        }
+    }    
+}
+</code></pre><p>这段代码决定了UIScrollView每个时刻的状态，那么接下来的就简单多了，只要重写一下<code>setRefreshState:</code>方法就可以了。</p>
+<pre><code>- (void)setRefreshState:(RefreshState)refreshState{
+    _refreshState = refreshState;
+    switch (refreshState) {
+        case RefreshStateNormal:
+            self.pulldownLabel.text = @&quot;下拉刷新&quot;;
+            [self.pulldownLabel sizeToFit];
+            break;
+        case RefreshStateLoading:
+            self.pulldownLabel.text = @&quot;正在刷新...&quot;;
+            [self.pulldownLabel sizeToFit];
+            if(self.refreshBlock){
+                self.refreshBlock();//这里就是你要执行的耗时的操作
+            }            
+            break;
+        case RefreshStatePulling:
+            self.pulldownLabel.text = @&quot;松开即可刷新&quot;;
+            [self.pulldownLabel sizeToFit];
+            break;
+        default:
+            break;
+    }
+}
+</code></pre><p>看一下我们的效果：<br><img src="http://upload-images.jianshu.io/upload_images/69809-72950bd579e695a9.gif?imageMogr2/auto-orient/strip" alt="平凡而简单的效果"><br>当然你会说这不够diao,不够炫酷，人家的效果都是这样：</p>
+<p><img src="https://camo.githubusercontent.com/15577b87be4403d9e2ede4d5cd5b9fccbd1d03ae/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343334333438363135312e676966" alt=""> <img src="https://camo.githubusercontent.com/911191d46157ea3961728b16696aea4440ffeb92/687474703a2f2f696d61676573302e636e626c6f67732e636f6d2f626c6f67323031352f3439373237392f3230313530362f3134313230343430323233383338392e676966" alt=""></p>
+<p>又被你发现了，😂，我满(hao)是(wu)虔(jie)诚(cao)地盗了大神的图，@M了个J，大神，膝盖已发货，请验收。</p>
+<p>那么我们怎么实现这样的效果呢，很简单，在上边设置状态的代码里添加动画就行了。来一段伪的代码：</p>
+<pre><code>case RefreshStateNormal:
+     self.pulldownLabel.text = @&quot;下拉刷新&quot;;
+     [UIView animateWithDuration:0.3 animations:^{
+         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI/2);//箭头旋转180º
+     }];
+     break;
+</code></pre><p>还有一点需要强调，在<code>scrollViewDidScroll:</code>里保持加载状态时修改了<code>contentInset</code>,所以取消加载状态恢复原状时只需…如此如此：</p>
+<pre><code>- (void)endRefresh{
+    if(self.refreshState == RefreshStateLoading){
+        self.refreshState = RefreshStateNormal;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.tableView.contentInset = UIEdgeInsetsMake(self.originalInsetTop, 0, 0, 0);
+        } completion:nil];
+    }
+}
+</code></pre><p>OK，希望看到这里你能理解下拉刷新的整个过程及原理了，欢迎指正和打击。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/09/关于连续触发的函数中动画异常的描述/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/09/为什么dispatch_sync在主线程会死锁/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Wang Yeqing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Yeqing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

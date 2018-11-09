@@ -79,17 +79,22 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="题目早早就定下了，现在想填充内容了，踌躇中却不知道从哪里开始了。窗外突然下起雨来。虽然不愿承认，但夏天确实已经渐去渐远，凉意开始蔓延。索性放空身心，伴着雨声入眠吧。  I’m back! 众所周知，UITableView的父视图就是UIScrollView,UITableView之所以能滚动就是基于UIScrollView的特性，今天咱们就来深入理解一下UIScrollView。 上图： 打码：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/11/09/hello-world/index.html">
+<meta property="og:title" content="WYQ">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/回头看UITableView(二)-父视图UIScrollView/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="题目早早就定下了，现在想填充内容了，踌躇中却不知道从哪里开始了。窗外突然下起雨来。虽然不愿承认，但夏天确实已经渐去渐远，凉意开始蔓延。索性放空身心，伴着雨声入眠吧。  I’m back! 众所周知，UITableView的父视图就是UIScrollView,UITableView之所以能滚动就是基于UIScrollView的特性，今天咱们就来深入理解一下UIScrollView。 上图： 打码：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-09T02:16:57.950Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-1271f1a769cf8f6a.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-e13410ddeefc5903.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-b6d1af36159f5390.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-0c59506e8d1ecadc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-11-09T04:05:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="WYQ">
+<meta name="twitter:description" content="题目早早就定下了，现在想填充内容了，踌躇中却不知道从哪里开始了。窗外突然下起雨来。虽然不愿承认，但夏天确实已经渐去渐远，凉意开始蔓延。索性放空身心，伴着雨声入眠吧。  I’m back! 众所周知，UITableView的父视图就是UIScrollView,UITableView之所以能滚动就是基于UIScrollView的特性，今天咱们就来深入理解一下UIScrollView。 上图： 打码：">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/69809-1271f1a769cf8f6a.gif?imageMogr2/auto-orient/strip">
 
 
 
@@ -119,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/09/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/回头看UITableView(二)-父视图UIScrollView/">
 
 
 
 
 
-  <title>Hello World | WYQ</title>
+  <title> | WYQ</title>
   
 
 
@@ -232,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/回头看UITableView(二)-父视图UIScrollView/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yeqing">
@@ -249,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -261,7 +266,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T10:16:57+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
                 2018-11-09
               </time>
             
@@ -299,15 +304,45 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>题目早早就定下了，现在想填充内容了，踌躇中却不知道从哪里开始了。<br>窗外突然下起雨来。虽然不愿承认，但夏天确实已经渐去渐远，凉意开始蔓延。索性放空身心，伴着雨声入眠吧。</p>
+<hr>
+<p>I’m back!</p>
+<p>众所周知，UITableView的父视图就是UIScrollView,UITableView之所以能滚动就是基于UIScrollView的特性，今天咱们就来深入理解一下UIScrollView。</p>
+<p>上图：<br><img src="http://upload-images.jianshu.io/upload_images/69809-1271f1a769cf8f6a.gif?imageMogr2/auto-orient/strip" alt="连续修改bounds属性"></p>
+<p>打码：</p>
+<pre><code>- (IBAction)boundsAction:(UIStepper *)sender {
+    self.redView.bounds = CGRectMake(0, sender.value, self.redView.bounds.size.width,   self.redView.bounds.size.height);
+    self.boundsLabel.text = [NSString stringWithFormat:@&quot;红色视图bounds%@&quot;,NSStringFromCGRect(self.redView.bounds)];
+}
+</code></pre><p>我如果说改变bounds的值不用UIStepper实现而是用手势实现，不知道大家有没有种恍然大悟的感觉。</p>
+<p>我们再复习一下UIView的frame和bounds是什么。<br>. frame:当前view在父view<code>坐标体系</code>中的位置和大小<br>. bounds:当前view的<code>坐标体系</code>，容纳子view的位置和大小<br>也就说一个view的位置是由当前view的frame和其父view的bounds决定的。</p>
+<p>回到上面的红绿视图，你已经看到:改变父view（红色视图）的bounds,子view（绿色视图）的位置就会相应的改变。如果我们给红色视图加一个UIPangestureRecognizer（拖动手势），滑动时根据其代理函数返回的值修改红色视图的bounds就实现了绿色视图的滑动。</p>
+<p>再上图：<br><img src="http://upload-images.jianshu.io/upload_images/69809-e13410ddeefc5903.gif?imageMogr2/auto-orient/strip" alt="手势修改bounds"><br>再打码：</p>
+<pre><code>- (IBAction)panHandler:(UIPanGestureRecognizer *)sender {
+    if(sender.state == UIGestureRecognizerStateChanged){
+        CGFloat distance = -[sender translationInView:sender.view].y;
+        self.redView.bounds = CGRectMake(0, self.redView.bounds.origin.y+distance, self.redView.bounds.size.width, self.redView.bounds.size.height);
+        [sender setTranslation:CGPointZero inView:sender.view];
+    }else if(sender.state == UIGestureRecognizerStateEnded){
+        self.boundsLabel.text = [NSString stringWithFormat:@&quot;红色视图bounds%@&quot;,NSStringFromCGRect(self.redView.bounds)];
+    }
+}
+</code></pre><p>果然图多可以少说话。那么你是不是可以自己手动写个UIScrollView了，如果你敢回答不能我就敢一星期不吃肉。顺便推荐一个录屏软件，个人感觉很好用，直接生成体积较小的gif。地址是<a href="http://www.cockos.com/licecap/" target="_blank" rel="noopener">http://www.cockos.com/licecap/</a></p>
+<p>当然，对于这个能滑动的视图的始祖，我们要想有强烈的掌控感，还需要了解几个属性。</p>
+<ol>
+<li>contentSize<br> 😓 又要提到上图了，好吧，如上图，contentSize其实就是绿色视图的大小，就是内容空间的大小。在UIScrollView里，当contentSize大于本身的frame.size的时候就可以滚动，否则不允许。</li>
+<li>contentOffset<br> 还是如上图，contentOffset其实就是红色视图的bounds.origin,所以你是否明白为什么当contentOffset的值是正值的时候视图往上，是负值的时候视图往下了吧。</li>
+<li>contentInset<br>这个属性很难说清楚，所以，那就更应该说了。如果你设置了这个属性后会对内容视图做一个偏移操作，或者说给内容视图添加了留白，比如说我们设置UIScrollView的contentInset为UIEdgeInsetsMake(64, 0, 0, 0)注意第一个参数是top,然后依次是left,bottom,right。那么添加的subview的<code>位置</code>纵坐标的起点就是subview.frame.origin.y+scrollView.contentInset.top(当然这是在不考虑父视图的bounds的情况下)。你也许注意到了一点，我用了<code>位置</code>一词，因为这其实是相对父视图的位置，它的frame并没有改变。</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/69809-b6d1af36159f5390.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2DCEB800-BB02-4E2D-A58F-25C2247D2F21.png"></p>
+<p>啊哈哈，<img src="http://upload-images.jianshu.io/upload_images/69809-0c59506e8d1ecadc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>self.scrollView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0);
+UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 50, self.scrollView.bounds.size.width, 200)];
+view.backgroundColor = [UIColor greenColor];
+[self.scrollView addSubview:view];
+</code></pre><p>如图，虽然view的起点是50，但是由于contentInset的原因，它相对于父视图的纵坐标位置是100。</p>
+<p>好了，先写到这里，办公室就我一个人了，兄弟我先回家了。</p>
+<p>预告：根据上边这些东东，咱们稍后谈谈怎么实现一个自定义的下拉刷新控件，我会尽快更新。<br>最后，诚心求一个Mac上方便作图的软件。如果你有破解版的sketch的话，给兄弟一个吧，先谢过了。</p>
 
       
     </div>
@@ -332,13 +367,17 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/11/09/打破Swift里带有引用计数的结构体/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/09/仿QQ左侧滑动菜单的实现/" rel="prev" title="">
+              <a href="/2018/11/09/关于连续触发的函数中动画异常的描述/" rel="prev" title="">
                  <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -392,17 +431,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -444,22 +474,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

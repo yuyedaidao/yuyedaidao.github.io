@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="##冲动最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYQ">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/仿QQ左侧滑动菜单的实现/index.html">
+<meta property="og:site_name" content="WYQ">
+<meta property="og:description" content="##冲动最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-0d47f8c72db4239c.gif">
+<meta property="og:updated_time" content="2018-11-09T04:05:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WYQ">
+<meta name="twitter:description" content="##冲动最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/仿QQ左侧滑动菜单的实现/">
+
+
+
+
+
+  <title> | WYQ</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WYQ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/仿QQ左侧滑动菜单的实现/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T12:05:06+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="冲动"><a href="#冲动" class="headerlink" title="##冲动"></a>##冲动</h2><p>最近接手的一个老项目有个侧滑菜单的需求，这个老项目的侧滑菜单用了网络上的一个第三方库，但是这个库竟然没有处理好导航条的显示，以至于项目中很多需要导航条展示信息的视图都通过添加subView的方式模仿了导航条。这简直是暴殄天物啊，放着真正的导航栏那强大的作用不用，浪费了多少时间和精力啊，都是青春啊，开发的前路上早已挖了无数的坑等着身心疲惫的我们往里跳啊。对此深恶痛绝的我，早就下了不杀此贼誓不罢休的决心。好吧，最近看三国看的有点多了。</p>
+<h2 id="暗渡陈仓"><a href="#暗渡陈仓" class="headerlink" title="##暗渡陈仓"></a>##暗渡陈仓</h2><p>我在无所不能的GitHub上搜索侧滑菜单项目，试验了各种，发觉没有能很好的符合当前项目需求。我们当前的项目需求是跟手机QQ左侧滑动菜单一样的效果，有个默认的主视图，然后其他视图的展示都是在这个视图的基础上push出来的。当然把这些项目改造出这种功能其实也不难，但是左侧菜单的视差效果都跟QQ相差甚远，唯一相似的就是RESideMenu这个比较有名的项目，但是它的视差效果是菜单在展示过程中由比较大然后缩放到实际大小，感觉不如QQ的效果好，怎奈我当时心情比骄傲浮躁，改了个参数也没调出想要的效果来，于是一怒之下决定自己写一个。事后，发现有个Swift版的特别炫酷，完全模仿的QQ，点<a href="https://github.com/johnlui/SwiftSideslipLikeQQ" target="_blank" rel="noopener">这里</a>查看<br><img src="https://camo.githubusercontent.com/eb3890f88dcc1640d67cfff82261c8648328d84f/687474703a2f2f6c7677656e68616e2e636f6d2f636f6e74656e742f75706c6f616466696c652f3230313530342f38663137313432383834303832302e676966" alt="Swift版手机QQ侧滑菜单"></p>
+<p>大哭，此大神还有相应的教程，如果各位看官不想听我接下来的实现思路又能看懂Swift的可以瞬移到此大神的<a href="http://lvwenhan.com/ios/445.html" target="_blank" rel="noopener">博客</a>了。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="##思路"></a>##思路</h2><p>不送….. 呜呜呜……<br>先看我寒碜的效果<br><img src="http://upload-images.jianshu.io/upload_images/69809-0d47f8c72db4239c.gif" alt="本人的手机QQ侧滑菜单"></p>
+<p><strong>实在忍不了，换了小图了</strong></p>
+<p>哎，炫酷没法比啊。</p>
+<p>iOS5之后每个UIViewController都可以轻松当一个容器了，可以同时管理许多其他的UIViewController了。</p>
+<pre><code>addChildViewController:
+willMoveToParentViewController: 
+didMoveToParentViewController:
+</code></pre><p>拿去，不谢！具体怎么写一个容器不在本文的讨论重点，还请大家自行谷歌。<del>好吧，我是在用<a href="http://honx.in/_VHWETOz5NE7ZQrbz" target="_blank" rel="noopener">红杏</a>翻墙</del> <em>软广取消，红杏被郭嘉干掉后我的钱也追不回来了</em></p>
+<p>现在的话我有两个子视图控制器了，把他们的view分别放在了我自定义的menuViewContainer和contentViewContainer这两个View里。OK，基础已打好。<br>理所应当，我在contentViewCcontainer上添加一个滑动手势，滑动时移动视图的位置就行了。那怎么确定手指在滑动时相应的视图应该滑动到哪呢？滑动到哪里结束呢？怎么确定同时改缩放到什么程度呢？<br>这些问题我本来想一一说讲一遍，发现自己太啰嗦，又不知道该怎么讲，所以还是直接上代码吧。</p>
+<pre><code>- (void)panGestureRecognizer:(UIScreenEdgePanGestureRecognizer *)recognizer{
+
+    CGPoint point = [recognizer translationInView:self.view];
+
+    if(recognizer.state == UIGestureRecognizerStateBegan) {
+       [self updateContentViewShadow];
+    }else if(recognizer.state == UIGestureRecognizerStateChanged){
+
+       CGFloat menuVisibleWidth = self.view.bounds.size.width-self.realContentViewVisibleWidth;
+       CGFloat delta = self.menuHidden ? point.x/menuVisibleWidth : (menuVisibleWidth+point.x)/menuVisibleWidth;
+       CGFloat scale = 1-(1-MinScaleContentView)*delta;
+       CGFloat menuScale = MinScaleMenuView + (1-MinScaleMenuView)*delta;
+
+       if(self.menuHidden){
+          //以内容视图最小缩放为界限
+          if(scale &lt; MinScaleContentView){//A
+            self.contentViewContainer.transform = CGAffineTransformMakeTranslation(menuVisibleWidth, 0);
+            self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,MinScaleContentView,MinScaleContentView);
+            self.contentViewScale = MinScaleContentView;
+            self.menuViewContainer.transform = CGAffineTransformMakeScale(1, 1);
+            self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, 0, 0);
+           }else{//大于最小界限又分大于等于1和小于1两种情况
+             if(scale &lt; 1){//B
+                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x, 0);
+                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
+                self.contentViewScale = scale;
+                self.menuViewContainer.transform = CGAffineTransformMakeScale(menuScale, menuScale);
+                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView *(1-delta), 0);
+             }else{//C
+                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(0, 0);
+                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,1, 1);
+                self.contentViewScale = 1;
+                self.menuViewContainer.transform = CGAffineTransformMakeScale(MinScaleMenuView, MinScaleMenuView);
+                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView, 0);
+            }
+        }          
+    }else{         
+        if(scale &gt; 1){//D
+            self.contentViewContainer.transform = CGAffineTransformMakeTranslation(0, 0);
+            self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,1,1);
+            self.contentViewScale = 1;
+            self.menuViewContainer.transform = CGAffineTransformMakeScale(MinScaleMenuView, MinScaleMenuView);
+            self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView, 0);
+        }else{
+            if(scale&gt;MinScaleContentView){//E
+                self.contentViewContainer.transform = CGAffineTransformMakeTranslation(point.x+menuVisibleWidth, 0);
+                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,scale, scale);
+                self.contentViewScale = scale;
+                self.menuViewContainer.transform = CGAffineTransformMakeScale(menuScale, menuScale);
+                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, -MoveDistanceMenuView * (1-delta), 0);
+            }else{//F
+                self.contentViewContainer.transform =CGAffineTransformMakeTranslation(self.view.bounds.size.width-self.realContentViewVisibleWidth, 0);
+                self.contentViewContainer.transform = CGAffineTransformScale(self.contentViewContainer.transform,MinScaleContentView, MinScaleContentView);
+                self.contentViewScale = MinScaleContentView;
+                self.menuViewContainer.transform = CGAffineTransformMakeScale(1, 1);
+                self.menuViewContainer.transform = CGAffineTransformTranslate(self.menuViewContainer.transform, 0, 0);
+            }
+        }
+    }        
+  }else if(recognizer.state == UIGestureRecognizerStateEnded){
+    [self showMenu:(self.contentViewContainer.frame.origin.x &gt; self.view.bounds.size.width/2)];
+  }
+}
+</code></pre><p>这样的结尾是不是太不负责任了？？？<br>好吧，我提醒大家，整段代码的精华全在delta的计算，视图滑动后的最终状态是由menuVisibleWidth和MinSacleContentView来决定。根据当前手势滑动的距离占menuVisibleWidth的百分比来计算滑动动作完成度，然后根据这个值来移动和缩放相应的视图。</p>
+<p>最后，上我的<a href="https://github.com/yuyedaidao/YQSlideMenuControllerDemo" target="_blank" rel="noopener">项目地址</a>，如果大家不嫌弃，请给star，如果有问题，烦请留言。感激涕零</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/09/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/09/iOS学习笔记/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Wang Yeqing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#冲动"><span class="nav-number">1.</span> <span class="nav-text">##冲动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暗渡陈仓"><span class="nav-number">2.</span> <span class="nav-text">##暗渡陈仓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">##思路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Yeqing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
