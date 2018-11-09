@@ -1086,7 +1086,7 @@
 dispatch_sync(queue, ^{//taskA
     //do something
     dispatch_sync(queue, ^{//taskB
-        //啥也干不了
+    //啥也干不了
     });
 });
 </code></pre><p>dispatch_sync函数用于将一个block(任务)提交到队列中同步执行，直到block执行完后，这个函数才会返回。queue是一个串行队列，如果先后加入两个任务，taskA和taskB, 那么只有taskA执行完之后taskB才能执行。如果taskB是在taskA中加进队列的，那么它们依然遵守先进先出原则，即taskA执行完之后taskB才执行，也就是taskB在等待taskA完成。但是因为dispatch_sync的同步特性,taskB执行不完taskA就不算完成，即taskA在等待taskB的完成，这样就发生了死锁。</p>
@@ -1098,11 +1098,11 @@ dispatch_sync(mainQueue, ^{
 </code></pre><p>mainQueue是系统创建的，在执行上面的代码之前就已经加进去了很多任务</p>
 <pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;Main&quot;, DISPATCH_QUEUE_SERIAL);
 dispatch_sync(queue, ^{
-    //Task A
+//Task A
 });
 ...
 dispatch_sync(queue, ^{
-    //Task N
+//Task N
 });
 </code></pre><p>在这N个任务里有一个任务是这样的：</p>
 <pre><code>dispatch_sync(queue, ^{
@@ -1724,7 +1724,7 @@ didMoveToParentViewController:
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1744,7 +1744,7 @@ didMoveToParentViewController:
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:wyqpadding@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>

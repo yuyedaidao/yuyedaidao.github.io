@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hope">
+  <meta name="keywords" content="iOS,GCD,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="首先看下面一段代码 dispatch_queue_t queue = dispatch_queue_create(&amp;quot;abc&amp;quot;, DISPATCH_QUEUE_SERIAL); dispatch_sync(queue, ^{//taskA     //do something     dispatch_sync(queue, ^{//taskB         //啥也干不了">
+<meta name="description" content="首先看下面一段代码 dispatch_queue_t queue = dispatch_queue_create(&amp;quot;abc&amp;quot;, DISPATCH_QUEUE_SERIAL); dispatch_sync(queue, ^{//taskA     //do something     dispatch_sync(queue, ^{//taskB     //啥也干不了     }">
+<meta name="keywords" content="iOS,GCD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为什么dispatch_sync在主线程会死锁">
 <meta property="og:url" content="http://yoursite.com/2018/11/09/为什么dispatch-sync在主线程会死锁/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:description" content="首先看下面一段代码 dispatch_queue_t queue = dispatch_queue_create(&amp;quot;abc&amp;quot;, DISPATCH_QUEUE_SERIAL); dispatch_sync(queue, ^{//taskA     //do something     dispatch_sync(queue, ^{//taskB         //啥也干不了">
+<meta property="og:description" content="首先看下面一段代码 dispatch_queue_t queue = dispatch_queue_create(&amp;quot;abc&amp;quot;, DISPATCH_QUEUE_SERIAL); dispatch_sync(queue, ^{//taskA     //do something     dispatch_sync(queue, ^{//taskB     //啥也干不了     }">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-09T06:24:12.070Z">
+<meta property="og:updated_time" content="2018-11-09T07:41:16.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么dispatch_sync在主线程会死锁">
-<meta name="twitter:description" content="首先看下面一段代码 dispatch_queue_t queue = dispatch_queue_create(&amp;quot;abc&amp;quot;, DISPATCH_QUEUE_SERIAL); dispatch_sync(queue, ^{//taskA     //do something     dispatch_sync(queue, ^{//taskB         //啥也干不了">
+<meta name="twitter:description" content="首先看下面一段代码 dispatch_queue_t queue = dispatch_queue_create(&amp;quot;abc&amp;quot;, DISPATCH_QUEUE_SERIAL); dispatch_sync(queue, ^{//taskA     //do something     dispatch_sync(queue, ^{//taskB     //啥也干不了     }">
 
 
 
@@ -324,7 +325,7 @@
 dispatch_sync(queue, ^{//taskA
     //do something
     dispatch_sync(queue, ^{//taskB
-        //啥也干不了
+    //啥也干不了
     });
 });
 </code></pre><p>dispatch_sync函数用于将一个block(任务)提交到队列中同步执行，直到block执行完后，这个函数才会返回。queue是一个串行队列，如果先后加入两个任务，taskA和taskB, 那么只有taskA执行完之后taskB才能执行。如果taskB是在taskA中加进队列的，那么它们依然遵守先进先出原则，即taskA执行完之后taskB才执行，也就是taskB在等待taskA完成。但是因为dispatch_sync的同步特性,taskB执行不完taskA就不算完成，即taskA在等待taskB的完成，这样就发生了死锁。</p>
@@ -336,11 +337,11 @@ dispatch_sync(mainQueue, ^{
 </code></pre><p>mainQueue是系统创建的，在执行上面的代码之前就已经加进去了很多任务</p>
 <pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;Main&quot;, DISPATCH_QUEUE_SERIAL);
 dispatch_sync(queue, ^{
-    //Task A
+//Task A
 });
 ...
 dispatch_sync(queue, ^{
-    //Task N
+//Task N
 });
 </code></pre><p>在这N个任务里有一个任务是这样的：</p>
 <pre><code>dispatch_sync(queue, ^{
@@ -364,6 +365,14 @@ dispatch_sync(queue, ^{
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/GCD/" rel="tag"># GCD</a>
+          
+        </div>
       
 
       
@@ -467,7 +476,7 @@ dispatch_sync(queue, ^{
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -487,7 +496,7 @@ dispatch_sync(queue, ^{
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:wyqpadding@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>

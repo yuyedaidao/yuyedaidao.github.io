@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hope">
+  <meta name="keywords" content="iOS,ReactiveCocoa,RAC,">
 
 
 
@@ -80,6 +80,7 @@
 
 
 <meta name="description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
+<meta name="keywords" content="iOS,ReactiveCocoa,RAC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ReactiveCocoa解读-订阅信号">
 <meta property="og:url" content="http://yoursite.com/2018/11/09/ReactiveCocoa解读-订阅信号/index.html">
@@ -89,7 +90,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-a6c41863589c6ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-2a25a6514c7a7229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-058f5b522000e7ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-09T06:17:15.075Z">
+<meta property="og:updated_time" content="2018-11-09T07:43:10.164Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReactiveCocoa解读-订阅信号">
 <meta name="twitter:description" content="信号(Signal)和订阅者(Subscriber)是在ReactiveCocoa( 下文简称RAC)的相关资料中提到最多的概念了，但因为是从英文语境中直接翻译过来的，让国内大部分开发者对订阅信号一时难以理解，即使掌握了RAC的用法对此还是模棱两可。今天，我们尝试从RAC的源码去解读，看看订阅信号到底是个啥子过程。 先上一段RAC最简单的使用方法。  RACSignal *signal = [RA">
@@ -421,6 +422,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/ReactiveCocoa/" rel="tag"># ReactiveCocoa</a>
+          
+            <a href="/tags/RAC/" rel="tag"># RAC</a>
+          
+        </div>
+      
 
       
       
@@ -519,7 +530,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -539,7 +550,7 @@
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:wyqpadding@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
