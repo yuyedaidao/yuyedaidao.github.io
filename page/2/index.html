@@ -481,8 +481,7 @@ view.backgroundColor = [UIColor greenColor];
             <p>UITableVIew是iOS开发中最常见的视图中最经典的视图了，没有之一，相信对这个视图敢称精通的人开发个好应用应该是问题不大的。</p>
 <hr>
 <p>闲话少叙，进入正题。</p>
-<p>###怎么使用</p>
-<p>掌握两个代理</p>
+<h3 id="怎么使用"><a href="#怎么使用" class="headerlink" title="怎么使用"></a>怎么使用</h3><p>掌握两个代理</p>
 <ol>
 <li><p><code>UITableViewDelegate</code></p>
 <pre><code>@optional  
@@ -515,8 +514,7 @@ view.backgroundColor = [UIColor greenColor];
 <li>这些方法的调用在保证大顺序不变的情况下，每个方法的调用次数是不一定的，每个iOS版本又不一样，你如果想知道可以动手去试验一下。尤其是在iOS8,它认为<code>cell</code>会随时变化，所以一滑动就重新计算<code>cell</code>的高度。</li>
 <li>这些方法的调用其实也是有插曲的，比如调用了<code>reloadData</code>之后，<code>tableView</code>只会调用能让它知道所需空间大小的代理方法，然后立马执行<code>reloadData</code>之后的语句，也就说<code>cellForRow</code>并不会在<code>reloadData</code>之后紧接着执行。所以<code>reloadData</code>之后尽量避免对数据源数组的操作。</li>
 </ol>
-<p>###复用机制</p>
-<p>了解<code>UITableView</code>的人肯定对这一著名特性多少有点了解。咱们先假设<code>UITableView</code>没有复用机制，那么我们要展示10000条数据的话，那就得生成10000个<code>UITableViewCell</code>,占用了大量内存不说，性能也可想而知了，必然是一滑一卡顿，一顿一暴怒啊，控制力弱的估计要摔手机了。</p>
+<h3 id="复用机制"><a href="#复用机制" class="headerlink" title="复用机制"></a>复用机制</h3><p>了解<code>UITableView</code>的人肯定对这一著名特性多少有点了解。咱们先假设<code>UITableView</code>没有复用机制，那么我们要展示10000条数据的话，那就得生成10000个<code>UITableViewCell</code>,占用了大量内存不说，性能也可想而知了，必然是一滑一卡顿，一顿一暴怒啊，控制力弱的估计要摔手机了。</p>
 <p>复用机制大体是这样:<code>UITableView</code>首先加载一屏幕(假设<code>UITableView</code>的大小是整个屏幕的大小)所需要的<code>UITableViewCell</code>,具体个数要根据每个<code>cell</code>的高度而定，总之肯定要铺满整个屏幕,更准确说当前加载的<code>cell</code>的高度要大于屏幕高度。然后你往上滑动，想要查看更多的内容，那么肯定需要一个新的<code>cell</code>放在已经存在内容的下边。这时候先不去生成，而是先去<code>UITableView</code>自己的一个资源池里去获取。这个资源池里放了已经生成的而且能用的<code>cell</code>。如果资源池是空的话才会主动生成一个新的<code>cell</code>。那么这个资源池里的<code>cell</code>又来自哪里呢？当你滑动时视图是，位于最顶部的<code>cell</code>会相应的往上滑动，直到它彻底消失在屏幕上，消失的<code>cell</code>去了哪里呢？你肯定想到了，是的，它被<code>UITableView</code>放到资源池里了。其他<code>cell</code>也是这样，只要一滑出屏幕就放入资源池。这样，有进有出，总共需要大约一屏幕多一点的<code>cell</code>就够了。相对于1000来说节省的资源就是指数级啊，完美解决了性能问题。</p>
 <p>iOS6之后我们一般在代码里这样处理<code>cell</code></p>
 <ol>
@@ -1121,6 +1119,15 @@ dispatch_once(&amp;onceToken, ^{
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
             
               
@@ -1150,6 +1157,12 @@ dispatch_once(&amp;onceToken, ^{
                     <a href="mailto:wyqpadding@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Wang_Yeqing" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
             </div>

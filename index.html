@@ -291,6 +291,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -703,10 +725,10 @@
       
         
           
-            <p>今天又遇到了一个奇怪的问题，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];</span><br><span class="line">imagePicker.allowsEditing = YES;</span><br><span class="line">imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;</span><br><span class="line">imagePicker.delegate = self;</span><br><span class="line">[self presentViewController:imagePicker animated:YES completion:nil];</span><br></pre></td></tr></table></figure></p>
+            <h4 id="今天又遇到了一个奇怪的问题"><a href="#今天又遇到了一个奇怪的问题" class="headerlink" title="今天又遇到了一个奇怪的问题"></a>今天又遇到了一个奇怪的问题</h4><p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];</span><br><span class="line">imagePicker.allowsEditing = YES;</span><br><span class="line">imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;</span><br><span class="line">imagePicker.delegate = self;</span><br><span class="line">[self presentViewController:imagePicker animated:YES completion:nil];</span><br></pre></td></tr></table></figure>
 <p>用法很对，没毛病，可就是不调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info</span><br></pre></td></tr></table></figure></p>
-<p>分析原因</p>
-<ul>
+<h4 id="分析原因"><a href="#分析原因" class="headerlink" title="分析原因"></a>分析原因</h4><ul>
 <li>UIImagePickerController实例对象被释放了 //这不可能，如果iOS系统没疯那肯定是我疯了</li>
 <li>UIImagePickerControllerd的delegate被释放了 //但是delegate是当前视图控制器肯定也没有释放</li>
 <li>delegate被改了 //看了看代码没有改动的地方啊</li>
@@ -1718,6 +1740,15 @@ didMoveToParentViewController:
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
             
               
@@ -1747,6 +1778,12 @@ didMoveToParentViewController:
                     <a href="mailto:wyqpadding@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Wang_Yeqing" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
             </div>

@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="今天又遇到了一个奇怪的问题，代码如下：12345UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];imagePicker.allowsEditing = YES;imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLib">
+<meta name="description" content="今天又遇到了一个奇怪的问题代码如下： 12345UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];imagePicker.allowsEditing = YES;imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLib">
 <meta name="keywords" content="exception,iOS,imagePicker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UIImagePickerController不走回调的问题">
 <meta property="og:url" content="http://yoursite.com/2018/11/09/UIImagePickerController不走回调的问题/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:description" content="今天又遇到了一个奇怪的问题，代码如下：12345UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];imagePicker.allowsEditing = YES;imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLib">
+<meta property="og:description" content="今天又遇到了一个奇怪的问题代码如下： 12345UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];imagePicker.allowsEditing = YES;imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLib">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-032f067659e35474.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-09T07:35:36.123Z">
+<meta property="og:updated_time" content="2018-11-09T07:49:26.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UIImagePickerController不走回调的问题">
-<meta name="twitter:description" content="今天又遇到了一个奇怪的问题，代码如下：12345UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];imagePicker.allowsEditing = YES;imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLib">
+<meta name="twitter:description" content="今天又遇到了一个奇怪的问题代码如下： 12345UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];imagePicker.allowsEditing = YES;imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLib">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/69809-032f067659e35474.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -322,10 +322,10 @@
       
 
       
-        <p>今天又遇到了一个奇怪的问题，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];</span><br><span class="line">imagePicker.allowsEditing = YES;</span><br><span class="line">imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;</span><br><span class="line">imagePicker.delegate = self;</span><br><span class="line">[self presentViewController:imagePicker animated:YES completion:nil];</span><br></pre></td></tr></table></figure></p>
+        <h4 id="今天又遇到了一个奇怪的问题"><a href="#今天又遇到了一个奇怪的问题" class="headerlink" title="今天又遇到了一个奇怪的问题"></a>今天又遇到了一个奇怪的问题</h4><p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];</span><br><span class="line">imagePicker.allowsEditing = YES;</span><br><span class="line">imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;</span><br><span class="line">imagePicker.delegate = self;</span><br><span class="line">[self presentViewController:imagePicker animated:YES completion:nil];</span><br></pre></td></tr></table></figure>
 <p>用法很对，没毛病，可就是不调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info</span><br></pre></td></tr></table></figure></p>
-<p>分析原因</p>
-<ul>
+<h4 id="分析原因"><a href="#分析原因" class="headerlink" title="分析原因"></a>分析原因</h4><ul>
 <li>UIImagePickerController实例对象被释放了 //这不可能，如果iOS系统没疯那肯定是我疯了</li>
 <li>UIImagePickerControllerd的delegate被释放了 //但是delegate是当前视图控制器肯定也没有释放</li>
 <li>delegate被改了 //看了看代码没有改动的地方啊</li>
@@ -464,6 +464,15 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
             
               
@@ -495,6 +504,12 @@
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
                 
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Wang_Yeqing" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
             </div>
           
 
@@ -519,7 +534,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#真相大白"><span class="nav-number">1.</span> <span class="nav-text">真相大白</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#今天又遇到了一个奇怪的问题"><span class="nav-number">1.</span> <span class="nav-text">今天又遇到了一个奇怪的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析原因"><span class="nav-number">2.</span> <span class="nav-text">分析原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#真相大白"><span class="nav-number">3.</span> <span class="nav-text">真相大白</span></a></li></ol></div>
             
 
           </div>
