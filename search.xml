@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SSH免密登录]]></title>
+    <url>%2F2018%2F11%2F19%2FSSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[说明 Client -&gt; 你当前使用的设备，例如我正在敲代码的MacBookPro Server -&gt; 你要免密登录的服务器 在Client上生成秘钥 打开终端输入命令cd ~/.ssh 继续输入ssh-keygen -t rsa,然后一路回车 执行命令cat id_rsa.pub&gt;&gt;authorized_keys 修改文件authorized_keys的权限,执行命令chmod 600 authorized_keys 修改目录~/.ssh的权限，执行命令chmod 700 ~/.ssh 复制公钥文本，输入cat authorized_keys,然后复制出现的文本。形如以下 1ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsopScfdy/3dfxLXErZVX5ZHn83mA8a/YZyo29FbEoOf3ayPSbK1jUZRbC1bEV86g3PcdwNqZOakaaAQpqT74aKx3+1AfsrxLD1mar6NnUd6Rlup7FrTe7lD4MNj5brK+PJtzFpV2gzszCeS34ZvfnlNvaHRO+8i8puUA9CMu9e6A8I7msb32nAHr+vDjw9HkEtBCadigbbxdiykgKEQJgbKOJy+Ksswc48lsX XX@bogon 在Server上添加Client上的公钥注意 下面的操作转移到你要登录的服务器上了 cd ~/.ssh到你当前用户的.ssh目录下 vi authorized_keys，然后把你刚才在Client上复制的文本粘贴进去 按下Esc,输入wq!保存 service sshd restart,重启sshd 基本操作完成，可以登录了如果还不行可能需要修改权限或者修改文件/etc/ssh/sshd_config]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[IBInspectable无法取值的问题]]></title>
     <url>%2F2018%2F11%2F09%2FIBInspectable%E6%97%A0%E6%B3%95%E5%8F%96%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[我在xib文件里用了IBInspectable然后在UIView的layoutSubviews里执行 dispatch_async(dispatch_get_main_queue(), ^{ //some code} 竟然取不到相应IBInspectable标记的值，如果在block的外边重新声明新的变量并赋值才可以如图： 奇怪的问题，特此记录]]></content>
@@ -20,8 +32,8 @@
         <category>iOS</category>
       </categories>
       <tags>
-        <tag>exception</tag>
         <tag>iOS</tag>
+        <tag>exception</tag>
         <tag>watch</tag>
       </tags>
   </entry>
@@ -46,8 +58,8 @@
         <category>iOS</category>
       </categories>
       <tags>
-        <tag>exception</tag>
         <tag>iOS</tag>
+        <tag>exception</tag>
         <tag>imagePicker</tag>
       </tags>
   </entry>
@@ -71,8 +83,8 @@
         <category>iOS</category>
       </categories>
       <tags>
-        <tag>exception</tag>
         <tag>iOS</tag>
+        <tag>exception</tag>
         <tag>CADisplayLink</tag>
       </tags>
   </entry>
@@ -96,8 +108,8 @@
         <category>iOS</category>
       </categories>
       <tags>
-        <tag>exception</tag>
         <tag>iOS</tag>
+        <tag>exception</tag>
         <tag>autolayout</tag>
         <tag>动画</tag>
       </tags>
