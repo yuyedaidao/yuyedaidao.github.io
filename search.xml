@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[好用的命令]]></title>
     <url>%2F2019%2F01%2F09%2F%E5%A5%BD%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[列出Mac中所有有效的证书 1security find-identity -v -p codesigning 列出Mac中的所有provisioning profile 1fastlane sigh manage 删除provisioning profile 1fastlane sigh manage -p name]]></content>
+    <content type="text"><![CDATA[列出Mac中所有有效的证书 1security find-identity -v -p codesigning 列出Mac中的所有provisioning profile 1fastlane sigh manage 删除provisioning profile 1fastlane sigh manage -p name 拷贝内容到剪切板 1cat a.txt | pbcopy]]></content>
       <tags>
         <tag>command</tag>
       </tags>
