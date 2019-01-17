@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-3288012c6594faf8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-09T08:05:49.400Z">
+<meta property="og:updated_time" content="2019-01-17T15:18:26.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS学习笔记">
 <meta name="twitter:description" content="autoLayout  Autolayout的作用非常明确：帮我们确定在不同设备、不同（父view）环境下，同一个可视单元所应具有合适的位置和尺寸，因此，当一个UIView上所施加的约束能够唯一确定它的frame（x, y, width, height）的时候我们的自动布局的使用才是正确的。而新手通常犯的两类错误就是约束不足（约束太少）和约束冲突两种（约束太多）。如果你给出的约束只能够确定这个v">
@@ -531,6 +531,8 @@ dispatch_once(&amp;onceToken, ^{
 <li><p>关于在Swift中<code>self.property</code>和<code>property</code>，提倡不用<code>self</code>，这样如果在闭包中使用的属性是属于当前的实例对象时编译器就会报错，你就必须加上<code>self</code>，当你加上<code>self</code>的时候你就意识到<code>self</code>要被循环引用了，你就知道要处理这个问题了。</p>
 </li>
 <li><p><img src="http://upload-images.jianshu.io/upload_images/69809-17483bfa677064be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+</li>
+<li><p>UIScrollView在iOS11中如果设置了自动调整内容位置之后，contentInset默认是0,一些需要用到contentInset的地方可以参考adjustedContentInset</p>
 </li>
 </ol>
 
