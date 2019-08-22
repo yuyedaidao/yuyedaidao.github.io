@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Swift中CGAffineTransform的那点事儿]]></title>
+    <url>%2F2019%2F08%2F22%2FSwift%E4%B8%ADCGAffineTransform%E9%82%A3%E7%82%B9%E4%BA%8B%E5%84%BF%2F</url>
+    <content type="text"><![CDATA[关于CGAffineTransform的介绍可以说一搜一大把，它的主要作用就是能对UIView进行变换，例如缩放、旋转、移动，这里推荐官方介绍。今天我在这里就不赘言了，主要强调几点: 补习矩阵计算的知识 矩阵乘法规则 A*B=C 横着称为行，竖着称为列 A的行数等于B的列数时A和B可以相乘 C的行数等于A的行数，C的列数等于B的列数 A的第一行的数分别乘以B的第一列的相同位置的数最后得到的和就是C的第一行第一列的数(文艺说法：乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和) 混合变换在平时的开发中我们常常会遇到需要对View进行多次变换的场景，例如：把长宽(100,100)都为父视图长宽(200,200)一半的视图变换的跟父视图一样大小并移到父视图的中心 问：要想实现需要上边的变换需要几步？答：两步。第一步，将长宽都放大到原来的2倍；第二步，将视图移动到父视图的中心问：代码该怎么写？答：有两种写法，代码如下 写法一 12345let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))view.backgroundColor = UIColor.orangevar transform = CGAffineTransform(scaleX: 2, y: 2)transform = transform.translatedBy(x: 25, y: 25)//MARK: 1view.transform = transform 写法二 12345let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))view.backgroundColor = UIColor.bluevar transform = CGAffineTransform(scaleX: 2, y: 2)transform = transform.concatenating(CGAffineTransform(translationX: 50, y: 50))//MARK: 2view.transform = transform 也许你已经观察到了，这里主要强调的就是concatenating方法，这个方法在处理新的变换时更容易让人理解，例如上边的场景，因为视图的锚点在中间，所以视图长宽扩大2倍后，视图的中心不变，所以只要让它跟父视图的中点重合，也就是从(50,50)的点往下往右分别移动50的距离就可以让子视图完全覆盖父视图，也就是说，所有的变化会一个一个挨个作用在视图上。然而在第一种写法即直接在第一次变换的基础上继续变换时，后续的变换有可能受到之前变换的影响，像上边的例子，就受到了扩大2倍的影响。具体说，如果之前的变换如果是缩放(scale)、旋转(rotate)时后续的移动(translate)就会受到前边变换的影响，或者说，所有的变换会在最后合并成一个然后作用在视图上。 旋转角度官方文档中关于旋转角度有这么一段 The angle, in radians, by which this matrix rotates the coordinate system axes. In iOS, a positive value specifies counterclockwise rotation and a negative value specifies clockwise rotation. In macOS, a positive value specifies clockwise rotation and a negative value specifies counterclockwise rotation. 说的是在iOS 中角度如果传入正数，视图会逆时针方向旋转。WTF,但是我们明明看到了视图是顺时针方向旋转啊。要解释这个问题，那再看一段文档 The direction that the context is rotated may appear to be altered by the state of the current transformation matrix prior to executing this function. For example, on iOS, a UIView applies a transformation to the graphics context that inverts the Y-axis (by multiplying it by -1). Rotating the user coordinate system on coordinate system that was previously flipped results in a rotation in the opposite direction (that is, positive values appear to rotate the coordinate system in the clockwise direction). 其实就是在iOS的UIView中坐标系的Y轴会被系统乘以-1，这样的话，角度在正数时视图就会顺时针旋转了。]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+        <tag>CGAffineTransform</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Swift小知识]]></title>
     <url>%2F2019%2F02%2F27%2FSwift%E5%B0%8F%E7%9F%A5%E8%AF%86%2F</url>
     <content type="text"><![CDATA[class修饰的func可以被重写，static不可以 protocol中要求实现的方法必须保证访问控制修饰符也要正确，尤其是对于可选实现的方法，如果修饰符不对就会被当做没有实现 如果调用Error的localizedDescription方法跟你重写的内容不一样，那你八成是没有让你的Error实现LocalizedError协议]]></content>

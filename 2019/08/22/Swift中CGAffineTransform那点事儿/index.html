@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hope">
+  <meta name="keywords" content="Swift,CGAffineTransform,">
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="快看，那里有破绽">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WYQ">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+<meta name="description" content="关于CGAffineTransform的介绍可以说一搜一大把，它的主要作用就是能对UIView进行变换，例如缩放、旋转、移动，这里推荐官方介绍。今天我在这里就不赘言了，主要强调几点: 补习矩阵计算的知识 矩阵乘法规则 A*B=C   横着称为行，竖着称为列 A的行数等于B的列数时A和B可以相乘 C的行数等于A的行数，C的列数等于B的列数 A的第一行的数分别乘以B的第一列的相同位置的数最后得到的和就">
+<meta name="keywords" content="Swift,CGAffineTransform">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift中CGAffineTransform的那点事儿">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/Swift中CGAffineTransform那点事儿/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:description" content="快看，那里有破绽">
+<meta property="og:description" content="关于CGAffineTransform的介绍可以说一搜一大把，它的主要作用就是能对UIView进行变换，例如缩放、旋转、移动，这里推荐官方介绍。今天我在这里就不赘言了，主要强调几点: 补习矩阵计算的知识 矩阵乘法规则 A*B=C   横着称为行，竖着称为列 A的行数等于B的列数时A和B可以相乘 C的行数等于A的行数，C的列数等于B的列数 A的第一行的数分别乘以B的第一列的相同位置的数最后得到的和就">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://docs-assets.developer.apple.com/published/8a0bbde8e5/equation02_2x_71f7e62f-7cbe-4670-9b34-924b49e48f72.png">
+<meta property="og:updated_time" content="2019-08-22T15:49:03.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WYQ">
-<meta name="twitter:description" content="快看，那里有破绽">
+<meta name="twitter:title" content="Swift中CGAffineTransform的那点事儿">
+<meta name="twitter:description" content="关于CGAffineTransform的介绍可以说一搜一大把，它的主要作用就是能对UIView进行变换，例如缩放、旋转、移动，这里推荐官方介绍。今天我在这里就不赘言了，主要强调几点: 补习矩阵计算的知识 矩阵乘法规则 A*B=C   横着称为行，竖着称为列 A的行数等于B的列数时A和B可以相乘 C的行数等于A的行数，C的列数等于B的列数 A的第一行的数分别乘以B的第一列的相同位置的数最后得到的和就">
+<meta name="twitter:image" content="https://docs-assets.developer.apple.com/published/8a0bbde8e5/equation02_2x_71f7e62f-7cbe-4670-9b34-924b49e48f72.png">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/page/2/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/Swift中CGAffineTransform那点事儿/">
 
 
 
 
 
-  <title>归档 | WYQ</title>
+  <title>Swift中CGAffineTransform的那点事儿 | WYQ</title>
   
 
 
@@ -143,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -269,251 +273,222 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/Swift中CGAffineTransform那点事儿/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yeqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYQ">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Swift中CGAffineTransform的那点事儿</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T23:48:55+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 21 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/22/Swift中CGAffineTransform那点事儿/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/22/Swift中CGAffineTransform那点事儿/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2019/08/22/Swift中CGAffineTransform那点事儿/" class="leancloud_visitors" data-flag-title="Swift中CGAffineTransform的那点事儿">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/仿QQ左侧滑动菜单的实现/" itemprop="url">
-              
-                <span itemprop="name">仿QQ左侧滑动菜单的实现</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:21:34+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/回头看UITableView-三-下拉刷新的实现/" itemprop="url">
-              
-                <span itemprop="name">回头看UITableView(三)-下拉刷新的实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:21:09+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/回头看UITableView-二-父视图UIScrollView/" itemprop="url">
-              
-                <span itemprop="name">回头看UITableView(二)-父视图UIScrollView</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:20:40+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/回头看之UITableView-基本代理方法及复用原理/" itemprop="url">
-              
-                <span itemprop="name">回头看之UITableView-(基本代理方法及复用原理)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:19:48+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>关于CGAffineTransform的介绍可以说一搜一大把，它的主要作用就是能对UIView进行变换，例如缩放、旋转、移动，这里推荐<a href="https://developer.apple.com/documentation/coregraphics/cgaffinetransform" target="_blank" rel="noopener">官方介绍</a>。今天我在这里就不赘言了，主要强调几点:</p>
+<h2 id="补习矩阵计算的知识"><a href="#补习矩阵计算的知识" class="headerlink" title="补习矩阵计算的知识"></a>补习矩阵计算的知识</h2><p><img src="https://docs-assets.developer.apple.com/published/8a0bbde8e5/equation02_2x_71f7e62f-7cbe-4670-9b34-924b49e48f72.png" alt="矩阵"></p>
+<h4 id="矩阵乘法规则"><a href="#矩阵乘法规则" class="headerlink" title="矩阵乘法规则"></a>矩阵乘法规则</h4><blockquote>
+<p>A*B=C</p>
+</blockquote>
+<ol>
+<li>横着称为行，竖着称为列</li>
+<li>A的行数等于B的列数时A和B可以相乘</li>
+<li>C的行数等于A的行数，C的列数等于B的列数</li>
+<li>A的第一行的数分别乘以B的第一列的相同位置的数最后得到的和就是C的第一行第一列的数(文艺说法：乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和) </li>
+</ol>
+<h2 id="混合变换"><a href="#混合变换" class="headerlink" title="混合变换"></a>混合变换</h2><p>在平时的开发中我们常常会遇到需要对View进行多次变换的场景，例如：把长宽(100,100)都为父视图长宽(200,200)一半的视图变换的跟父视图一样大小并移到父视图的中心</p>
+<p>问：要想实现需要上边的变换需要几步？<br>答：两步。第一步，将长宽都放大到原来的2倍；第二步，将视图移动到父视图的中心<br>问：代码该怎么写？<br>答：有两种写法，代码如下</p>
+<ol>
+<li>写法一</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))</span><br><span class="line">view.backgroundColor = UIColor.orange</span><br><span class="line">var transform = CGAffineTransform(scaleX: 2, y: 2)</span><br><span class="line">transform = transform.translatedBy(x: 25, y: 25)//MARK: 1</span><br><span class="line">view.transform = transform</span><br></pre></td></tr></table></figure>
+<ol>
+<li>写法二</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))</span><br><span class="line">view.backgroundColor = UIColor.blue</span><br><span class="line">var transform = CGAffineTransform(scaleX: 2, y: 2)</span><br><span class="line">transform = transform.concatenating(CGAffineTransform(translationX: 50, y: 50))//MARK: 2</span><br><span class="line">view.transform = transform</span><br></pre></td></tr></table></figure>
+<p>也许你已经观察到了，这里主要强调的就是<code>concatenating</code>方法，这个方法在处理新的变换时更容易让人理解，例如上边的场景，<strong>因为视图的锚点在中间</strong>，所以视图长宽扩大2倍后，视图的中心不变，所以只要让它跟父视图的中点重合，也就是从(50,50)的点往下往右分别移动50的距离就可以让子视图完全覆盖父视图，也就是说，<strong>所有的变化会一个一个挨个作用在视图上</strong>。然而在第一种写法即直接在第一次变换的基础上继续变换时，后续的变换有可能受到之前变换的影响，像上边的例子，就受到了扩大2倍的影响。具体说，如果之前的变换如果是缩放(scale)、旋转(rotate)时后续的移动(translate)就会受到前边变换的影响，或者说，<strong>所有的变换会在最后合并成一个然后作用在视图上</strong>。</p>
+<h2 id="旋转角度"><a href="#旋转角度" class="headerlink" title="旋转角度"></a>旋转角度</h2><p>官方文档中关于旋转角度有这么一段</p>
+<blockquote>
+<p>The angle, in radians, by which this matrix rotates the coordinate system axes. In iOS, a positive value specifies counterclockwise rotation and a negative value specifies clockwise rotation. In macOS, a positive value specifies clockwise rotation and a negative value specifies counterclockwise rotation.</p>
+</blockquote>
+<p>说的是在<code>iOS</code> 中角度如果传入正数，视图会逆时针方向旋转。WTF,但是我们明明看到了视图是顺时针方向旋转啊。要解释这个问题，那再看一段文档</p>
+<blockquote>
+<p>The direction that the context is rotated may appear to be altered by the state of the current transformation matrix prior to executing this function. For example, on iOS, a UIView applies a transformation to the graphics context that inverts the Y-axis (by multiplying it by -1). Rotating the user coordinate system on coordinate system that was previously flipped results in a rotation in the opposite direction (that is, positive values appear to rotate the coordinate system in the clockwise direction).</p>
+</blockquote>
+<p>其实就是在<code>iOS</code>的UIView中坐标系的<code>Y</code>轴会被系统乘以-1，这样的话，角度在正数时视图就会顺时针旋转了。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/iOS学习笔记/" itemprop="url">
-              
-                <span itemprop="name">iOS学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:18:16+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/ReactiveCocoa解读-订阅信号/" itemprop="url">
-              
-                <span itemprop="name">ReactiveCocoa解读-订阅信号</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:17:15+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
+          
+            <a href="/tags/CGAffineTransform/" rel="tag"># CGAffineTransform</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/Swift小知识/" rel="next" title="Swift小知识">
+                <i class="fa fa-chevron-left"></i> Swift小知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -521,6 +496,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -541,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -624,6 +615,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#补习矩阵计算的知识"><span class="nav-number">1.</span> <span class="nav-text">补习矩阵计算的知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#矩阵乘法规则"><span class="nav-number">1.0.1.</span> <span class="nav-text">矩阵乘法规则</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#混合变换"><span class="nav-number">2.</span> <span class="nav-text">混合变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转角度"><span class="nav-number">3.</span> <span class="nav-text">旋转角度</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -757,6 +764,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
