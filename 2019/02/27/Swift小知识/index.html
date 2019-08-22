@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="class修饰的func可以被重写，static不可以">
+<meta name="description" content="class修饰的func可以被重写，static不可以 protocol中要求实现的方法必须保证访问控制修饰符也要正确，尤其是对于可选实现的方法，如果修饰符不对就会被当做没有实现 如果调用Error的localizedDescription方法跟你重写的内容不一样，那你八成是没有让你的Error实现LocalizedError协议">
 <meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift小知识">
 <meta property="og:url" content="http://yoursite.com/2019/02/27/Swift小知识/index.html">
 <meta property="og:site_name" content="WYQ">
-<meta property="og:description" content="class修饰的func可以被重写，static不可以">
+<meta property="og:description" content="class修饰的func可以被重写，static不可以 protocol中要求实现的方法必须保证访问控制修饰符也要正确，尤其是对于可选实现的方法，如果修饰符不对就会被当做没有实现 如果调用Error的localizedDescription方法跟你重写的内容不一样，那你八成是没有让你的Error实现LocalizedError协议">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-31T14:57:40.516Z">
+<meta property="og:updated_time" content="2019-08-22T15:45:28.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift小知识">
-<meta name="twitter:description" content="class修饰的func可以被重写，static不可以">
+<meta name="twitter:description" content="class修饰的func可以被重写，static不可以 protocol中要求实现的方法必须保证访问控制修饰符也要正确，尤其是对于可选实现的方法，如果修饰符不对就会被当做没有实现 如果调用Error的localizedDescription方法跟你重写的内容不一样，那你八成是没有让你的Error实现LocalizedError协议">
 
 
 
@@ -337,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/macOS/" itemprop="url" rel="index">
-                    <span itemprop="name">macOS</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -397,6 +397,8 @@
       
         <ol>
 <li><code>class</code>修饰的func可以被重写，<code>static</code>不可以</li>
+<li>protocol中要求实现的方法必须保证访问控制修饰符也要正确，尤其是对于可选实现的方法，如果修饰符不对就会被当做没有实现</li>
+<li>如果调用<code>Error</code>的<code>localizedDescription</code>方法跟你重写的内容不一样，那你八成是没有让你的<code>Error</code>实现<code>LocalizedError</code>协议</li>
 </ol>
 
       
